@@ -3,6 +3,7 @@ class AppAssets {
 
   // Images
   static const String logo = 'assets/images/logo.png';
+  static const String getStartedBg = 'assets/images/get_started_bg.png';
 
   // Onboarding
   static const String onboarding1 = 'assets/images/onboarding_1.png';
