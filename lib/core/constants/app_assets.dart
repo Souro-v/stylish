@@ -55,4 +55,11 @@ class AppAssets {
   static const String shop11 = 'assets/products/shop_11.png';
   static const String shop12 = 'assets/products/shop_12.png';
 
+  // Product Detail Images
+  static const String detail1 = 'assets/products/detail_1.png';
+  static const String detail2 = 'assets/products/detail_2.png';
+  static const String detail3 = 'assets/products/detail_3.png';
+  static const String detail4 = 'assets/products/detail_4.png';
+  static const String detail5 = 'assets/products/detail_5.png';
+
 }
