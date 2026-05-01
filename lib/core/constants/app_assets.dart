@@ -40,4 +40,19 @@ class AppAssets {
   static const String trending3 = 'assets/products/trending_3.png';
   static const String trending4 = 'assets/products/trending_4.png';
   static const String trending5 = 'assets/products/trending_5.png';
+
+  // Shop Products
+  static const String shop1 = 'assets/products/shop_1.png';
+  static const String shop2 = 'assets/products/shop_2.png';
+  static const String shop3 = 'assets/products/shop_3.png';
+  static const String shop4 = 'assets/products/shop_4.png';
+  static const String shop5 = 'assets/products/shop_5.png';
+  static const String shop6 = 'assets/products/shop_6.png';
+  static const String shop7 = 'assets/products/shop_7.png';
+  static const String shop8 = 'assets/products/shop_8.png';
+  static const String shop9 = 'assets/products/shop_9.png';
+  static const String shop10 = 'assets/products/shop_10.png';
+  static const String shop11 = 'assets/products/shop_11.png';
+  static const String shop12 = 'assets/products/shop_12.png';
+
 }
