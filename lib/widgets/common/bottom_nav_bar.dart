@@ -57,9 +57,9 @@ class BottomNavBar extends StatelessWidget {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Iconsax.setting_2),
-            activeIcon: Icon(Iconsax.setting_21),
-            label: 'Setting',
+            icon: Icon(Iconsax.user),
+            activeIcon: Icon(Iconsax.user),
+            label: 'Profile',
           ),
         ],
       ),

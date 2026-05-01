@@ -573,6 +573,12 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _currentNavIndex,
         onTap: (index) {
           setState(() => _currentNavIndex = index);
+          if (index == 1) {
+            Navigator.pushNamed(context, AppRoutes.trending);
+          }
+          if(index ==4){
+            Navigator.pushNamed(context, AppRoutes.profile);
+          }
         },
       ),
     );
