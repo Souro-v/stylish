@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stylish/screens/products/trending_screen.dart';
 import '../../screens/products/product_detail_screen.dart';
 import '../../screens/splash/splash_screen.dart';
 import '../../screens/onboarding/onboarding_screen.dart';
@@ -24,6 +25,8 @@ class AppRoutes {
   static const String cart = '/cart';
   static const String profile = '/profile';
   static const String checkout = '/checkout';
+  static const String trending = '/trending';
+
 
   // Route Generator
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -48,6 +51,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
       case checkout:
         return MaterialPageRoute(builder: (_) => const CheckoutScreen());
+      case trending:
+        return MaterialPageRoute(builder: (_) => const TrendingScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(
