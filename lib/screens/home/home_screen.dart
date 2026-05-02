@@ -92,10 +92,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                 const CircleAvatar(
+                  const CircleAvatar(
                     radius: 18,
                     backgroundColor: AppColors.lightBorder,
-                    child:  Icon(Iconsax.user, size: 20),
+                    child: Icon(Iconsax.user, size: 20),
                   ),
                 ],
               ),
@@ -403,7 +403,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 borderRadius: BorderRadius.circular(12),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppColors.black.withValues(alpha: 0.06),
+                                    color:
+                                        AppColors.black.withValues(alpha: 0.06),
                                     blurRadius: 8,
                                     offset: const Offset(0, 2),
                                   ),
@@ -427,7 +428,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     padding: const EdgeInsets.all(8),
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           product['name'],
@@ -455,7 +456,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 fontSize: 11,
                                                 color: AppColors.grey,
                                                 decoration:
-                                                TextDecoration.lineThrough,
+                                                    TextDecoration.lineThrough,
                                               ),
                                             ),
                                             const SizedBox(width: 4),
@@ -540,16 +541,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: const Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                   Text(
+                                  Text(
                                     'up to 50% Off',
                                     style: TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                   Icon(
+                                  Icon(
                                     Icons.arrow_forward_ios,
                                     size: 14,
                                     color: AppColors.grey,
@@ -576,7 +577,10 @@ class _HomeScreenState extends State<HomeScreen> {
           if (index == 1) {
             Navigator.pushNamed(context, AppRoutes.trending);
           }
-          if(index ==4){
+          if (index == 2) {
+            Navigator.pushNamed(context, AppRoutes.placeOrder);
+          }
+          if (index == 4) {
             Navigator.pushNamed(context, AppRoutes.profile);
           }
         },

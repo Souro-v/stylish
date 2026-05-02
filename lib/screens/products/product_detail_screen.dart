@@ -322,7 +322,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       children: [
                         Expanded(
                           child: ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: () => Navigator.pushNamed(context, AppRoutes.placeOrder),
                             icon: const Icon(Iconsax.shopping_cart,
                                 color: AppColors.white, size: 18),
                             label: const Text(

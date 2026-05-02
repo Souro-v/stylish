@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/screens/products/trending_screen.dart';
+import '../../screens/checkout/place_order_screen.dart';
 import '../../screens/products/product_detail_screen.dart';
 import '../../screens/splash/splash_screen.dart';
 import '../../screens/onboarding/onboarding_screen.dart';
@@ -26,6 +27,7 @@ class AppRoutes {
   static const String profile = '/profile';
   static const String checkout = '/checkout';
   static const String trending = '/trending';
+  static const String placeOrder = '/place-order';
 
 
   // Route Generator
@@ -53,7 +55,9 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const CheckoutScreen());
       case trending:
         return MaterialPageRoute(builder: (_) => const TrendingScreen());
-      default:
+      case placeOrder:
+        return MaterialPageRoute(builder: (_) => const PlaceOrderScreen());
+        default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(
             body: Center(child: Text('Route not found!')),
