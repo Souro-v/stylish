@@ -62,4 +62,10 @@ class AppAssets {
   static const String detail4 = 'assets/products/detail_4.png';
   static const String detail5 = 'assets/products/detail_5.png';
 
+  // Payment Icons
+  static const String visaIcon = 'assets/icons/visa.png';
+  static const String bkashIcon = 'assets/icons/bkash.png';
+  static const String nagadIcon = 'assets/icons/nagad.png';
+  static const String rocketIcon = 'assets/icons/rocket.png';
+
 }
