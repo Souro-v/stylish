@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/theme/theme_provider.dart';
 import '../../widgets/common/custom_button.dart';
 import '../../widgets/common/custom_text_field.dart';
 
@@ -355,6 +357,7 @@ class _SettingsSheet extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          // Handle
           Container(
             width: 40,
             height: 4,
@@ -372,12 +375,28 @@ class _SettingsSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          // Settings options পরে add হবে
-          const Text(
-            'Coming soon...',
-            style: TextStyle(color: AppColors.grey),
+
+          // Dark Mode Toggle
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, _) {
+              return ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: Icon(
+                  themeProvider.isDarkMode
+                      ? Iconsax.moon
+                      : Iconsax.sun_1,
+                  color: AppColors.primary,
+                ),
+                title: const Text('Dark Mode'),
+                trailing: Switch(
+                  value: themeProvider.isDarkMode,
+                  activeThumbColor: AppColors.primary,
+                  onChanged: (_) => themeProvider.toggleTheme(),
+                ),
+              );
+            },
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
         ],
       ),
     );

@@ -580,6 +580,9 @@ class _HomeScreenState extends State<HomeScreen> {
           if (index == 2) {
             Navigator.pushNamed(context, AppRoutes.placeOrder);
           }
+          if (index == 3) {
+            Navigator.pushNamed(context, AppRoutes.search);
+          }
           if (index == 4) {
             Navigator.pushNamed(context, AppRoutes.profile);
           }
