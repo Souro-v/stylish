@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () => Navigator.pushNamed(context, AppRoutes.newArrivals),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 6),

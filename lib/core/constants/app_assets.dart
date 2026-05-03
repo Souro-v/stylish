@@ -68,4 +68,20 @@ class AppAssets {
   static const String nagadIcon = 'assets/icons/nagad.png';
   static const String rocketIcon = 'assets/icons/rocket.png';
 
+  // New Arrivals
+  static const String blendBlazer = 'assets/products/blend_blazer.png';
+  static const String blendBlazer1 = 'assets/products/blend_blazer1.png';
+  static const String hotCasual1 = 'assets/products/hot_casual1.png';
+  static const String blackBlend = 'assets/products/black_blend.png';
+  static const String hotCasual = 'assets/products/hot_casual.png';
+  static const String summerHot1 = 'assets/products/summer_hot1.png';
+  static const String summerHot = 'assets/products/summer_hot.png';
+  static const String summerHoliday2 = 'assets/products/summer_holiday2.png';
+  static const String largeTshirt = 'assets/products/large_tshirt.png';
+  static const String largeTshirt1 = 'assets/products/large_tshirt1.png';
+  static const String boysGlass1 = 'assets/products/boys_glass1.png';
+  static const String boysGlass2 = 'assets/products/boys_glass2.png';
+  static const String uniGlass1 = 'assets/products/uni_glass1.png';
+  static const String summerHoliday = 'assets/products/summer_holiday.png';
+  static const String summerHoliday1 = 'assets/products/summer_holiday1.png';
 }
