@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/screens/products/trending_screen.dart';
 import '../../screens/checkout/place_order_screen.dart';
-import '../../screens/checkout/success_screen.dart';
 import '../../screens/products/product_detail_screen.dart';
+import '../../screens/search/search_screen.dart';
 import '../../screens/splash/splash_screen.dart';
 import '../../screens/onboarding/onboarding_screen.dart';
 import '../../screens/auth/sign_in_screen.dart';
@@ -29,7 +29,7 @@ class AppRoutes {
   static const String checkout = '/checkout';
   static const String trending = '/trending';
   static const String placeOrder = '/place-order';
-  static const String success = '/success';
+  static const String search = '/search';
 
 
   // Route Generator
@@ -59,8 +59,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const TrendingScreen());
       case placeOrder:
         return MaterialPageRoute(builder: (_) => const PlaceOrderScreen());
-      case success:
-        return MaterialPageRoute(builder: (_) => const SuccessScreen());
+      case search:
+        return MaterialPageRoute(builder: (_) => const SearchScreen());
         default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

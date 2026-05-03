@@ -29,8 +29,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
           children: [
             // AppBar
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -62,9 +61,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? AppColors.darkCard
-                            : AppColors.white,
+                        color: isDark ? AppColors.darkCard : AppColors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -127,26 +124,22 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                             color: AppColors.lightBorder),
-                                        borderRadius:
-                                        BorderRadius.circular(4),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton<String>(
                                           value: _selectedSize,
                                           isDense: true,
                                           items: _sizes
-                                              .map((s) =>
-                                              DropdownMenuItem(
-                                                value: s,
-                                                child: Text(s,
-                                                    style:
-                                                    const TextStyle(
-                                                        fontSize:
-                                                        12)),
-                                              ))
+                                              .map((s) => DropdownMenuItem(
+                                                    value: s,
+                                                    child: Text(s,
+                                                        style: const TextStyle(
+                                                            fontSize: 12)),
+                                                  ))
                                               .toList(),
                                           onChanged: (val) => setState(
-                                                  () => _selectedSize = val!),
+                                              () => _selectedSize = val!),
                                         ),
                                       ),
                                     ),
@@ -166,26 +159,22 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                             color: AppColors.lightBorder),
-                                        borderRadius:
-                                        BorderRadius.circular(4),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton<int>(
                                           value: _selectedQty,
                                           isDense: true,
                                           items: _quantities
-                                              .map((q) =>
-                                              DropdownMenuItem(
-                                                value: q,
-                                                child: Text('$q',
-                                                    style:
-                                                    const TextStyle(
-                                                        fontSize:
-                                                        12)),
-                                              ))
+                                              .map((q) => DropdownMenuItem(
+                                                    value: q,
+                                                    child: Text('$q',
+                                                        style: const TextStyle(
+                                                            fontSize: 12)),
+                                                  ))
                                               .toList(),
                                           onChanged: (val) => setState(
-                                                  () => _selectedQty = val!),
+                                              () => _selectedQty = val!),
                                         ),
                                       ),
                                     ),
@@ -194,16 +183,16 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                 const SizedBox(height: 8),
 
                                 // Delivery
-                               const Row(
+                                const Row(
                                   children: [
-                                     Text(
+                                    Text(
                                       'Delivery by ',
                                       style: TextStyle(
                                         fontSize: 12,
                                         color: AppColors.grey,
                                       ),
                                     ),
-                                     Text(
+                                    Text(
                                       '10 May 2XXX',
                                       style: TextStyle(
                                         fontSize: 12,
@@ -225,9 +214,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 14),
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? AppColors.darkCard
-                            : AppColors.white,
+                        color: isDark ? AppColors.darkCard : AppColors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -239,12 +226,12 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                        const  Row(
+                          const Row(
                             children: [
-                               Icon(Iconsax.discount_shape,
+                              Icon(Iconsax.discount_shape,
                                   size: 20, color: AppColors.grey),
-                               SizedBox(width: 10),
-                               Text(
+                              SizedBox(width: 10),
+                              Text(
                                 'Apply Coupons',
                                 style: TextStyle(
                                   fontSize: 14,
@@ -273,9 +260,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? AppColors.darkCard
-                            : AppColors.white,
+                        color: isDark ? AppColors.darkCard : AppColors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -297,14 +282,12 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                           const SizedBox(height: 12),
 
                           // Order Amounts
-                         const Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children:  [
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Text('Order Amounts',
                                   style: TextStyle(
-                                      fontSize: 13,
-                                      color: AppColors.grey)),
+                                      fontSize: 13, color: AppColors.grey)),
                               Text('₹ 7,000.00',
                                   style: TextStyle(fontSize: 13)),
                             ],
@@ -313,15 +296,13 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
 
                           // Convenience
                           Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
                                   const Text('Convenience ',
                                       style: TextStyle(
-                                          fontSize: 13,
-                                          color: AppColors.grey)),
+                                          fontSize: 13, color: AppColors.grey)),
                                   GestureDetector(
                                     onTap: () {},
                                     child: const Text(
@@ -349,14 +330,12 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                           const SizedBox(height: 8),
 
                           // Delivery Fee
-                         const Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children:  [
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Text('Delivery Fee',
                                   style: TextStyle(
-                                      fontSize: 13,
-                                      color: AppColors.grey)),
+                                      fontSize: 13, color: AppColors.grey)),
                               Text(
                                 'Free',
                                 style: TextStyle(
@@ -370,10 +349,9 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                           const Divider(height: 24),
 
                           // Order Total
-                         const Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children:  [
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Text(
                                 'Order Total',
                                 style: TextStyle(
@@ -429,8 +407,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
 
       // Bottom Bar
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: isDark ? AppColors.darkBackground : AppColors.white,
           boxShadow: [

@@ -45,8 +45,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           children: [
             // AppBar
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -78,9 +77,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? AppColors.darkCard
-                            : AppColors.white,
+                        color: isDark ? AppColors.darkCard : AppColors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
@@ -93,9 +90,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         children: [
                           // Order
                           Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children:  [
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Text(
                                 'Order',
                                 style: TextStyle(
@@ -109,13 +105,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ),
                             ],
                           ),
-                           SizedBox(height: 10),
+                          SizedBox(height: 10),
 
                           // Shipping
                           Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children:  [
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Text(
                                 'Shipping',
                                 style: TextStyle(
@@ -129,13 +124,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ),
                             ],
                           ),
-                           Divider(height: 24),
+                          Divider(height: 24),
 
                           // Total
-                        Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children:  [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Text(
                                 'Total',
                                 style: TextStyle(
@@ -173,16 +167,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       final isSelected = _selectedPayment == index;
 
                       return GestureDetector(
-                        onTap: () =>
-                            setState(() => _selectedPayment = index),
+                        onTap: () => setState(() => _selectedPayment = index),
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 12),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 14),
                           decoration: BoxDecoration(
-                            color: isDark
-                                ? AppColors.darkCard
-                                : AppColors.white,
+                            color:
+                                isDark ? AppColors.darkCard : AppColors.white,
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
                               color: isSelected
@@ -198,8 +190,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             ],
                           ),
                           child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Image.asset(
                                 method['icon'],
@@ -224,8 +215,70 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     // Continue Button
                     CustomButton(
                       text: 'Continue',
-                      onPressed: () => Navigator.pushNamed(
-                          context, AppRoutes.success),
+                      onPressed: (){
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (_) => Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(24),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // Success Icon
+                                  Container(
+                                    width: 80,
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors.primary.withValues(alpha: 0.1),
+                                    ),
+                                    child: const Icon(
+                                      Icons.check_circle,
+                                      color: AppColors.primary,
+                                      size: 50,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  const Text(
+                                    'Payment done successfully.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 24),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        AppRoutes.home,
+                                        (route) => false,
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.primary,
+                                      minimumSize:
+                                          const Size(double.infinity, 48),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      'Continue Shopping',
+                                      style: TextStyle(color: AppColors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 24),
                   ],
@@ -237,8 +290,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentNavIndex,
-        onTap: (index) =>
-            setState(() => _currentNavIndex = index),
+        onTap: (index) => setState(() => _currentNavIndex = index),
       ),
     );
   }
