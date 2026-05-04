@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/wishlist_provider.dart' show WishlistProvider;
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/star_rating.dart';
@@ -20,6 +22,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int _currentImageIndex = 0;
   int _currentNavIndex = 0;
   bool _isExpanded = false;
+
+  final Map<String, dynamic> _product = {
+    'image': AppAssets.detail1,
+    'name': 'Nike Sneakers',
+    'price': 1500,
+    'oldPrice': 2999,
+    'rating': 3.5,
+  };
+
 
   final List<String> _images = [
     AppAssets.detail1,
@@ -316,6 +327,41 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
+                    Consumer<WishlistProvider>(
+                      builder: (context, wishlist, _) {
+                        final isWishlisted = wishlist.isWishlisted(_product['name']);
+                        return GestureDetector(
+                          onTap: () => wishlist.toggleWishlist(_product),
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: AppColors.primary),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  isWishlisted ? Icons.favorite : Icons.favorite_border,
+                                  color: AppColors.primary,
+                                  size: 18,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  isWishlisted ? 'Wishlisted' : 'Add to Wishlist',
+                                  style: const TextStyle(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 12),
 
                     // Cart + Buy Now buttons
                     Row(

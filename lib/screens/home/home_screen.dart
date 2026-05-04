@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/wishlist_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import 'widgets/banner_slider.dart';
@@ -352,7 +354,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           GestureDetector(
-                            onTap: () => Navigator.pushNamed(context, AppRoutes.newArrivals),
+                            onTap: () => Navigator.pushNamed(
+                                context, AppRoutes.newArrivals),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 6),
@@ -413,17 +416,56 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(12),
+                                  Stack(children: [
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.vertical(
+                                        top: Radius.circular(12),
+                                      ),
+                                      child: Image.asset(
+                                        product['image'],
+                                        height: 120,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                    child: Image.asset(
-                                      product['image'],
-                                      height: 120,
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
+                                    Positioned(
+                                      top: 8,
+                                      right: 8,
+                                      child: Consumer<WishlistProvider>(
+                                        builder: (context, wishlist, _) {
+                                          final isWishlisted = wishlist
+                                              .isWishlisted(product['name']);
+                                          return GestureDetector(
+                                            onTap: () => wishlist
+                                                .toggleWishlist(product),
+                                            child: Container(
+                                              padding: const EdgeInsets.all(6),
+                                              decoration: BoxDecoration(
+                                                color: AppColors.white,
+                                                shape: BoxShape.circle,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: AppColors.black
+                                                        .withValues(alpha: 0.1),
+                                                    blurRadius: 4,
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Icon(
+                                                isWishlisted
+                                                    ? Icons.favorite
+                                                    : Icons.favorite_border,
+                                                size: 16,
+                                                color: isWishlisted
+                                                    ? AppColors.primary
+                                                    : AppColors.grey,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
-                                  ),
+                                  ]),
                                   Padding(
                                     padding: const EdgeInsets.all(8),
                                     child: Column(
