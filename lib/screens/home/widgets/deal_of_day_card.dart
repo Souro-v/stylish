@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stylish/core/routes/app_routes.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_assets.dart';
+import '../../../core/providers/wishlist_provider.dart';
 
 class DealOfDayCard extends StatefulWidget {
   const DealOfDayCard({super.key});
@@ -45,7 +47,8 @@ class _DealOfDayCardState extends State<DealOfDayCard> {
     {
       'image': AppAssets.deal4,
       'name': 'TITAN Men Watch- 1806N',
-      'desc': 'This Titan watch in Black color is I wanted to buy for a long time',
+      'desc':
+          'This Titan watch in Black color is I wanted to buy for a long time',
       'price': 1500,
       'oldPrice': 3500,
       'discount': '60%Off',
@@ -67,7 +70,7 @@ class _DealOfDayCardState extends State<DealOfDayCard> {
         itemBuilder: (context, index) {
           final deal = _deals[index];
           return GestureDetector(
-            onTap: ()=> Navigator.pushNamed(context, AppRoutes.productDetail),
+            onTap: () => Navigator.pushNamed(context, AppRoutes.productDetail),
             child: Container(
               width: 160,
               decoration: BoxDecoration(
@@ -84,16 +87,56 @@ class _DealOfDayCardState extends State<DealOfDayCard> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(12),
-                    ),
-                    child: Image.asset(
-                      deal['image'],
-                      height: 140,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                  Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(12),
+                        ),
+                        child: Image.asset(
+                          deal['image'],
+                          height: 140,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: Consumer<WishlistProvider>(
+                          builder: (context, wishlist, _) {
+                            final isWishlisted =
+                                wishlist.isWishlisted(deal['name']);
+                            return GestureDetector(
+                              onTap: () => wishlist.toggleWishlist(deal),
+                              child: Container(
+                                padding: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.black
+                                          .withValues(alpha: 0.1),
+                                      blurRadius: 4,
+                                    ),
+                                  ],
+                                ),
+                                child: Icon(
+                                  isWishlisted
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  size: 16,
+                                  color: isWishlisted
+                                      ? AppColors.primary
+                                      : AppColors.grey,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),
