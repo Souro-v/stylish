@@ -4,6 +4,8 @@ import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
+import 'package:provider/provider.dart';
+import '../../core/providers/wishlist_provider.dart';
 
 class NewArrivalsScreen extends StatefulWidget {
   const NewArrivalsScreen({super.key});
@@ -138,8 +140,6 @@ class _NewArrivalsScreenState extends State<NewArrivalsScreen> {
     },
   ];
 
-  final List<bool> _wishlisted = List.generate(15, (_) => false);
-
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -182,11 +182,11 @@ class _NewArrivalsScreenState extends State<NewArrivalsScreen> {
             ),
 
             // Title
-           const Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 16),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                   Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -258,36 +258,36 @@ class _NewArrivalsScreenState extends State<NewArrivalsScreen> {
                                 Positioned(
                                   top: 8,
                                   right: 8,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        _wishlisted[index] =
-                                            !_wishlisted[index];
-                                      });
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.all(6),
-                                      decoration: BoxDecoration(
-                                        color: AppColors.white,
-                                        shape: BoxShape.circle,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: AppColors.black
-                                                .withValues(alpha: 0.1),
-                                            blurRadius: 4,
+                                  child: Consumer<WishlistProvider>(
+                                    builder: (context, wishlist, _) {
+                                      final isWishlisted =
+                                      wishlist.isWishlisted(product['name']);
+                                      return GestureDetector(
+                                        onTap: () => wishlist.toggleWishlist(product),
+                                        child: Container(
+                                          padding: const EdgeInsets.all(6),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.white,
+                                            shape: BoxShape.circle,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: AppColors.black.withValues(alpha: 0.1),
+                                                blurRadius: 4,
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                      child: Icon(
-                                        _wishlisted[index]
-                                            ? Icons.favorite
-                                            : Icons.favorite_border,
-                                        size: 16,
-                                        color: _wishlisted[index]
-                                            ? AppColors.primary
-                                            : AppColors.grey,
-                                      ),
-                                    ),
+                                          child: Icon(
+                                            isWishlisted
+                                                ? Icons.favorite
+                                                : Icons.favorite_border,
+                                            size: 16,
+                                            color: isWishlisted
+                                                ? AppColors.primary
+                                                : AppColors.grey,
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ],
