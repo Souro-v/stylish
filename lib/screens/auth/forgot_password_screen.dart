@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../widgets/common/custom_button.dart';
 import '../../widgets/common/custom_text_field.dart';
 
@@ -14,7 +16,6 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -22,14 +23,29 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     super.dispose();
   }
 
-  void _onSubmit() {
+  void _onSubmit() async {
     if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-      Future.delayed(const Duration(seconds: 2), () {
-        if (!mounted) return;
-        setState(() => _isLoading = false);
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final success = await authProvider.forgotPassword(
+        _emailController.text.trim(),
+      );
+      if (!mounted) return;
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Password reset email sent! Check your inbox.'),
+            backgroundColor: AppColors.success,
+          ),
+        );
         Navigator.pop(context);
-      });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(authProvider.errorMessage ?? 'Something went wrong'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
     }
   }
 
@@ -58,8 +74,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   hintText: 'Enter your email address',
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  prefixIcon:
-                  const Icon(Iconsax.sms, color: AppColors.grey),
+                  prefixIcon: const Icon(Iconsax.sms, color: AppColors.grey),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
@@ -79,10 +94,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 const SizedBox(height: 32),
 
                 // Submit Button
-                CustomButton(
-                  text: 'Submit',
-                  onPressed: _onSubmit,
-                  isLoading: _isLoading,
+                Consumer<AuthProvider>(
+                  builder: (context, auth, _) {
+                    return CustomButton(
+                      text: 'Submit',
+                      onPressed: _onSubmit,
+                      isLoading: auth.isLoading,
+                    );
+                  },
                 ),
               ],
             ),

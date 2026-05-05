@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/custom_button.dart';
 import '../../widgets/common/custom_text_field.dart';
@@ -17,8 +19,6 @@ class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isLoading = false;
-
   @override
   void dispose() {
     _emailController.dispose();
@@ -26,14 +26,24 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  void _onLogin() {
+  void _onLogin() async {
     if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-      Future.delayed(const Duration(seconds: 2), () {
-        if (!mounted) return;
-        setState(() => _isLoading = false);
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final success = await authProvider.signIn(
+        _emailController.text.trim(),
+        _passwordController.text.trim(),
+      );
+      if (!mounted) return;
+      if (success) {
         Navigator.pushReplacementNamed(context, AppRoutes.home);
-      });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(authProvider.errorMessage ?? 'Login failed'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
     }
   }
 
@@ -91,8 +101,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
-                    onTap: () => Navigator.pushNamed(
-                        context, AppRoutes.forgotPassword),
+                    onTap: () =>
+                        Navigator.pushNamed(context, AppRoutes.forgotPassword),
                     child: const Text(
                       'Forgot Password?',
                       style: TextStyle(
@@ -106,10 +116,14 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(height: 24),
 
                 // Login Button
-                CustomButton(
-                  text: 'Login',
-                  onPressed: _onLogin,
-                  isLoading: _isLoading,
+                Consumer<AuthProvider>(
+                  builder: (context, auth, _) {
+                    return CustomButton(
+                      text: 'Login',
+                      onPressed: _onLogin,
+                      isLoading: auth.isLoading,
+                    );
+                  },
                 ),
                 const SizedBox(height: 32),
 

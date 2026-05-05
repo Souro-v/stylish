@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/auth_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/custom_button.dart';
 import '../../widgets/common/custom_text_field.dart';
@@ -18,7 +20,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -28,14 +29,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  void _onCreateAccount() {
+  void _onCreateAccount() async {
     if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-      Future.delayed(const Duration(seconds: 2), () {
-        if (!mounted) return;
-        setState(() => _isLoading = false);
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final success = await authProvider.signUp(
+        _emailController.text.trim(),
+        _passwordController.text.trim(),
+      );
+      if (!mounted) return;
+      if (success) {
         Navigator.pushReplacementNamed(context, AppRoutes.home);
-      });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(authProvider.errorMessage ?? 'Sign up failed'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
     }
   }
 
@@ -134,10 +145,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 24),
 
                 // Create Account Button
-                CustomButton(
-                  text: 'Create Account',
-                  onPressed: _onCreateAccount,
-                  isLoading: _isLoading,
+                Consumer<AuthProvider>(
+                  builder: (context, auth, _) {
+                    return CustomButton(
+                      text: 'Create Account',
+                      onPressed: _onCreateAccount,
+                      isLoading: auth.isLoading,
+                    );
+                  },
                 ),
                 const SizedBox(height: 32),
 

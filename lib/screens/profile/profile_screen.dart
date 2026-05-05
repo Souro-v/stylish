@@ -4,6 +4,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/auth_provider.dart';
+import '../../core/routes/app_routes.dart';
 import '../../core/theme/theme_provider.dart';
 import '../../widgets/common/custom_button.dart';
 import '../../widgets/common/custom_text_field.dart';
@@ -393,6 +395,33 @@ class _SettingsSheet extends StatelessWidget {
                   activeThumbColor: AppColors.primary,
                   onChanged: (_) => themeProvider.toggleTheme(),
                 ),
+              );
+            },
+          ),
+          // Sign Out
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(
+              Iconsax.logout,
+              color: AppColors.error,
+            ),
+            title: const Text(
+              'Sign Out',
+              style: TextStyle(
+                color: AppColors.error,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () async {
+              Navigator.pop(context); // Bottom sheet close
+              final authProvider =
+              Provider.of<AuthProvider>(context, listen: false);
+              await authProvider.signOut();
+              if (!context.mounted) return;
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.signIn,
+                    (route) => false,
               );
             },
           ),
