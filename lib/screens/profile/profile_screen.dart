@@ -100,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: const Icon(Icons.arrow_back_ios, size: 20),
                   ),
                   const Text(
-                    'Checkout',
+                    'Profile',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,

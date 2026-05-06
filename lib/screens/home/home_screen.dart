@@ -18,8 +18,10 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
 class _HomeScreenState extends State<HomeScreen> {
   int _currentNavIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -28,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  // Trending products data
   static const List<Map<String, dynamic>> _trendingProducts = [
     {
       'image': AppAssets.trending1,
@@ -118,30 +119,38 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Search Bar
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      decoration: BoxDecoration(
-                        color: isDark
-                            ? AppColors.darkCard
-                            : AppColors.lightScaffoldBg,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Row(
-                        children: [
-                          Icon(Iconsax.search_normal, color: AppColors.grey),
-                          SizedBox(width: 8),
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Search any Product...',
-                                border: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
+                    GestureDetector(
+                      onTap: () =>
+                          Navigator.pushNamed(context, AppRoutes.search),
+                      child: Container(
+                        padding:
+                        const EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? AppColors.darkCard
+                              : AppColors.lightScaffoldBg,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Row(
+                          children: [
+                            Icon(Iconsax.search_normal,
+                                color: AppColors.grey),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: TextField(
+                                enabled: false,
+                                decoration: InputDecoration(
+                                  hintText: 'Search any Product...',
+                                  border: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                ),
                               ),
                             ),
-                          ),
-                          Icon(Iconsax.microphone, color: AppColors.grey),
-                        ],
+                            Icon(Iconsax.microphone,
+                                color: AppColors.grey),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -267,11 +276,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: isDark ? AppColors.darkCard : AppColors.white,
+                        color: isDark
+                            ? AppColors.darkCard
+                            : AppColors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.black.withValues(alpha: 0.05),
+                            color:
+                            AppColors.black.withValues(alpha: 0.05),
                             blurRadius: 8,
                           ),
                         ],
@@ -321,7 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 16),
 
-                    // Trending Products
+                    // Trending Products Header
                     Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 10),
@@ -362,7 +374,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           GestureDetector(
                             onTap: () => Navigator.pushNamed(
-                                context, AppRoutes.newArrivals),
+                                context, AppRoutes.trending),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 6),
@@ -398,7 +410,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemCount: _trendingProducts.length,
-                        separatorBuilder: (_, __) => const SizedBox(width: 12),
+                        separatorBuilder: (_, __) =>
+                        const SizedBox(width: 12),
                         itemBuilder: (context, index) {
                           final product = _trendingProducts[index];
                           return GestureDetector(
@@ -413,71 +426,82 @@ class _HomeScreenState extends State<HomeScreen> {
                                 borderRadius: BorderRadius.circular(12),
                                 boxShadow: [
                                   BoxShadow(
-                                    color:
-                                        AppColors.black.withValues(alpha: 0.06),
+                                    color: AppColors.black
+                                        .withValues(alpha: 0.06),
                                     blurRadius: 8,
                                     offset: const Offset(0, 2),
                                   ),
                                 ],
                               ),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
                                 children: [
-                                  Stack(children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.vertical(
-                                        top: Radius.circular(12),
+                                  Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                        const BorderRadius.vertical(
+                                          top: Radius.circular(12),
+                                        ),
+                                        child: Image.asset(
+                                          product['image'],
+                                          height: 120,
+                                          width: double.infinity,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                      child: Image.asset(
-                                        product['image'],
-                                        height: 120,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: 8,
-                                      right: 8,
-                                      child: Consumer<WishlistProvider>(
-                                        builder: (context, wishlist, _) {
-                                          final isWishlisted = wishlist
-                                              .isWishlisted(product['name']);
-                                          return GestureDetector(
-                                            onTap: () => wishlist
-                                                .toggleWishlist(product),
-                                            child: Container(
-                                              padding: const EdgeInsets.all(6),
-                                              decoration: BoxDecoration(
-                                                color: AppColors.white,
-                                                shape: BoxShape.circle,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: AppColors.black
-                                                        .withValues(alpha: 0.1),
-                                                    blurRadius: 4,
-                                                  ),
-                                                ],
+                                      Positioned(
+                                        top: 8,
+                                        right: 8,
+                                        child: Consumer<WishlistProvider>(
+                                          builder:
+                                              (context, wishlist, _) {
+                                            final isWishlisted = wishlist
+                                                .isWishlisted(
+                                                product['name']);
+                                            return GestureDetector(
+                                              onTap: () => wishlist
+                                                  .toggleWishlist(product),
+                                              child: Container(
+                                                padding:
+                                                const EdgeInsets.all(
+                                                    6),
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.white,
+                                                  shape: BoxShape.circle,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: AppColors
+                                                          .black
+                                                          .withValues(
+                                                          alpha: 0.1),
+                                                      blurRadius: 4,
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Icon(
+                                                  isWishlisted
+                                                      ? Icons.favorite
+                                                      : Icons
+                                                      .favorite_border,
+                                                  size: 16,
+                                                  color: isWishlisted
+                                                      ? AppColors.primary
+                                                      : AppColors.grey,
+                                                ),
                                               ),
-                                              child: Icon(
-                                                isWishlisted
-                                                    ? Icons.favorite
-                                                    : Icons.favorite_border,
-                                                size: 16,
-                                                color: isWishlisted
-                                                    ? AppColors.primary
-                                                    : AppColors.grey,
-                                              ),
-                                            ),
-                                          );
-                                        },
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ),
-                                  ]),
+                                    ],
+                                  ),
                                   Padding(
                                     padding: const EdgeInsets.all(8),
                                     child: Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           product['name'],
@@ -504,8 +528,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               style: const TextStyle(
                                                 fontSize: 11,
                                                 color: AppColors.grey,
-                                                decoration:
-                                                    TextDecoration.lineThrough,
+                                                decoration: TextDecoration
+                                                    .lineThrough,
                                               ),
                                             ),
                                             const SizedBox(width: 4),
@@ -546,7 +570,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     SectionHeader(
                       title: 'New Arrivals',
                       subtitle: "Summer' 25 Collections",
-                      onViewAll: () {},
+                      onViewAll: () => Navigator.pushNamed(
+                          context, AppRoutes.newArrivals),
                     ),
                     const SizedBox(height: 16),
 
@@ -558,7 +583,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.black.withValues(alpha: 0.06),
+                              color: AppColors.black
+                                  .withValues(alpha: 0.06),
                               blurRadius: 8,
                             ),
                           ],
@@ -590,7 +616,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: const Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'up to 50% Off',
