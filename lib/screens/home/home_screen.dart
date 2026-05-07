@@ -102,10 +102,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  const CircleAvatar(
-                    radius: 18,
-                    backgroundColor: AppColors.lightBorder,
-                    child: Icon(Iconsax.user, size: 20),
+                  GestureDetector(
+                    onTap: ()=> Navigator.pushNamed(context, AppRoutes.profile),
+                    child: const CircleAvatar(
+                      radius: 18,
+                      backgroundColor: AppColors.lightBorder,
+                      child: Icon(Iconsax.user, size: 20),
+                    ),
                   ),
                 ],
               ),

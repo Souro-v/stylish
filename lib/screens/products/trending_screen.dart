@@ -56,6 +56,41 @@ class _TrendingScreenState extends State<TrendingScreen> {
                 ],
               ),
             ),
+            // Search Bar
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: GestureDetector(
+                onTap: () => Navigator.pushNamed(context, AppRoutes.search),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? AppColors.darkCard
+                        : AppColors.lightScaffoldBg,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Iconsax.search_normal, color: AppColors.grey),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: TextField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                            hintText: 'Search any Product...',
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      Icon(Iconsax.microphone, color: AppColors.grey),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
 
             // Title
             const Padding(
@@ -133,7 +168,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                               boxShadow: [
                                 BoxShadow(
                                   color:
-                                  AppColors.black..withValues(alpha: 0.06),
+                                  AppColors.black.withValues(alpha: 0.06),
                                   blurRadius: 8,
                                   offset: const Offset(0, 2),
                                 ),
