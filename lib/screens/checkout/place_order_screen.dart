@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
+import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/custom_button.dart';
 
 class PlaceOrderScreen extends StatefulWidget {
@@ -29,7 +30,8 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
           children: [
             // AppBar
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -61,11 +63,14 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: isDark ? AppColors.darkCard : AppColors.white,
+                        color: isDark
+                            ? AppColors.darkCard
+                            : AppColors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.black.withValues(alpha: 0.05),
+                            color: AppColors.black
+                                .withValues(alpha: 0.05),
                             blurRadius: 8,
                           ),
                         ],
@@ -73,7 +78,6 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Product Image
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: Image.asset(
@@ -84,11 +88,10 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                             ),
                           ),
                           const SizedBox(width: 12),
-
-                          // Product Info
                           Expanded(
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
                               children: [
                                 const Text(
                                   "Women's Casual Wear",
@@ -106,11 +109,8 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                   ),
                                 ),
                                 const SizedBox(height: 8),
-
-                                // Size + Qty
                                 Row(
                                   children: [
-                                    // Size Dropdown
                                     const Text(
                                       'Size ',
                                       style: TextStyle(
@@ -119,33 +119,40 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                       ),
                                     ),
                                     Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8, vertical: 2),
+                                      padding:
+                                      const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 2),
                                       decoration: BoxDecoration(
                                         border: Border.all(
-                                            color: AppColors.lightBorder),
-                                        borderRadius: BorderRadius.circular(4),
+                                            color:
+                                            AppColors.lightBorder),
+                                        borderRadius:
+                                        BorderRadius.circular(4),
                                       ),
-                                      child: DropdownButtonHideUnderline(
+                                      child:
+                                      DropdownButtonHideUnderline(
                                         child: DropdownButton<String>(
                                           value: _selectedSize,
                                           isDense: true,
                                           items: _sizes
-                                              .map((s) => DropdownMenuItem(
-                                                    value: s,
-                                                    child: Text(s,
-                                                        style: const TextStyle(
-                                                            fontSize: 12)),
-                                                  ))
+                                              .map((s) =>
+                                              DropdownMenuItem(
+                                                value: s,
+                                                child: Text(s,
+                                                    style: const TextStyle(
+                                                        fontSize:
+                                                        12)),
+                                              ))
                                               .toList(),
-                                          onChanged: (val) => setState(
-                                              () => _selectedSize = val!),
+                                          onChanged: (val) =>
+                                              setState(() =>
+                                              _selectedSize =
+                                              val!),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(width: 12),
-
-                                    // Qty Dropdown
                                     const Text(
                                       'Qty ',
                                       style: TextStyle(
@@ -154,35 +161,42 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                       ),
                                     ),
                                     Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8, vertical: 2),
+                                      padding:
+                                      const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 2),
                                       decoration: BoxDecoration(
                                         border: Border.all(
-                                            color: AppColors.lightBorder),
-                                        borderRadius: BorderRadius.circular(4),
+                                            color:
+                                            AppColors.lightBorder),
+                                        borderRadius:
+                                        BorderRadius.circular(4),
                                       ),
-                                      child: DropdownButtonHideUnderline(
+                                      child:
+                                      DropdownButtonHideUnderline(
                                         child: DropdownButton<int>(
                                           value: _selectedQty,
                                           isDense: true,
                                           items: _quantities
-                                              .map((q) => DropdownMenuItem(
-                                                    value: q,
-                                                    child: Text('$q',
-                                                        style: const TextStyle(
-                                                            fontSize: 12)),
-                                                  ))
+                                              .map((q) =>
+                                              DropdownMenuItem(
+                                                value: q,
+                                                child: Text('$q',
+                                                    style: const TextStyle(
+                                                        fontSize:
+                                                        12)),
+                                              ))
                                               .toList(),
-                                          onChanged: (val) => setState(
-                                              () => _selectedQty = val!),
+                                          onChanged: (val) =>
+                                              setState(() =>
+                                              _selectedQty =
+                                              val!),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 8),
-
-                                // Delivery
                                 const Row(
                                   children: [
                                     Text(
@@ -214,17 +228,21 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 14),
                       decoration: BoxDecoration(
-                        color: isDark ? AppColors.darkCard : AppColors.white,
+                        color: isDark
+                            ? AppColors.darkCard
+                            : AppColors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.black.withValues(alpha: 0.05),
+                            color: AppColors.black
+                                .withValues(alpha: 0.05),
                             blurRadius: 8,
                           ),
                         ],
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
                         children: [
                           const Row(
                             children: [
@@ -260,11 +278,14 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: isDark ? AppColors.darkCard : AppColors.white,
+                        color: isDark
+                            ? AppColors.darkCard
+                            : AppColors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.black.withValues(alpha: 0.05),
+                            color: AppColors.black
+                                .withValues(alpha: 0.05),
                             blurRadius: 8,
                           ),
                         ],
@@ -280,29 +301,29 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                             ),
                           ),
                           const SizedBox(height: 12),
-
-                          // Order Amounts
                           const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Order Amounts',
                                   style: TextStyle(
-                                      fontSize: 13, color: AppColors.grey)),
+                                      fontSize: 13,
+                                      color: AppColors.grey)),
                               Text('₹ 7,000.00',
                                   style: TextStyle(fontSize: 13)),
                             ],
                           ),
                           const SizedBox(height: 8),
-
-                          // Convenience
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
                                   const Text('Convenience ',
                                       style: TextStyle(
-                                          fontSize: 13, color: AppColors.grey)),
+                                          fontSize: 13,
+                                          color: AppColors.grey)),
                                   GestureDetector(
                                     onTap: () {},
                                     child: const Text(
@@ -328,14 +349,14 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                             ],
                           ),
                           const SizedBox(height: 8),
-
-                          // Delivery Fee
                           const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Delivery Fee',
                                   style: TextStyle(
-                                      fontSize: 13, color: AppColors.grey)),
+                                      fontSize: 13,
+                                      color: AppColors.grey)),
                               Text(
                                 'Free',
                                 style: TextStyle(
@@ -347,10 +368,9 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                             ],
                           ),
                           const Divider(height: 24),
-
-                          // Order Total
                           const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Order Total',
@@ -369,8 +389,6 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                             ],
                           ),
                           const SizedBox(height: 6),
-
-                          // EMI
                           Row(
                             children: [
                               const Text(
@@ -396,7 +414,45 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 100),
+                    const SizedBox(height: 16),
+
+                    // Proceed to Payment Button
+                    CustomButton(
+                      text: 'Proceed to Payment',
+                      onPressed: () => Navigator.pushNamed(
+                          context, AppRoutes.checkout),
+                    ),
+                    const SizedBox(height: 16),
+
+                    // Price + View Details
+                    Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              '₹7,000.00',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.primary,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: const Text(
+                                'View Details',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: AppColors.primary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
                   ],
                 ),
               ),
@@ -404,56 +460,22 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
           ],
         ),
       ),
-
-      // Bottom Bar
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: isDark ? AppColors.darkBackground : AppColors.white,
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.black.withValues(alpha: 0.08),
-              blurRadius: 10,
-              offset: const Offset(0, -2),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  '₹7,000.00',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: const Text(
-                    'View Details',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: CustomButton(
-                text: 'Proceed to Payment',
-                onPressed: () =>
-                    Navigator.pushNamed(context, AppRoutes.checkout),
-              ),
-            ),
-          ],
-        ),
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: 2,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacementNamed(context, AppRoutes.home);
+          }
+          if (index == 1) {
+            Navigator.pushNamed(context, AppRoutes.trending);
+          }
+          if (index == 3) {
+            Navigator.pushNamed(context, AppRoutes.search);
+          }
+          if (index == 4) {
+            Navigator.pushNamed(context, AppRoutes.profile);
+          }
+        },
       ),
     );
   }
