@@ -28,8 +28,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
           children: [
             // AppBar
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -64,9 +63,8 @@ class _TrendingScreenState extends State<TrendingScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
-                    color: isDark
-                        ? AppColors.darkCard
-                        : AppColors.lightScaffoldBg,
+                    color:
+                        isDark ? AppColors.darkCard : AppColors.lightScaffoldBg,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Row(
@@ -148,7 +146,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                     child: GridView.builder(
                       itemCount: wishlist.wishlistItems.length,
                       gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 12,
                         mainAxisSpacing: 12,
@@ -161,28 +159,25 @@ class _TrendingScreenState extends State<TrendingScreen> {
                               context, AppRoutes.productDetail),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: isDark
-                                  ? AppColors.darkCard
-                                  : AppColors.white,
+                              color:
+                                  isDark ? AppColors.darkCard : AppColors.white,
                               borderRadius: BorderRadius.circular(12),
                               boxShadow: [
                                 BoxShadow(
                                   color:
-                                  AppColors.black.withValues(alpha: 0.06),
+                                      AppColors.black.withValues(alpha: 0.06),
                                   blurRadius: 8,
                                   offset: const Offset(0, 2),
                                 ),
                               ],
                             ),
                             child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Stack(
                                   children: [
                                     ClipRRect(
-                                      borderRadius:
-                                      const BorderRadius.vertical(
+                                      borderRadius: const BorderRadius.vertical(
                                         top: Radius.circular(12),
                                       ),
                                       child: Image.asset(
@@ -196,11 +191,10 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                       top: 8,
                                       right: 8,
                                       child: GestureDetector(
-                                        onTap: () => wishlist
-                                            .toggleWishlist(product),
+                                        onTap: () =>
+                                            wishlist.toggleWishlist(product),
                                         child: Container(
-                                          padding:
-                                          const EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           decoration: BoxDecoration(
                                             color: AppColors.white,
                                             shape: BoxShape.circle,
@@ -226,7 +220,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                   padding: const EdgeInsets.all(8),
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         product['name'],
@@ -254,8 +248,8 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                             style: const TextStyle(
                                               fontSize: 11,
                                               color: AppColors.grey,
-                                              decoration: TextDecoration
-                                                  .lineThrough,
+                                              decoration:
+                                                  TextDecoration.lineThrough,
                                             ),
                                           ),
                                         ],
