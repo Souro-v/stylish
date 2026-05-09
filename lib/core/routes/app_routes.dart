@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/screens/products/trending_screen.dart';
 import '../../screens/checkout/place_order_screen.dart';
+import '../../screens/home/deal_of_day_screen.dart';
 import '../../screens/home/new_arrivals_screen.dart';
 import '../../screens/products/product_detail_screen.dart';
 import '../../screens/search/search_screen.dart';
@@ -31,6 +32,7 @@ class AppRoutes {
   static const String placeOrder = '/place-order';
   static const String search = '/search';
   static const String newArrivals = '/new-arrivals';
+  static const String dealOfDay = '/deal-of-day';
 
 
   // Route Generator
@@ -64,6 +66,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case newArrivals:
         return MaterialPageRoute(builder: (_) => const NewArrivalsScreen());
+      case dealOfDay:
+        return MaterialPageRoute(builder: (_) => const DealOfDayScreen());
         default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

@@ -84,4 +84,9 @@ class AppAssets {
   static const String summerHot = 'assets/products/summer_hot.jpg';
   static const String summerHot1 = 'assets/products/summer_hot1.jpg';
   static const String uniGlass1 = 'assets/products/uni_glass1.jpg';
+  // Deal of Day Extra
+  static const String dod1 = 'assets/products/dod_1.jpg';
+  static const String dod2 = 'assets/products/dod_2.jpg';
+  static const String dod3 = 'assets/products/dod_3.jpg';
+  static const String dod4 = 'assets/products/dod_4.jpg';
 }
