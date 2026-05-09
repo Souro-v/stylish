@@ -291,47 +291,53 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            AppAssets.specialOffersIcon,
-                            width: 48,
-                            height: 48,
-                          ),
-                          const SizedBox(width: 12),
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Special Offers 😱',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
+                      child: GestureDetector(
+                        onTap: () => Navigator.pushNamed(context, AppRoutes.specialOffers),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              AppAssets.specialOffersIcon,
+                              width: 48,
+                              height: 48,
+                            ),
+                            const SizedBox(width: 12),
+                            const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Special Offers 😱',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                'We make sure you get the\noffer you need at best prices',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: AppColors.grey,
+                                SizedBox(height: 4),
+                                Text(
+                                  'We make sure you get the\noffer you need at best prices',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.grey,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
 
                     // Flat and Heels Banner
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(
-                        AppAssets.flatHeelsBanner,
-                        width: double.infinity,
-                        height: 100,
-                        fit: BoxFit.cover,
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, AppRoutes.flatHeels),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          AppAssets.flatHeelsBanner,
+                          width: double.infinity,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),

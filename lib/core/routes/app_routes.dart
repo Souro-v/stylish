@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:stylish/screens/products/trending_screen.dart';
 import '../../screens/checkout/place_order_screen.dart';
 import '../../screens/home/deal_of_day_screen.dart';
+import '../../screens/home/flat_heels_screen.dart';
 import '../../screens/home/new_arrivals_screen.dart';
+import '../../screens/home/special_offers_screen.dart';
 import '../../screens/products/product_detail_screen.dart';
 import '../../screens/search/search_screen.dart';
 import '../../screens/splash/splash_screen.dart';
@@ -33,6 +35,8 @@ class AppRoutes {
   static const String search = '/search';
   static const String newArrivals = '/new-arrivals';
   static const String dealOfDay = '/deal-of-day';
+  static const String specialOffers = '/special-offers';
+  static const String flatHeels = '/flat-heels';
 
 
   // Route Generator
@@ -68,6 +72,10 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const NewArrivalsScreen());
       case dealOfDay:
         return MaterialPageRoute(builder: (_) => const DealOfDayScreen());
+      case specialOffers:
+        return MaterialPageRoute(builder: (_) => const SpecialOffersScreen());
+      case flatHeels:
+        return MaterialPageRoute(builder: (_) => const FlatHeelsScreen());
         default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(
