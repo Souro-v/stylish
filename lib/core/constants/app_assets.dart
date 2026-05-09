@@ -89,4 +89,24 @@ class AppAssets {
   static const String dod2 = 'assets/products/dod_2.jpg';
   static const String dod3 = 'assets/products/dod_3.jpg';
   static const String dod4 = 'assets/products/dod_4.jpg';
+
+  // Special Offers
+  static const String so1 = 'assets/products/so_1.jpg';
+  static const String so2 = 'assets/products/so_2.jpg';
+  static const String so3 = 'assets/products/so_3.jpg';
+  static const String so4 = 'assets/products/so_4.jpg';
+  static const String so5 = 'assets/products/so_5.jpg';
+  static const String so6 = 'assets/products/so_6.jpg';
+
+// Flat and Heels
+  static const String fh1 = 'assets/products/fh_1.jpg';
+  static const String fh2 = 'assets/products/fh_2.jpg';
+  static const String fh3 = 'assets/products/fh_3.jpg';
+  static const String fh4 = 'assets/products/fh_4.jpg';
+  static const String fh5 = 'assets/products/fh_5.jpg';
+  static const String fh6 = 'assets/products/fh_6.jpg';
+  static const String fh7 = 'assets/products/fh_7.jpg';
+  static const String fh8 = 'assets/products/fh_8.jpg';
+  static const String fh9 = 'assets/products/fh_9.jpg';
+  static const String fh10 = 'assets/products/fh_10.jpg';
 }
