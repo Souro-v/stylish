@@ -43,6 +43,12 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
+    - assets/beauty/
+    - assets/fashion/
+    - assets/gift/
     - assets/icons/
+    - assets/images/
+    - assets/kid/
+    - assets/men/
     - assets/products/
+    - assets/women/
