@@ -39,6 +39,7 @@ class AppRoutes {
   static const String flatHeels = '/flat-heels';
 
 
+
   // Route Generator
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
