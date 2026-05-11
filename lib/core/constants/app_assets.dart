@@ -109,4 +109,74 @@ class AppAssets {
   static const String fh8 = 'assets/products/fh_8.jpg';
   static const String fh9 = 'assets/products/fh_9.jpg';
   static const String fh10 = 'assets/products/fh_10.jpg';
+  // Beauty
+  static const String beauty1 = 'assets/beauty/beauty_1.jpg';
+  static const String beauty2 = 'assets/beauty/beauty_2.jpg';
+  static const String beauty3 = 'assets/beauty/beauty_3.jpg';
+  static const String beauty4 = 'assets/beauty/beauty_4.jpg';
+  static const String beauty5 = 'assets/beauty/beauty_5.jpg';
+  static const String beauty6 = 'assets/beauty/beauty_6.jpg';
+  static const String beauty7 = 'assets/beauty/beauty_7.jpg';
+  static const String beauty8 = 'assets/beauty/beauty_8.jpg';
+  static const String beauty9 = 'assets/beauty/beauty_9.jpg';
+
+// Fashion
+  static const String fashion1 = 'assets/fashion/fashion_1.jpg';
+  static const String fashion2 = 'assets/fashion/fashion_2.jpg';
+  static const String fashion3 = 'assets/fashion/fashion_3.jpg';
+  static const String fashion4 = 'assets/fashion/fashion_4.jpg';
+  static const String fashion5 = 'assets/fashion/fashion_5.jpg';
+  static const String fashion6 = 'assets/fashion/fashion_6.jpg';
+  static const String fashion7 = 'assets/fashion/fashion_7.jpg';
+  static const String fashion8 = 'assets/fashion/fashion_8.jpg';
+
+// Gifts
+  static const String gift1 = 'assets/gift/gifts_1.jpg';
+  static const String gift2 = 'assets/gift/gifts_2.jpg';
+  static const String gift3 = 'assets/gift/gifts_3.jpg';
+  static const String gift4 = 'assets/gift/gifts_4.jpg';
+  static const String gift5 = 'assets/gift/gifts_5.jpg';
+  static const String gift6 = 'assets/gift/gifts_6.jpg';
+  static const String gift7 = 'assets/gift/gifts_7.jpg';
+  static const String gift8 = 'assets/gift/gifts_8.jpg';
+  static const String gift9 = 'assets/gift/gifts_9.jpg';
+  static const String gift10 = 'assets/gift/gifts_10.jpg';
+  static const String gift11 = 'assets/gift/gifts_11.jpg';
+  static const String gift12 = 'assets/gift/gifts_12.jpg';
+  static const String gift13 = 'assets/gift/gifts_13.jpg';
+
+// Kids
+  static const String kid1 = 'assets/kid/kid_1.jpg';
+  static const String kid2 = 'assets/kid/kid_2.jpg';
+  static const String kid3 = 'assets/kid/kid_3.jpg';
+  static const String kid4 = 'assets/kid/kid_4.jpg';
+  static const String kid5 = 'assets/kid/kid_5.jpg';
+  static const String kid6 = 'assets/kid/kid_6.jpg';
+  static const String kid7 = 'assets/kid/kid_7.jpg';
+  static const String kid8 = 'assets/kid/kid_8.jpg';
+
+// Mens
+  static const String mens1 = 'assets/men/mens_1.jpg';
+  static const String mens2 = 'assets/men/mens_2.jpg';
+  static const String mens3 = 'assets/men/mens_3.jpg';
+  static const String mens4 = 'assets/men/mens_4.jpg';
+  static const String mens5 = 'assets/men/mens_5.jpg';
+  static const String mens6 = 'assets/men/mens_6.jpg';
+  static const String mens7 = 'assets/men/mens_7.jpg';
+  static const String mens8 = 'assets/men/mens_8.jpg';
+  static const String mens9 = 'assets/men/mens_9.jpg';
+  static const String mens10 = 'assets/men/mens_10.jpg';
+  static const String mens11 = 'assets/men/mens_11.jpg';
+  static const String mens12 = 'assets/men/mens_12.jpg';
+
+// Womens
+  static const String womens1 = 'assets/women/womens_1.jpg';
+  static const String womens2 = 'assets/women/womens_2.jpg';
+  static const String womens3 = 'assets/women/womens_3.jpg';
+  static const String womens4 = 'assets/women/womens_4.jpg';
+  static const String womens5 = 'assets/women/womens_5.jpg';
+  static const String womens6 = 'assets/women/womens_6.jpg';
+  static const String womens7 = 'assets/women/womens_7.jpg';
+  static const String womens8 = 'assets/women/womens_8.jpg';
+  static const String womens9 = 'assets/women/womens_9.jpg';
 }
