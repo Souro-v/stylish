@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/cart_provider.dart';
 import '../../core/providers/wishlist_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
@@ -376,23 +377,39 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: ElevatedButton.icon(
-                            onPressed: () => Navigator.pushNamed(
-                                context, AppRoutes.placeOrder),
-                            icon: const Icon(Iconsax.shopping_cart,
-                                color: AppColors.white, size: 18),
-                            label: const Text(
-                              'Go to cart',
-                              style: TextStyle(color: AppColors.white),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
+                          child: Consumer<CartProvider>(
+                            builder: (context, cart, _) {
+                              final isInCart = cart.isInCart(widget.product['name'] ?? '');
+                              return ElevatedButton.icon(
+                                onPressed: () {
+                                  if (isInCart) {
+                                    Navigator.pushNamed(context, AppRoutes.placeOrder);
+                                  } else {
+                                    cart.addToCart(widget.product);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Added to cart!'),
+                                        backgroundColor: AppColors.primary,
+                                        duration: Duration(seconds: 1),
+                                      ),
+                                    );
+                                  }
+                                },
+                                icon: const Icon(Iconsax.shopping_cart,
+                                    color: AppColors.white, size: 18),
+                                label: Text(
+                                  isInCart ? 'Go to cart' : 'Add to cart',
+                                  style: const TextStyle(color: AppColors.white),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.primary,
+                                  padding: const EdgeInsets.symmetric(vertical: 12),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         const SizedBox(width: 12),
