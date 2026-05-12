@@ -156,7 +156,9 @@ class _TrendingScreenState extends State<TrendingScreen> {
                         final product = wishlist.wishlistItems[index];
                         return GestureDetector(
                           onTap: () => Navigator.pushNamed(
-                              context, AppRoutes.productDetail),
+                              context, AppRoutes.productDetail,
+                            arguments: product
+                          ),
                           child: Container(
                             decoration: BoxDecoration(
                               color:

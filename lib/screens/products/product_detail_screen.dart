@@ -4,14 +4,16 @@ import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
-import '../../core/providers/wishlist_provider.dart' show WishlistProvider;
+import '../../core/providers/wishlist_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/star_rating.dart';
 import 'widgets/size_selector.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({super.key});
+  final Map<String, dynamic> product;
+
+  const ProductDetailScreen({super.key, required this.product});
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -23,17 +25,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int _currentNavIndex = 0;
   bool _isExpanded = false;
 
-  final Map<String, dynamic> _product = {
-    'image': AppAssets.detail1,
-    'name': 'Nike Sneakers',
-    'price': 1500,
-    'oldPrice': 2999,
-    'rating': 3.5,
-  };
-
-
-  final List<String> _images = [
-    AppAssets.detail1,
+  List<String> get _images => [
+    widget.product['image'] ?? AppAssets.detail1,
     AppAssets.detail2,
     AppAssets.detail3,
     AppAssets.detail4,
@@ -46,6 +39,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       'name': 'Nike Sneakers',
       'desc': 'Nike Air Jordan Retro 1 Low Mystic Black',
       'price': 1900,
+      'oldPrice': 2999,
       'rating': 4.5,
       'reviews': 46890,
     },
@@ -54,6 +48,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       'name': 'Nike Sneakers',
       'desc': 'Mid Peach Mocha Shoes For Man White Black Pink S...',
       'price': 2500,
+      'oldPrice': 3999,
       'rating': 4.5,
       'reviews': 256091,
     },
@@ -62,6 +57,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       'name': 'Jordan Stay',
       'desc': 'The classic Air Jordan 12 to create a shoe...',
       'price': 4999,
+      'oldPrice': 7999,
       'rating': 4.0,
       'reviews': 10234,
     },
@@ -70,6 +66,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       'name': 'Black Jacket',
       'desc': 'This warm and comfortable jacket...',
       'price': 2999,
+      'oldPrice': 4999,
       'rating': 4.0,
       'reviews': 223569,
     },
@@ -85,7 +82,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    const String fullDesc =
+    final String fullDesc = widget.product['desc'] ??
         'Perhaps the most iconic sneaker of all-time, this original "Chicago"? colorway is the cornerstone to any sneaker collection. Made famous in 1985 by Michael Jordan, the shoe has stood the test of time, becoming the most famous colorway of the Air Jordan 1. This 2015 release saw the shoe return in its full glory.';
 
     return Scaffold(
@@ -103,8 +100,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     child: const Icon(Icons.arrow_back_ios, size: 20),
                   ),
                   GestureDetector(
-                    onTap: () =>
-                        Navigator.pushNamed(context, AppRoutes.cart),
+                    onTap: () => Navigator.pushNamed(
+                        context, AppRoutes.placeOrder),
                     child: const Icon(Iconsax.shopping_cart, size: 24),
                   ),
                 ],
@@ -141,7 +138,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ),
                           ),
                         ),
-                        // Next arrow
                         Positioned(
                           right: 12,
                           top: 120,
@@ -152,7 +148,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppColors.black.withValues(alpha: 0.1),
+                                  color:
+                                  AppColors.black.withValues(alpha: 0.1),
                                   blurRadius: 4,
                                 ),
                               ],
@@ -164,7 +161,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ),
                           ),
                         ),
-                        // Dots
                         Positioned(
                           bottom: 12,
                           child: AnimatedSmoothIndicator(
@@ -198,34 +194,36 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     const SizedBox(height: 16),
 
                     // Product Name
-                    const Text(
-                      'Nike Sneakers',
-                      style: TextStyle(
+                    Text(
+                      widget.product['name'] ?? 'Product',
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 4),
-                    const Text(
-                      'Vision Alta Men\'s Shoes Size (All Colours)',
-                      style: TextStyle(
+                    Text(
+                      widget.product['desc'] ?? '',
+                      style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.grey,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 8),
 
                     // Rating
-                  const Row(
+                    Row(
                       children: [
-                         StarRating(
-                          rating: 3.5,
+                        StarRating(
+                          rating: (widget.product['rating'] ?? 0).toDouble(),
                           size: 16,
                         ),
-                         SizedBox(width: 6),
+                        const SizedBox(width: 6),
                         Text(
-                          '56,890',
-                          style:  TextStyle(
+                          '${widget.product['reviews'] ?? ''}',
+                          style: const TextStyle(
                             fontSize: 12,
                             color: AppColors.grey,
                           ),
@@ -237,18 +235,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     // Price
                     Row(
                       children: [
-                        const Text(
-                          '₹2,999',
-                          style: TextStyle(
+                        Text(
+                          '₹${widget.product['oldPrice'] ?? ''}',
+                          style: const TextStyle(
                             fontSize: 14,
                             color: AppColors.grey,
                             decoration: TextDecoration.lineThrough,
                           ),
                         ),
                         const SizedBox(width: 8),
-                        const Text(
-                          '₹1,500',
-                          style: TextStyle(
+                        Text(
+                          '₹${widget.product['price'] ?? ''}',
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: AppColors.primary,
@@ -262,9 +260,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             color: AppColors.primary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: const Text(
-                            '50% Off',
-                            style: TextStyle(
+                          child: Text(
+                            '${widget.product['discount'] ?? ''}',
+                            style: const TextStyle(
                               fontSize: 12,
                               color: AppColors.primary,
                               fontWeight: FontWeight.w500,
@@ -287,7 +285,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     Text(
                       _isExpanded
                           ? fullDesc
-                          : '${fullDesc.substring(0, 120)}...',
+                          : '${fullDesc.substring(0, fullDesc.length > 120 ? 120 : fullDesc.length)}...',
                       style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.grey,
@@ -295,7 +293,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => setState(() => _isExpanded = !_isExpanded),
+                      onTap: () =>
+                          setState(() => _isExpanded = !_isExpanded),
                       child: Text(
                         _isExpanded ? 'Less' : '...More',
                         style: const TextStyle(
@@ -308,18 +307,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     const SizedBox(height: 12),
 
                     // Tags Row
-                   const Row(
+                    const Row(
                       children: [
                         _TagChip(
                           icon: Iconsax.location,
                           label: 'Nearest Store',
                         ),
-                         SizedBox(width: 8),
+                        SizedBox(width: 8),
                         _TagChip(
                           icon: Iconsax.crown,
                           label: 'VIP',
                         ),
-                         SizedBox(width: 8),
+                        SizedBox(width: 8),
                         _TagChip(
                           icon: Iconsax.refresh,
                           label: 'Return policy',
@@ -327,29 +326,39 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
+
+                    // Wishlist Button
                     Consumer<WishlistProvider>(
                       builder: (context, wishlist, _) {
-                        final isWishlisted = wishlist.isWishlisted(_product['name']);
+                        final isWishlisted =
+                        wishlist.isWishlisted(widget.product['name']);
                         return GestureDetector(
-                          onTap: () => wishlist.toggleWishlist(_product),
+                          onTap: () =>
+                              wishlist.toggleWishlist(widget.product),
                           child: Container(
                             width: double.infinity,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            padding:
+                            const EdgeInsets.symmetric(vertical: 12),
                             decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.primary),
+                              border:
+                              Border.all(color: AppColors.primary),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
-                                  isWishlisted ? Icons.favorite : Icons.favorite_border,
+                                  isWishlisted
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
                                   color: AppColors.primary,
                                   size: 18,
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  isWishlisted ? 'Wishlisted' : 'Add to Wishlist',
+                                  isWishlisted
+                                      ? 'Wishlisted'
+                                      : 'Add to Wishlist',
                                   style: const TextStyle(
                                     color: AppColors.primary,
                                     fontWeight: FontWeight.w600,
@@ -368,7 +377,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       children: [
                         Expanded(
                           child: ElevatedButton.icon(
-                            onPressed: () => Navigator.pushNamed(context, AppRoutes.placeOrder),
+                            onPressed: () => Navigator.pushNamed(
+                                context, AppRoutes.placeOrder),
                             icon: const Icon(Iconsax.shopping_cart,
                                 color: AppColors.white, size: 18),
                             label: const Text(
@@ -377,8 +387,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primary,
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -388,7 +398,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: () => Navigator.pushNamed(
+                                context, AppRoutes.checkout),
                             icon: const Icon(Icons.bolt,
                                 color: AppColors.white, size: 18),
                             label: const Text(
@@ -397,8 +408,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -417,7 +428,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         color: AppColors.primary.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: AppColors.primary.withValues(alpha: 0.2),
+                          color:
+                          AppColors.primary.withValues(alpha: 0.2),
                         ),
                       ),
                       child: const Column(
@@ -458,8 +470,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             style: OutlinedButton.styleFrom(
                               side: const BorderSide(
                                   color: AppColors.lightBorder),
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -479,8 +491,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             style: OutlinedButton.styleFrom(
                               side: const BorderSide(
                                   color: AppColors.lightBorder),
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -548,77 +560,87 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         const SizedBox(width: 12),
                         itemBuilder: (context, index) {
                           final product = _similarProducts[index];
-                          return Container(
-                            width: 150,
-                            decoration: BoxDecoration(
-                              color: isDark
-                                  ? AppColors.darkCard
-                                  : AppColors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.black.withValues(alpha: 0.06),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
+                          return GestureDetector(
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              AppRoutes.productDetail,
+                              arguments: product,
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.vertical(
-                                    top: Radius.circular(12),
+                            child: Container(
+                              width: 150,
+                              decoration: BoxDecoration(
+                                color: isDark
+                                    ? AppColors.darkCard
+                                    : AppColors.white,
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.black
+                                        .withValues(alpha: 0.06),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
                                   ),
-                                  child: Image.asset(
-                                    product['image'],
-                                    height: 120,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius:
+                                    const BorderRadius.vertical(
+                                      top: Radius.circular(12),
+                                    ),
+                                    child: Image.asset(
+                                      product['image'],
+                                      height: 120,
+                                      width: double.infinity,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        product['name'],
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          product['name'],
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 2),
-                                      Text(
-                                        product['desc'],
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          color: AppColors.grey,
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          product['desc'],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                            color: AppColors.grey,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        '₹${product['price']}',
-                                        style: const TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.primary,
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          '₹${product['price']}',
+                                          style: const TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.primary,
+                                          ),
                                         ),
-                                      ),
-                                      StarRating(
-                                        rating: product['rating'],
-                                        size: 12,
-                                      ),
-                                    ],
+                                        StarRating(
+                                          rating: (product['rating'] as num).toDouble(),
+                                          size: 12,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         },
@@ -634,7 +656,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentNavIndex,
-        onTap: (index) => setState(() => _currentNavIndex = index),
+        onTap: (index) {
+          setState(() => _currentNavIndex = index);
+          if (index == 0) {
+            Navigator.pushReplacementNamed(context, AppRoutes.home);
+          }
+          if (index == 1) {
+            Navigator.pushNamed(context, AppRoutes.trending);
+          }
+          if (index == 2) {
+            Navigator.pushNamed(context, AppRoutes.placeOrder);
+          }
+          if (index == 3) {
+            Navigator.pushNamed(context, AppRoutes.search);
+          }
+          if (index == 4) {
+            Navigator.pushNamed(context, AppRoutes.profile);
+          }
+        },
       ),
     );
   }

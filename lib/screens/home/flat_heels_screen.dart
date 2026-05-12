@@ -18,16 +18,86 @@ class _FlatHeelsScreenState extends State<FlatHeelsScreen> {
   int _currentNavIndex = 0;
 
   static const List<Map<String, dynamic>> _products = [
-    {'image': AppAssets.fh1, 'name': 'Flat & Heels 1', 'price': 1299, 'oldPrice': 2499, 'discount': '48%Off', 'rating': 4.5},
-    {'image': AppAssets.fh2, 'name': 'Flat & Heels 2', 'price': 999, 'oldPrice': 1999, 'discount': '50%Off', 'rating': 4.0},
-    {'image': AppAssets.fh3, 'name': 'Flat & Heels 3', 'price': 1499, 'oldPrice': 2999, 'discount': '50%Off', 'rating': 4.5},
-    {'image': AppAssets.fh4, 'name': 'Flat & Heels 4', 'price': 799, 'oldPrice': 1499, 'discount': '47%Off', 'rating': 4.0},
-    {'image': AppAssets.fh5, 'name': 'Flat & Heels 5', 'price': 1799, 'oldPrice': 3499, 'discount': '49%Off', 'rating': 4.5},
-    {'image': AppAssets.fh6, 'name': 'Flat & Heels 6', 'price': 899, 'oldPrice': 1799, 'discount': '50%Off', 'rating': 4.0},
-    {'image': AppAssets.fh7, 'name': 'Flat & Heels 7', 'price': 1199, 'oldPrice': 2199, 'discount': '45%Off', 'rating': 4.5},
-    {'image': AppAssets.fh8, 'name': 'Flat & Heels 8', 'price': 699, 'oldPrice': 1299, 'discount': '46%Off', 'rating': 4.0},
-    {'image': AppAssets.fh9, 'name': 'Flat & Heels 9', 'price': 1599, 'oldPrice': 2999, 'discount': '47%Off', 'rating': 4.5},
-    {'image': AppAssets.fh10, 'name': 'Flat & Heels 10', 'price': 999, 'oldPrice': 1999, 'discount': '50%Off', 'rating': 4.0},
+    {
+      'image': AppAssets.fh1,
+      'name': 'Flat & Heels 1',
+      'price': 1299,
+      'oldPrice': 2499,
+      'discount': '48%Off',
+      'rating': 4.5
+    },
+    {
+      'image': AppAssets.fh2,
+      'name': 'Flat & Heels 2',
+      'price': 999,
+      'oldPrice': 1999,
+      'discount': '50%Off',
+      'rating': 4.0
+    },
+    {
+      'image': AppAssets.fh3,
+      'name': 'Flat & Heels 3',
+      'price': 1499,
+      'oldPrice': 2999,
+      'discount': '50%Off',
+      'rating': 4.5
+    },
+    {
+      'image': AppAssets.fh4,
+      'name': 'Flat & Heels 4',
+      'price': 799,
+      'oldPrice': 1499,
+      'discount': '47%Off',
+      'rating': 4.0
+    },
+    {
+      'image': AppAssets.fh5,
+      'name': 'Flat & Heels 5',
+      'price': 1799,
+      'oldPrice': 3499,
+      'discount': '49%Off',
+      'rating': 4.5
+    },
+    {
+      'image': AppAssets.fh6,
+      'name': 'Flat & Heels 6',
+      'price': 899,
+      'oldPrice': 1799,
+      'discount': '50%Off',
+      'rating': 4.0
+    },
+    {
+      'image': AppAssets.fh7,
+      'name': 'Flat & Heels 7',
+      'price': 1199,
+      'oldPrice': 2199,
+      'discount': '45%Off',
+      'rating': 4.5
+    },
+    {
+      'image': AppAssets.fh8,
+      'name': 'Flat & Heels 8',
+      'price': 699,
+      'oldPrice': 1299,
+      'discount': '46%Off',
+      'rating': 4.0
+    },
+    {
+      'image': AppAssets.fh9,
+      'name': 'Flat & Heels 9',
+      'price': 1599,
+      'oldPrice': 2999,
+      'discount': '47%Off',
+      'rating': 4.5
+    },
+    {
+      'image': AppAssets.fh10,
+      'name': 'Flat & Heels 10',
+      'price': 999,
+      'oldPrice': 1999,
+      'discount': '50%Off',
+      'rating': 4.0
+    },
   ];
 
   @override
@@ -63,7 +133,8 @@ class _FlatHeelsScreenState extends State<FlatHeelsScreen> {
                     ],
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
+                    onTap: () =>
+                        Navigator.pushNamed(context, AppRoutes.profile),
                     child: const CircleAvatar(
                       radius: 18,
                       backgroundColor: AppColors.lightBorder,
@@ -105,7 +176,9 @@ class _FlatHeelsScreenState extends State<FlatHeelsScreen> {
                   itemBuilder: (context, index) {
                     final product = _products[index];
                     return GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, AppRoutes.productDetail),
+                      onTap: () => Navigator.pushNamed(
+                          context, AppRoutes.productDetail,
+                          arguments: product),
                       child: Container(
                         decoration: BoxDecoration(
                           color: isDark ? AppColors.darkCard : AppColors.white,
@@ -124,7 +197,8 @@ class _FlatHeelsScreenState extends State<FlatHeelsScreen> {
                             Stack(
                               children: [
                                 ClipRRect(
-                                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                                  borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(12)),
                                   child: Image.asset(
                                     product['image'],
                                     height: 160,
@@ -137,9 +211,11 @@ class _FlatHeelsScreenState extends State<FlatHeelsScreen> {
                                   right: 8,
                                   child: Consumer<WishlistProvider>(
                                     builder: (context, wishlist, _) {
-                                      final isWishlisted = wishlist.isWishlisted(product['name']);
+                                      final isWishlisted = wishlist
+                                          .isWishlisted(product['name']);
                                       return GestureDetector(
-                                        onTap: () => wishlist.toggleWishlist(product),
+                                        onTap: () =>
+                                            wishlist.toggleWishlist(product),
                                         child: Container(
                                           padding: const EdgeInsets.all(6),
                                           decoration: BoxDecoration(
@@ -147,15 +223,20 @@ class _FlatHeelsScreenState extends State<FlatHeelsScreen> {
                                             shape: BoxShape.circle,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: AppColors.black.withValues(alpha: 0.1),
+                                                color: AppColors.black
+                                                    .withValues(alpha: 0.1),
                                                 blurRadius: 4,
                                               ),
                                             ],
                                           ),
                                           child: Icon(
-                                            isWishlisted ? Icons.favorite : Icons.favorite_border,
+                                            isWishlisted
+                                                ? Icons.favorite
+                                                : Icons.favorite_border,
                                             size: 16,
-                                            color: isWishlisted ? AppColors.primary : AppColors.grey,
+                                            color: isWishlisted
+                                                ? AppColors.primary
+                                                : AppColors.grey,
                                           ),
                                         ),
                                       );
@@ -166,7 +247,8 @@ class _FlatHeelsScreenState extends State<FlatHeelsScreen> {
                                   top: 8,
                                   left: 8,
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 6, vertical: 2),
                                     decoration: BoxDecoration(
                                       color: AppColors.primary,
                                       borderRadius: BorderRadius.circular(4),
@@ -192,27 +274,40 @@ class _FlatHeelsScreenState extends State<FlatHeelsScreen> {
                                     product['name'],
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                                    style: const TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                   const SizedBox(height: 4),
                                   Row(
                                     children: [
                                       Text(
                                         '₹${product['price']}',
-                                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.primary),
+                                        style: const TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.primary),
                                       ),
                                       const SizedBox(width: 4),
                                       Text(
                                         '₹${product['oldPrice']}',
-                                        style: const TextStyle(fontSize: 11, color: AppColors.grey, decoration: TextDecoration.lineThrough),
+                                        style: const TextStyle(
+                                            fontSize: 11,
+                                            color: AppColors.grey,
+                                            decoration:
+                                                TextDecoration.lineThrough),
                                       ),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      const Icon(Icons.star, color: Colors.amber, size: 13),
+                                      const Icon(Icons.star,
+                                          color: Colors.amber, size: 13),
                                       const SizedBox(width: 2),
-                                      Text('${product['rating']}', style: const TextStyle(fontSize: 11, color: AppColors.grey)),
+                                      Text('${product['rating']}',
+                                          style: const TextStyle(
+                                              fontSize: 11,
+                                              color: AppColors.grey)),
                                     ],
                                   ),
                                 ],

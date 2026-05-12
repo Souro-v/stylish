@@ -34,8 +34,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           children: [
             // AppBar
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -92,8 +91,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: GridView.builder(
                   itemCount: widget.products.length,
-                  gridDelegate:
-                  const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
@@ -103,17 +101,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     final product = widget.products[index];
                     return GestureDetector(
                       onTap: () => Navigator.pushNamed(
-                          context, AppRoutes.productDetail),
+                          context, AppRoutes.productDetail,
+                          arguments: product),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: isDark
-                              ? AppColors.darkCard
-                              : AppColors.white,
+                          color: isDark ? AppColors.darkCard : AppColors.white,
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color:
-                              AppColors.black.withValues(alpha: 0.06),
+                              color: AppColors.black.withValues(alpha: 0.06),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),
@@ -125,8 +121,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             Stack(
                               children: [
                                 ClipRRect(
-                                  borderRadius:
-                                  const BorderRadius.vertical(
+                                  borderRadius: const BorderRadius.vertical(
                                     top: Radius.circular(12),
                                   ),
                                   child: Image.asset(
@@ -145,11 +140,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       final isWishlisted = wishlist
                                           .isWishlisted(product['name']);
                                       return GestureDetector(
-                                        onTap: () => wishlist
-                                            .toggleWishlist(product),
+                                        onTap: () =>
+                                            wishlist.toggleWishlist(product),
                                         child: Container(
-                                          padding:
-                                          const EdgeInsets.all(6),
+                                          padding: const EdgeInsets.all(6),
                                           decoration: BoxDecoration(
                                             color: AppColors.white,
                                             shape: BoxShape.circle,
@@ -184,8 +178,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                         horizontal: 6, vertical: 2),
                                     decoration: BoxDecoration(
                                       color: AppColors.primary,
-                                      borderRadius:
-                                      BorderRadius.circular(4),
+                                      borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: Text(
                                       product['discount'],
@@ -202,8 +195,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             Padding(
                               padding: const EdgeInsets.all(8),
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     product['name'],
@@ -232,7 +224,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                           fontSize: 11,
                                           color: AppColors.grey,
                                           decoration:
-                                          TextDecoration.lineThrough,
+                                              TextDecoration.lineThrough,
                                         ),
                                       ),
                                     ],

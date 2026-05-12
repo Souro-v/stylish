@@ -18,12 +18,54 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
   int _currentNavIndex = 0;
 
   static const List<Map<String, dynamic>> _products = [
-    {'image': AppAssets.so1, 'name': 'Special Offer 1', 'price': 999, 'oldPrice': 1999, 'discount': '50%Off', 'rating': 4.5},
-    {'image': AppAssets.so2, 'name': 'Special Offer 2', 'price': 799, 'oldPrice': 1499, 'discount': '47%Off', 'rating': 4.0},
-    {'image': AppAssets.so3, 'name': 'Special Offer 3', 'price': 1299, 'oldPrice': 2499, 'discount': '48%Off', 'rating': 4.5},
-    {'image': AppAssets.so4, 'name': 'Special Offer 4', 'price': 599, 'oldPrice': 999, 'discount': '40%Off', 'rating': 4.0},
-    {'image': AppAssets.so5, 'name': 'Special Offer 5', 'price': 1499, 'oldPrice': 2999, 'discount': '50%Off', 'rating': 4.5},
-    {'image': AppAssets.so6, 'name': 'Special Offer 6', 'price': 899, 'oldPrice': 1799, 'discount': '50%Off', 'rating': 4.0},
+    {
+      'image': AppAssets.so1,
+      'name': 'Special Offer 1',
+      'price': 999,
+      'oldPrice': 1999,
+      'discount': '50%Off',
+      'rating': 4.5
+    },
+    {
+      'image': AppAssets.so2,
+      'name': 'Special Offer 2',
+      'price': 799,
+      'oldPrice': 1499,
+      'discount': '47%Off',
+      'rating': 4.0
+    },
+    {
+      'image': AppAssets.so3,
+      'name': 'Special Offer 3',
+      'price': 1299,
+      'oldPrice': 2499,
+      'discount': '48%Off',
+      'rating': 4.5
+    },
+    {
+      'image': AppAssets.so4,
+      'name': 'Special Offer 4',
+      'price': 599,
+      'oldPrice': 999,
+      'discount': '40%Off',
+      'rating': 4.0
+    },
+    {
+      'image': AppAssets.so5,
+      'name': 'Special Offer 5',
+      'price': 1499,
+      'oldPrice': 2999,
+      'discount': '50%Off',
+      'rating': 4.5
+    },
+    {
+      'image': AppAssets.so6,
+      'name': 'Special Offer 6',
+      'price': 899,
+      'oldPrice': 1799,
+      'discount': '50%Off',
+      'rating': 4.0
+    },
   ];
 
   @override
@@ -59,7 +101,8 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                     ],
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
+                    onTap: () =>
+                        Navigator.pushNamed(context, AppRoutes.profile),
                     child: const CircleAvatar(
                       radius: 18,
                       backgroundColor: AppColors.lightBorder,
@@ -101,7 +144,9 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                   itemBuilder: (context, index) {
                     final product = _products[index];
                     return GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, AppRoutes.productDetail),
+                      onTap: () => Navigator.pushNamed(
+                          context, AppRoutes.productDetail,
+                          arguments: product),
                       child: Container(
                         decoration: BoxDecoration(
                           color: isDark ? AppColors.darkCard : AppColors.white,
@@ -120,7 +165,8 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                             Stack(
                               children: [
                                 ClipRRect(
-                                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                                  borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(12)),
                                   child: Image.asset(
                                     product['image'],
                                     height: 160,
@@ -133,9 +179,11 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                                   right: 8,
                                   child: Consumer<WishlistProvider>(
                                     builder: (context, wishlist, _) {
-                                      final isWishlisted = wishlist.isWishlisted(product['name']);
+                                      final isWishlisted = wishlist
+                                          .isWishlisted(product['name']);
                                       return GestureDetector(
-                                        onTap: () => wishlist.toggleWishlist(product),
+                                        onTap: () =>
+                                            wishlist.toggleWishlist(product),
                                         child: Container(
                                           padding: const EdgeInsets.all(6),
                                           decoration: BoxDecoration(
@@ -143,15 +191,20 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                                             shape: BoxShape.circle,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: AppColors.black.withValues(alpha: 0.1),
+                                                color: AppColors.black
+                                                    .withValues(alpha: 0.1),
                                                 blurRadius: 4,
                                               ),
                                             ],
                                           ),
                                           child: Icon(
-                                            isWishlisted ? Icons.favorite : Icons.favorite_border,
+                                            isWishlisted
+                                                ? Icons.favorite
+                                                : Icons.favorite_border,
                                             size: 16,
-                                            color: isWishlisted ? AppColors.primary : AppColors.grey,
+                                            color: isWishlisted
+                                                ? AppColors.primary
+                                                : AppColors.grey,
                                           ),
                                         ),
                                       );
@@ -162,7 +215,8 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                                   top: 8,
                                   left: 8,
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 6, vertical: 2),
                                     decoration: BoxDecoration(
                                       color: AppColors.primary,
                                       borderRadius: BorderRadius.circular(4),
@@ -188,27 +242,40 @@ class _SpecialOffersScreenState extends State<SpecialOffersScreen> {
                                     product['name'],
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+                                    style: const TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                   const SizedBox(height: 4),
                                   Row(
                                     children: [
                                       Text(
                                         '₹${product['price']}',
-                                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.primary),
+                                        style: const TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.primary),
                                       ),
                                       const SizedBox(width: 4),
                                       Text(
                                         '₹${product['oldPrice']}',
-                                        style: const TextStyle(fontSize: 11, color: AppColors.grey, decoration: TextDecoration.lineThrough),
+                                        style: const TextStyle(
+                                            fontSize: 11,
+                                            color: AppColors.grey,
+                                            decoration:
+                                                TextDecoration.lineThrough),
                                       ),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      const Icon(Icons.star, color: Colors.amber, size: 13),
+                                      const Icon(Icons.star,
+                                          color: Colors.amber, size: 13),
                                       const SizedBox(width: 2),
-                                      Text('${product['rating']}', style: const TextStyle(fontSize: 11, color: AppColors.grey)),
+                                      Text('${product['rating']}',
+                                          style: const TextStyle(
+                                              fontSize: 11,
+                                              color: AppColors.grey)),
                                     ],
                                   ),
                                 ],

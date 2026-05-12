@@ -191,7 +191,9 @@ class _DealOfDayScreenState extends State<DealOfDayScreen> {
                     final product = _products[index];
                     return GestureDetector(
                       onTap: () => Navigator.pushNamed(
-                          context, AppRoutes.productDetail),
+                          context, AppRoutes.productDetail,
+                          arguments: product,
+                      ),
                       child: Container(
                         decoration: BoxDecoration(
                           color: isDark

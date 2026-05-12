@@ -63,7 +63,10 @@ class AppRoutes {
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case productDetail:
-        return MaterialPageRoute(builder: (_) => const ProductDetailScreen());
+        final product = settings.arguments as Map<String, dynamic>? ?? {};
+        return MaterialPageRoute(
+          builder: (_) => ProductDetailScreen(product: product),
+        );
       case cart:
         return MaterialPageRoute(builder: (_) => const CartScreen());
       case profile:

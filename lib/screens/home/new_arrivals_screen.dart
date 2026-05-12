@@ -225,8 +225,9 @@ class _NewArrivalsScreenState extends State<NewArrivalsScreen> {
                   itemBuilder: (context, index) {
                     final product = _products[index];
                     return GestureDetector(
-                      onTap: () =>
-                          Navigator.pushNamed(context, AppRoutes.productDetail),
+                      onTap: () => Navigator.pushNamed(
+                          context, AppRoutes.productDetail,
+                          arguments: product),
                       child: Container(
                         decoration: BoxDecoration(
                           color: isDark ? AppColors.darkCard : AppColors.white,
@@ -260,10 +261,11 @@ class _NewArrivalsScreenState extends State<NewArrivalsScreen> {
                                   right: 8,
                                   child: Consumer<WishlistProvider>(
                                     builder: (context, wishlist, _) {
-                                      final isWishlisted =
-                                      wishlist.isWishlisted(product['name']);
+                                      final isWishlisted = wishlist
+                                          .isWishlisted(product['name']);
                                       return GestureDetector(
-                                        onTap: () => wishlist.toggleWishlist(product),
+                                        onTap: () =>
+                                            wishlist.toggleWishlist(product),
                                         child: Container(
                                           padding: const EdgeInsets.all(6),
                                           decoration: BoxDecoration(
@@ -271,7 +273,8 @@ class _NewArrivalsScreenState extends State<NewArrivalsScreen> {
                                             shape: BoxShape.circle,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: AppColors.black.withValues(alpha: 0.1),
+                                                color: AppColors.black
+                                                    .withValues(alpha: 0.1),
                                                 blurRadius: 4,
                                               ),
                                             ],
