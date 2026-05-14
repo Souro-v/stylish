@@ -47,6 +47,7 @@ class AppRoutes {
   static const String womens = '/womens';
   static const String gifts = '/gifts';
   static const String summerSale = '/summer-sale';
+  static const String sponsoredScreen = '/sponsored';
 
   // Route Generator
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -690,6 +691,25 @@ class AppRoutes {
                 'discount': '47%Off',
                 'rating': 4.5
               },
+            ],
+          ),
+        );
+      case sponsoredScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CategoryScreen(
+            title: 'Up to 50% Off 🛍️',
+            products: [
+              {'image': AppAssets.sponsored1, 'name': 'Sponsored Product 1', 'price': 999, 'oldPrice': 1999, 'discount': '50%Off', 'rating': 4.5},
+              {'image': AppAssets.sponsored2, 'name': 'Sponsored Product 2', 'price': 799, 'oldPrice': 1499, 'discount': '47%Off', 'rating': 4.0},
+              {'image': AppAssets.sponsored3, 'name': 'Sponsored Product 3', 'price': 1299, 'oldPrice': 2499, 'discount': '48%Off', 'rating': 4.5},
+              {'image': AppAssets.sponsored4, 'name': 'Sponsored Product 4', 'price': 599, 'oldPrice': 999, 'discount': '40%Off', 'rating': 4.0},
+              {'image': AppAssets.sponsored5, 'name': 'Sponsored Product 5', 'price': 1499, 'oldPrice': 2999, 'discount': '50%Off', 'rating': 4.5},
+              {'image': AppAssets.sponsored6, 'name': 'Sponsored Product 6', 'price': 899, 'oldPrice': 1799, 'discount': '50%Off', 'rating': 4.0},
+              {'image': AppAssets.sponsored7, 'name': 'Sponsored Product 7', 'price': 1199, 'oldPrice': 2199, 'discount': '45%Off', 'rating': 4.5},
+              {'image': AppAssets.sponsored8, 'name': 'Sponsored Product 8', 'price': 699, 'oldPrice': 1299, 'discount': '46%Off', 'rating': 4.0},
+              {'image': AppAssets.sponsored9, 'name': 'Sponsored Product 9', 'price': 1599, 'oldPrice': 2999, 'discount': '47%Off', 'rating': 4.5},
+              {'image': AppAssets.sponsored10, 'name': 'Sponsored Product 10', 'price': 999, 'oldPrice': 1799, 'discount': '44%Off', 'rating': 4.0},
+              {'image': AppAssets.sponsored11, 'name': 'Sponsored Product 11', 'price': 1299, 'oldPrice': 2299, 'discount': '43%Off', 'rating': 4.5},
             ],
           ),
         );

@@ -189,4 +189,16 @@ class AppAssets {
   static const String summer7 = 'assets/products/summer7.jpg';
   static const String summer8 = 'assets/products/summer8.jpg';
   static const String summer9 = 'assets/products/summer9.jpg';
+  // Sponsored
+  static const String sponsored1 = 'assets/products/sponsored1.jpg';
+  static const String sponsored2 = 'assets/products/sponsored2.jpg';
+  static const String sponsored3 = 'assets/products/sponsored3.jpg';
+  static const String sponsored4 = 'assets/products/sponsored4.jpg';
+  static const String sponsored5 = 'assets/products/sponsored5.jpg';
+  static const String sponsored6 = 'assets/products/sponsored6.jpg';
+  static const String sponsored7 = 'assets/products/sponsored7.jpg';
+  static const String sponsored8 = 'assets/products/sponsored8.jpg';
+  static const String sponsored9 = 'assets/products/sponsored9.jpg';
+  static const String sponsored10 = 'assets/products/sponsored10.jpg';
+  static const String sponsored11 = 'assets/products/sponsored11.jpg';
 }
