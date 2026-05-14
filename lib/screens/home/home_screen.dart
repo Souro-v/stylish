@@ -30,6 +30,148 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Widget _buildDrawer(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Drawer(
+      backgroundColor: isDark ? AppColors.darkBackground : AppColors.white,
+      child: SafeArea(
+        child: Column(
+          children: [
+            // Header
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: const BoxDecoration(
+                color: AppColors.primary,
+              ),
+              child: const Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: AppColors.white,
+                    child: Icon(
+                      Iconsax.user,
+                      size: 30,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                  SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome!',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.white,
+                        ),
+                      ),
+                      Text(
+                        'Stylish User',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            // Menu Items
+            _DrawerItem(
+              icon: Iconsax.home,
+              title: 'Home',
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            _DrawerItem(
+              icon: Iconsax.category,
+              title: 'Beauty',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.beauty);
+              },
+            ),
+            _DrawerItem(
+              icon: Iconsax.category,
+              title: 'Fashion',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.fashion);
+              },
+            ),
+            _DrawerItem(
+              icon: Iconsax.category,
+              title: 'Kids',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.kids);
+              },
+            ),
+            _DrawerItem(
+              icon: Iconsax.category,
+              title: 'Mens',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.mens);
+              },
+            ),
+            _DrawerItem(
+              icon: Iconsax.category,
+              title: 'Womens',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.womens);
+              },
+            ),
+            _DrawerItem(
+              icon: Iconsax.category,
+              title: 'Gifts',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.gifts);
+              },
+            ),
+            _DrawerItem(
+              icon: Iconsax.heart,
+              title: 'Wishlist',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.trending);
+              },
+            ),
+            _DrawerItem(
+              icon: Iconsax.shopping_bag,
+              title: 'My Orders',
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+
+            const Spacer(),
+
+            // Settings + Logout
+            _DrawerItem(
+              icon: Iconsax.setting_2,
+              title: 'Settings',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.profile);
+              },
+            ),
+            const SizedBox(height: 8),
+          ],
+        ),
+      ),
+    );
+  }
+
   static const List<Map<String, dynamic>> _trendingProducts = [
     {
       'image': AppAssets.trending1,
@@ -78,6 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
+      drawer: _buildDrawer(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -87,7 +230,12 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Icon(Iconsax.menu, size: 24),
+                  Builder(
+                    builder: (context) => GestureDetector(
+                      onTap: () => Scaffold.of(context).openDrawer(),
+                      child: const Icon(Iconsax.menu, size: 24),
+                    ),
+                  ),
                   Row(
                     children: [
                       Image.asset(AppAssets.logo, width: 32, height: 32),
@@ -103,7 +251,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   GestureDetector(
-                    onTap: ()=> Navigator.pushNamed(context, AppRoutes.profile),
+                    onTap: () =>
+                        Navigator.pushNamed(context, AppRoutes.profile),
                     child: const CircleAvatar(
                       radius: 18,
                       backgroundColor: AppColors.lightBorder,
@@ -126,8 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: () =>
                           Navigator.pushNamed(context, AppRoutes.search),
                       child: Container(
-                        padding:
-                        const EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         decoration: BoxDecoration(
                           color: isDark
                               ? AppColors.darkCard
@@ -136,8 +284,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child: const Row(
                           children: [
-                            Icon(Iconsax.search_normal,
-                                color: AppColors.grey),
+                            Icon(Iconsax.search_normal, color: AppColors.grey),
                             SizedBox(width: 8),
                             Expanded(
                               child: TextField(
@@ -150,8 +297,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            Icon(Iconsax.microphone,
-                                color: AppColors.grey),
+                            Icon(Iconsax.microphone, color: AppColors.grey),
                           ],
                         ),
                       ),
@@ -241,7 +387,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           GestureDetector(
-                            onTap: () => Navigator.pushNamed(context, AppRoutes.dealOfDay),
+                            onTap: () => Navigator.pushNamed(
+                                context, AppRoutes.dealOfDay),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 6),
@@ -279,20 +426,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? AppColors.darkCard
-                            : AppColors.white,
+                        color: isDark ? AppColors.darkCard : AppColors.white,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color:
-                            AppColors.black.withValues(alpha: 0.05),
+                            color: AppColors.black.withValues(alpha: 0.05),
                             blurRadius: 8,
                           ),
                         ],
                       ),
                       child: GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.specialOffers),
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.specialOffers),
                         child: Row(
                           children: [
                             Image.asset(
@@ -329,7 +474,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     // Flat and Heels Banner
                     GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, AppRoutes.flatHeels),
+                      onTap: () =>
+                          Navigator.pushNamed(context, AppRoutes.flatHeels),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.asset(
@@ -419,13 +565,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemCount: _trendingProducts.length,
-                        separatorBuilder: (_, __) =>
-                        const SizedBox(width: 12),
+                        separatorBuilder: (_, __) => const SizedBox(width: 12),
                         itemBuilder: (context, index) {
                           final product = _trendingProducts[index];
                           return GestureDetector(
                             onTap: () => Navigator.pushNamed(
-                                context, AppRoutes.productDetail),
+                                context, AppRoutes.productDetail,arguments: product),
                             child: Container(
                               width: 140,
                               decoration: BoxDecoration(
@@ -435,22 +580,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                 borderRadius: BorderRadius.circular(12),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppColors.black
-                                        .withValues(alpha: 0.06),
+                                    color:
+                                        AppColors.black.withValues(alpha: 0.06),
                                     blurRadius: 8,
                                     offset: const Offset(0, 2),
                                   ),
                                 ],
                               ),
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Stack(
                                     children: [
                                       ClipRRect(
                                         borderRadius:
-                                        const BorderRadius.vertical(
+                                            const BorderRadius.vertical(
                                           top: Radius.circular(12),
                                         ),
                                         child: Image.asset(
@@ -464,27 +608,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                         top: 8,
                                         right: 8,
                                         child: Consumer<WishlistProvider>(
-                                          builder:
-                                              (context, wishlist, _) {
+                                          builder: (context, wishlist, _) {
                                             final isWishlisted = wishlist
-                                                .isWishlisted(
-                                                product['name']);
+                                                .isWishlisted(product['name']);
                                             return GestureDetector(
                                               onTap: () => wishlist
                                                   .toggleWishlist(product),
                                               child: Container(
                                                 padding:
-                                                const EdgeInsets.all(
-                                                    6),
+                                                    const EdgeInsets.all(6),
                                                 decoration: BoxDecoration(
                                                   color: AppColors.white,
                                                   shape: BoxShape.circle,
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: AppColors
-                                                          .black
+                                                      color: AppColors.black
                                                           .withValues(
-                                                          alpha: 0.1),
+                                                              alpha: 0.1),
                                                       blurRadius: 4,
                                                     ),
                                                   ],
@@ -492,8 +632,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 child: Icon(
                                                   isWishlisted
                                                       ? Icons.favorite
-                                                      : Icons
-                                                      .favorite_border,
+                                                      : Icons.favorite_border,
                                                   size: 16,
                                                   color: isWishlisted
                                                       ? AppColors.primary
@@ -510,7 +649,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     padding: const EdgeInsets.all(8),
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           product['name'],
@@ -537,8 +676,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               style: const TextStyle(
                                                 fontSize: 11,
                                                 color: AppColors.grey,
-                                                decoration: TextDecoration
-                                                    .lineThrough,
+                                                decoration:
+                                                    TextDecoration.lineThrough,
                                               ),
                                             ),
                                             const SizedBox(width: 4),
@@ -579,8 +718,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     SectionHeader(
                       title: 'New Arrivals',
                       subtitle: "Summer' 25 Collections",
-                      onViewAll: () => Navigator.pushNamed(
-                          context, AppRoutes.newArrivals),
+                      onViewAll: () =>
+                          Navigator.pushNamed(context, AppRoutes.newArrivals),
                     ),
                     const SizedBox(height: 16),
 
@@ -592,8 +731,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.black
-                                  .withValues(alpha: 0.06),
+                              color: AppColors.black.withValues(alpha: 0.06),
                               blurRadius: 8,
                             ),
                           ],
@@ -625,7 +763,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: const Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'up to 50% Off',
@@ -672,6 +810,34 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
       ),
+    );
+  }
+}
+
+class _DrawerItem extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final VoidCallback onTap;
+
+  const _DrawerItem({
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(icon, color: AppColors.primary, size: 22),
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      onTap: onTap,
+      horizontalTitleGap: 8,
     );
   }
 }
