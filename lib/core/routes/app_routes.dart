@@ -46,6 +46,7 @@ class AppRoutes {
   static const String mens = '/mens';
   static const String womens = '/womens';
   static const String gifts = '/gifts';
+  static const String summerSale = '/summer-sale';
 
   // Route Generator
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -606,6 +607,86 @@ class AppRoutes {
                 'name': 'Gift Product 13',
                 'price': 899,
                 'oldPrice': 1699,
+                'discount': '47%Off',
+                'rating': 4.5
+              },
+            ],
+          ),
+        );
+      case summerSale:
+        return MaterialPageRoute(
+          builder: (_) => const CategoryScreen(
+            title: 'Hot Summer Sale 🔥',
+            products: [
+              {
+                'image': AppAssets.summer1,
+                'name': 'Summer Collection 1',
+                'price': 999,
+                'oldPrice': 1999,
+                'discount': '50%Off',
+                'rating': 4.5
+              },
+              {
+                'image': AppAssets.summer2,
+                'name': 'Summer Collection 2',
+                'price': 799,
+                'oldPrice': 1499,
+                'discount': '47%Off',
+                'rating': 4.0
+              },
+              {
+                'image': AppAssets.summer3,
+                'name': 'Summer Collection 3',
+                'price': 1299,
+                'oldPrice': 2499,
+                'discount': '48%Off',
+                'rating': 4.5
+              },
+              {
+                'image': AppAssets.summer4,
+                'name': 'Summer Collection 4',
+                'price': 599,
+                'oldPrice': 999,
+                'discount': '40%Off',
+                'rating': 4.0
+              },
+              {
+                'image': AppAssets.summer5,
+                'name': 'Summer Collection 5',
+                'price': 1499,
+                'oldPrice': 2999,
+                'discount': '50%Off',
+                'rating': 4.5
+              },
+              {
+                'image': AppAssets.summer6,
+                'name': 'Summer Collection 6',
+                'price': 899,
+                'oldPrice': 1799,
+                'discount': '50%Off',
+                'rating': 4.0
+              },
+              {
+                'image': AppAssets.summer7,
+                'name': 'Summer Collection 7',
+                'price': 1199,
+                'oldPrice': 2199,
+                'discount': '45%Off',
+                'rating': 4.5
+              },
+              {
+                'image': AppAssets.summer8,
+                'name': 'Summer Collection 8',
+                'price': 699,
+                'oldPrice': 1299,
+                'discount': '46%Off',
+                'rating': 4.0
+              },
+              {
+                'image': AppAssets.summer9,
+                'name': 'Summer Collection 9',
+                'price': 1599,
+                'oldPrice': 2999,
                 'discount': '47%Off',
                 'rating': 4.5
               },

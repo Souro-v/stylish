@@ -179,4 +179,14 @@ class AppAssets {
   static const String womens7 = 'assets/women/womens_7.jpg';
   static const String womens8 = 'assets/women/womens_8.jpg';
   static const String womens9 = 'assets/women/womens_9.jpg';
+  // Summer Sale
+  static const String summer1 = 'assets/products/summer1.jpg';
+  static const String summer2 = 'assets/products/summer2.jpg';
+  static const String summer3 = 'assets/products/summer3.jpg';
+  static const String summer4 = 'assets/products/summer4.jpg';
+  static const String summer5 = 'assets/products/summer5.jpg';
+  static const String summer6 = 'assets/products/summer6.jpg';
+  static const String summer7 = 'assets/products/summer7.jpg';
+  static const String summer8 = 'assets/products/summer8.jpg';
+  static const String summer9 = 'assets/products/summer9.jpg';
 }

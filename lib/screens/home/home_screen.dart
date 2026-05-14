@@ -570,7 +570,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           final product = _trendingProducts[index];
                           return GestureDetector(
                             onTap: () => Navigator.pushNamed(
-                                context, AppRoutes.productDetail,arguments: product),
+                                context, AppRoutes.productDetail,
+                                arguments: product),
                             child: Container(
                               width: 140,
                               decoration: BoxDecoration(
@@ -703,13 +704,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 16),
 
                     // Hot Summer Sale Banner
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(
-                        AppAssets.hotSummerSale,
-                        width: double.infinity,
-                        height: 120,
-                        fit: BoxFit.cover,
+                    GestureDetector(
+                      onTap: () =>
+                          Navigator.pushNamed(context, AppRoutes.summerSale),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          AppAssets.hotSummerSale,
+                          width: double.infinity,
+                          height: 120,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
