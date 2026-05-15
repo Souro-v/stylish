@@ -730,7 +730,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     // Sponsored Banner
                     GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, AppRoutes.sponsoredScreen),
+                      onTap: () => Navigator.pushNamed(
+                          context, AppRoutes.sponsoredScreen),
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),

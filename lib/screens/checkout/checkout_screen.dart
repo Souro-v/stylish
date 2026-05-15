@@ -4,6 +4,8 @@ import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/custom_button.dart';
+import 'package:provider/provider.dart';
+import '../../core/providers/cart_provider.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
@@ -215,7 +217,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     // Continue Button
                     CustomButton(
                       text: 'Continue',
-                      onPressed: (){
+                      onPressed: () {
+                        // Cart clear
+                        Provider.of<CartProvider>(context, listen: false).clearCart();
                         showDialog(
                           context: context,
                           barrierDismissible: false,
@@ -228,7 +232,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  // Success Icon
                                   Container(
                                     width: 80,
                                     height: 80,
@@ -257,13 +260,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                       Navigator.pushNamedAndRemoveUntil(
                                         context,
                                         AppRoutes.home,
-                                        (route) => false,
+                                            (route) => false,
                                       );
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: AppColors.primary,
-                                      minimumSize:
-                                          const Size(double.infinity, 48),
+                                      minimumSize: const Size(double.infinity, 48),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       ),
