@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'Wishlist',
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.trending);
+                Navigator.pushNamed(context, AppRoutes.wishlist);
               },
             ),
             _DrawerItem(
@@ -529,7 +529,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           GestureDetector(
                             onTap: () => Navigator.pushNamed(
-                                context, AppRoutes.trending),
+                                context, AppRoutes.wishlist),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 6),
@@ -803,7 +803,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: (index) {
           setState(() => _currentNavIndex = index);
           if (index == 1) {
-            Navigator.pushNamed(context, AppRoutes.trending);
+            Navigator.pushNamed(context, AppRoutes.wishlist);
           }
           if (index == 2) {
             Navigator.pushNamed(context, AppRoutes.placeOrder);

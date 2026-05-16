@@ -328,7 +328,7 @@ class _FlatHeelsScreenState extends State<FlatHeelsScreen> {
         currentIndex: _currentNavIndex,
         onTap: (index) {
           setState(() => _currentNavIndex = index);
-          if (index == 1) Navigator.pushNamed(context, AppRoutes.trending);
+          if (index == 1) Navigator.pushNamed(context, AppRoutes.wishlist);
           if (index == 2) Navigator.pushNamed(context, AppRoutes.placeOrder);
           if (index == 3) Navigator.pushNamed(context, AppRoutes.search);
           if (index == 4) Navigator.pushNamed(context, AppRoutes.profile);

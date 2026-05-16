@@ -8,14 +8,14 @@ import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/star_rating.dart';
 
-class TrendingScreen extends StatefulWidget {
-  const TrendingScreen({super.key});
+class WishlistScreen extends StatefulWidget {
+  const WishlistScreen({super.key});
 
   @override
-  State<TrendingScreen> createState() => _TrendingScreenState();
+  State<WishlistScreen> createState() => _TrendingScreenState();
 }
 
-class _TrendingScreenState extends State<TrendingScreen> {
+class _TrendingScreenState extends State<WishlistScreen> {
   int _currentNavIndex = 1;
 
   @override

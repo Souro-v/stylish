@@ -369,7 +369,7 @@ class _DealOfDayScreenState extends State<DealOfDayScreen> {
         onTap: (index) {
           setState(() => _currentNavIndex = index);
           if (index == 1) {
-            Navigator.pushNamed(context, AppRoutes.trending);
+            Navigator.pushNamed(context, AppRoutes.wishlist);
           }
           if (index == 2) {
             Navigator.pushNamed(context, AppRoutes.placeOrder);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stylish/screens/products/trending_screen.dart';
+import 'package:stylish/screens/products/wishlist_screen.dart';
 import '../../screens/categories/category_screen.dart';
 import '../../screens/checkout/place_order_screen.dart';
 import '../../screens/home/deal_of_day_screen.dart';
@@ -33,7 +33,7 @@ class AppRoutes {
   static const String cart = '/cart';
   static const String profile = '/profile';
   static const String checkout = '/checkout';
-  static const String trending = '/trending';
+  static const String wishlist = '/wishlist';
   static const String placeOrder = '/place-order';
   static const String search = '/search';
   static const String newArrivals = '/new-arrivals';
@@ -75,8 +75,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
       case checkout:
         return MaterialPageRoute(builder: (_) => const CheckoutScreen());
-      case trending:
-        return MaterialPageRoute(builder: (_) => const TrendingScreen());
+      case wishlist:
+        return MaterialPageRoute(builder: (_) => const WishlistScreen());
       case placeOrder:
         return MaterialPageRoute(builder: (_) => const PlaceOrderScreen());
       case search:

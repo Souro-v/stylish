@@ -464,7 +464,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
             Navigator.pushReplacementNamed(context, AppRoutes.home);
           }
           if (index == 1) {
-            Navigator.pushNamed(context, AppRoutes.trending);
+            Navigator.pushNamed(context, AppRoutes.wishlist);
           }
           if (index == 3) {
             Navigator.pushNamed(context, AppRoutes.search);

@@ -679,7 +679,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             Navigator.pushReplacementNamed(context, AppRoutes.home);
           }
           if (index == 1) {
-            Navigator.pushNamed(context, AppRoutes.trending);
+            Navigator.pushNamed(context, AppRoutes.wishlist);
           }
           if (index == 2) {
             Navigator.pushNamed(context, AppRoutes.placeOrder);
