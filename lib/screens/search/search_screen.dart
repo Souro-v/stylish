@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
+import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/star_rating.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -111,8 +112,7 @@ class _SearchScreenState extends State<SearchScreen> {
   List<Map<String, dynamic>> get _filteredProducts {
     if (_query.isEmpty) return [];
     return _allProducts
-        .where((p) =>
-        p['name'].toLowerCase().contains(_query.toLowerCase()))
+        .where((p) => p['name'].toLowerCase().contains(_query.toLowerCase()))
         .toList();
   }
 
@@ -139,15 +139,13 @@ class _SearchScreenState extends State<SearchScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
-                  color: isDark
-                      ? AppColors.darkCard
-                      : AppColors.lightScaffoldBg,
+                  color:
+                      isDark ? AppColors.darkCard : AppColors.lightScaffoldBg,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Iconsax.search_normal,
-                        color: AppColors.grey),
+                    const Icon(Iconsax.search_normal, color: AppColors.grey),
                     const SizedBox(width: 8),
                     Expanded(
                       child: TextField(
@@ -194,6 +192,23 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: 3,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacementNamed(context, AppRoutes.home);
+          }
+          if (index == 1) {
+            Navigator.pushNamed(context, AppRoutes.wishlist);
+          }
+          if (index == 2) {
+            Navigator.pushNamed(context, AppRoutes.placeOrder);
+          }
+          if (index == 4) {
+            Navigator.pushNamed(context, AppRoutes.profile);
+          }
+        },
+      ),
     );
   }
 
@@ -234,14 +249,14 @@ class _SearchScreenState extends State<SearchScreen> {
           ..._recentSearches.map((search) {
             return ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Iconsax.clock,
-                  color: AppColors.grey, size: 20),
+              leading:
+                  const Icon(Iconsax.clock, color: AppColors.grey, size: 20),
               title: Text(
                 search,
                 style: const TextStyle(fontSize: 14),
               ),
-              trailing: const Icon(Icons.north_west,
-                  color: AppColors.grey, size: 16),
+              trailing:
+                  const Icon(Icons.north_west, color: AppColors.grey, size: 16),
               onTap: () {
                 _searchController.text = search;
                 setState(() {
@@ -275,12 +290,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   });
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
-                    color: isDark
-                        ? AppColors.darkCard
-                        : AppColors.lightScaffoldBg,
+                    color:
+                        isDark ? AppColors.darkCard : AppColors.lightScaffoldBg,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: AppColors.lightBorder),
                   ),
@@ -310,8 +324,7 @@ class _SearchScreenState extends State<SearchScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Iconsax.search_normal,
-                size: 60,
-                color: AppColors.grey.withValues(alpha: 0.5)),
+                size: 60, color: AppColors.grey.withValues(alpha: 0.5)),
             const SizedBox(height: 16),
             const Text(
               'No products found!',
@@ -336,8 +349,7 @@ class _SearchScreenState extends State<SearchScreen> {
       itemBuilder: (context, index) {
         final product = results[index];
         return GestureDetector(
-          onTap: () =>
-              Navigator.pushNamed(context, AppRoutes.productDetail),
+          onTap: () => Navigator.pushNamed(context, AppRoutes.productDetail),
           child: Container(
             decoration: BoxDecoration(
               color: isDark ? AppColors.darkCard : AppColors.white,

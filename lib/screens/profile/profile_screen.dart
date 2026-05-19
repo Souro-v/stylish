@@ -7,6 +7,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/theme/theme_provider.dart';
+import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/custom_button.dart';
 import '../../widgets/common/custom_text_field.dart';
 
@@ -23,25 +24,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final ImagePicker _picker = ImagePicker();
 
   // Personal Details
-  final _emailController =
-  TextEditingController(text: 'aashifa@gmail.com');
-  final _passwordController =
-  TextEditingController(text: '***********');
+  final _emailController = TextEditingController(text: 'aashifa@gmail.com');
+  final _passwordController = TextEditingController(text: '***********');
 
   // Business Address
   final _pincodeController = TextEditingController(text: '450116');
-  final _addressController =
-  TextEditingController(text: '216 St Paul\'s Rd,');
+  final _addressController = TextEditingController(text: '216 St Paul\'s Rd,');
   final _cityController = TextEditingController(text: 'London');
   final _stateController = TextEditingController(text: 'N1 2LL,');
-  final _countryController =
-  TextEditingController(text: 'United Kingdom');
+  final _countryController = TextEditingController(text: 'United Kingdom');
 
   // Bank Details
-  final _bankAccountController =
-  TextEditingController(text: '204356XXXXXXX');
+  final _bankAccountController = TextEditingController(text: '204356XXXXXXX');
   final _accountHolderController =
-  TextEditingController(text: 'Abhiraj Sisodiya');
+      TextEditingController(text: 'Abhiraj Sisodiya');
   final _ifscController = TextEditingController(text: 'SBIN00428');
 
   bool _isLoading = false;
@@ -62,8 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _pickImage() async {
-    final XFile? image =
-    await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       setState(() => _profileImage = File(image.path));
     }
@@ -90,8 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             // AppBar
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -148,10 +142,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   : null,
                               child: _profileImage == null
                                   ? const Icon(
-                                Iconsax.user,
-                                size: 50,
-                                color: AppColors.grey,
-                              )
+                                      Iconsax.user,
+                                      size: 50,
+                                      color: AppColors.grey,
+                                    )
                                   : null,
                             ),
                             Positioned(
@@ -189,8 +183,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 16),
 
                       const Text('Email Address',
-                          style: TextStyle(
-                              fontSize: 13, color: AppColors.grey)),
+                          style:
+                              TextStyle(fontSize: 13, color: AppColors.grey)),
                       const SizedBox(height: 6),
                       CustomTextField(
                         hintText: 'Email Address',
@@ -200,8 +194,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 16),
 
                       const Text('Password',
-                          style: TextStyle(
-                              fontSize: 13, color: AppColors.grey)),
+                          style:
+                              TextStyle(fontSize: 13, color: AppColors.grey)),
                       const SizedBox(height: 6),
                       CustomTextField(
                         hintText: 'Password',
@@ -236,8 +230,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 16),
 
                       const Text('Pincode',
-                          style: TextStyle(
-                              fontSize: 13, color: AppColors.grey)),
+                          style:
+                              TextStyle(fontSize: 13, color: AppColors.grey)),
                       const SizedBox(height: 6),
                       CustomTextField(
                         hintText: 'Pincode',
@@ -247,8 +241,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 16),
 
                       const Text('Address',
-                          style: TextStyle(
-                              fontSize: 13, color: AppColors.grey)),
+                          style:
+                              TextStyle(fontSize: 13, color: AppColors.grey)),
                       const SizedBox(height: 6),
                       CustomTextField(
                         hintText: 'Address',
@@ -257,8 +251,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 16),
 
                       const Text('City',
-                          style: TextStyle(
-                              fontSize: 13, color: AppColors.grey)),
+                          style:
+                              TextStyle(fontSize: 13, color: AppColors.grey)),
                       const SizedBox(height: 6),
                       CustomTextField(
                         hintText: 'City',
@@ -267,21 +261,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 16),
 
                       const Text('State',
-                          style: TextStyle(
-                              fontSize: 13, color: AppColors.grey)),
+                          style:
+                              TextStyle(fontSize: 13, color: AppColors.grey)),
                       const SizedBox(height: 6),
                       CustomTextField(
                         hintText: 'State',
                         controller: _stateController,
-                        suffixIcon: const Icon(
-                            Icons.keyboard_arrow_down,
+                        suffixIcon: const Icon(Icons.keyboard_arrow_down,
                             color: AppColors.grey),
                       ),
                       const SizedBox(height: 16),
 
                       const Text('Country',
-                          style: TextStyle(
-                              fontSize: 13, color: AppColors.grey)),
+                          style:
+                              TextStyle(fontSize: 13, color: AppColors.grey)),
                       const SizedBox(height: 6),
                       CustomTextField(
                         hintText: 'Country',
@@ -300,8 +293,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 16),
 
                       const Text('Bank Account Number',
-                          style: TextStyle(
-                              fontSize: 13, color: AppColors.grey)),
+                          style:
+                              TextStyle(fontSize: 13, color: AppColors.grey)),
                       const SizedBox(height: 6),
                       CustomTextField(
                         hintText: 'Bank Account Number',
@@ -311,8 +304,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 16),
 
                       const Text('Account Holder\'s Name',
-                          style: TextStyle(
-                              fontSize: 13, color: AppColors.grey)),
+                          style:
+                              TextStyle(fontSize: 13, color: AppColors.grey)),
                       const SizedBox(height: 6),
                       CustomTextField(
                         hintText: 'Account Holder\'s Name',
@@ -321,8 +314,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 16),
 
                       const Text('IFSC Code',
-                          style: TextStyle(
-                              fontSize: 13, color: AppColors.grey)),
+                          style:
+                              TextStyle(fontSize: 13, color: AppColors.grey)),
                       const SizedBox(height: 6),
                       CustomTextField(
                         hintText: 'IFSC Code',
@@ -344,6 +337,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: 4,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacementNamed(context, AppRoutes.home);
+          }
+          if (index == 1) {
+            Navigator.pushNamed(context, AppRoutes.wishlist);
+          }
+          if (index == 2) {
+            Navigator.pushNamed(context, AppRoutes.placeOrder);
+          }
+          if (index == 3) {
+            Navigator.pushNamed(context, AppRoutes.search);
+          }
+        },
       ),
     );
   }
@@ -384,9 +394,7 @@ class _SettingsSheet extends StatelessWidget {
               return ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: Icon(
-                  themeProvider.isDarkMode
-                      ? Iconsax.moon
-                      : Iconsax.sun_1,
+                  themeProvider.isDarkMode ? Iconsax.moon : Iconsax.sun_1,
                   color: AppColors.primary,
                 ),
                 title: const Text('Dark Mode'),
@@ -415,13 +423,13 @@ class _SettingsSheet extends StatelessWidget {
             onTap: () async {
               Navigator.pop(context); // Bottom sheet close
               final authProvider =
-              Provider.of<AuthProvider>(context, listen: false);
+                  Provider.of<AuthProvider>(context, listen: false);
               await authProvider.signOut();
               if (!context.mounted) return;
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 AppRoutes.signIn,
-                    (route) => false,
+                (route) => false,
               );
             },
           ),
