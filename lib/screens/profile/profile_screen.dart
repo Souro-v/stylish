@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/routes/app_routes.dart';
@@ -58,9 +60,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _pickImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? image = await _picker.pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 512,
+      maxHeight: 512,
+      imageQuality: 80,
+    );
     if (image != null) {
-      setState(() => _profileImage = File(image.path));
+      // Save image to app directory
+      final directory = await getApplicationDocumentsDirectory();
+      const String  fileName = 'profile_image.jpg';
+      final String filePath = '${directory.path}/$fileName';
+
+      // Copy image to app directory
+      await File(image.path).copy(filePath);
+
+      setState(() => _profileImage = File(filePath));
+
+      // Save path to SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('profile_image_path', filePath);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfileImage();
+  }
+
+  Future<void> _loadProfileImage() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? imagePath = prefs.getString('profile_image_path');
+    if (imagePath != null && File(imagePath).existsSync()) {
+      setState(() => _profileImage = File(imagePath));
     }
   }
 

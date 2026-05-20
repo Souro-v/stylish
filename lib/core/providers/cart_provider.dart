@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../services/firestore_service.dart';
 
 class CartProvider extends ChangeNotifier {
-  final List<Map<String, dynamic>> _cartItems = [];
+  final FirestoreService _firestoreService = FirestoreService();
+  List<Map<String, dynamic>> _cartItems = [];
 
   List<Map<String, dynamic>> get cartItems => _cartItems;
 
@@ -17,48 +19,43 @@ class CartProvider extends ChangeNotifier {
     return _cartItems.any((item) => item['name'] == productName);
   }
 
-  void addToCart(Map<String, dynamic> product) {
+  // Load cart from Firestore
+  void loadCart() {
+    _firestoreService.getCartItems().listen((items) {
+      _cartItems = items;
+      notifyListeners();
+    });
+  }
+
+  // Add to cart
+  Future<void> addToCart(Map<String, dynamic> product) async {
     if (isInCart(product['name'])) {
-      // Already in cart — increase qty
       final index = _cartItems
           .indexWhere((item) => item['name'] == product['name']);
-      _cartItems[index]['qty'] =
-          (_cartItems[index]['qty'] as int) + 1;
+      final newQty = (_cartItems[index]['qty'] as int) + 1;
+      await _firestoreService.updateCartQty(product['name'], newQty);
     } else {
-      _cartItems.add({...product, 'qty': 1, 'size': '42'});
-    }
-    notifyListeners();
-  }
-
-  void removeFromCart(String productName) {
-    _cartItems.removeWhere((item) => item['name'] == productName);
-    notifyListeners();
-  }
-
-  void updateQty(String productName, int qty) {
-    final index =
-    _cartItems.indexWhere((item) => item['name'] == productName);
-    if (index != -1) {
-      if (qty <= 0) {
-        _cartItems.removeAt(index);
-      } else {
-        _cartItems[index]['qty'] = qty;
-      }
-      notifyListeners();
+      await _firestoreService.addToCart(product);
     }
   }
 
-  void updateSize(String productName, String size) {
-    final index =
-    _cartItems.indexWhere((item) => item['name'] == productName);
-    if (index != -1) {
-      _cartItems[index]['size'] = size;
-      notifyListeners();
-    }
+  // Remove from cart
+  Future<void> removeFromCart(String productName) async {
+    await _firestoreService.removeFromCart(productName);
   }
 
-  void clearCart() {
-    _cartItems.clear();
-    notifyListeners();
+  // Update qty
+  Future<void> updateQty(String productName, int qty) async {
+    await _firestoreService.updateCartQty(productName, qty);
+  }
+
+  // Update size
+  Future<void> updateSize(String productName, String size) async {
+    await _firestoreService.updateCartSize(productName, size);
+  }
+
+  // Clear cart
+  Future<void> clearCart() async {
+    await _firestoreService.clearCart();
   }
 }
