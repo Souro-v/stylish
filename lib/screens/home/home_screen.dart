@@ -154,6 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'My Orders',
               onTap: () {
                 Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.orders);
               },
             ),
 

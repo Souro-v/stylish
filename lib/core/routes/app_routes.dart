@@ -6,6 +6,7 @@ import '../../screens/home/deal_of_day_screen.dart';
 import '../../screens/home/flat_heels_screen.dart';
 import '../../screens/home/new_arrivals_screen.dart';
 import '../../screens/home/special_offers_screen.dart';
+import '../../screens/orders/orders_screen.dart';
 import '../../screens/products/product_detail_screen.dart';
 import '../../screens/products/trending_screen.dart';
 import '../../screens/search/search_screen.dart';
@@ -37,6 +38,7 @@ class AppRoutes {
   static const String checkout = '/checkout';
   static const String wishlist = '/wishlist';
   static const String placeOrder = '/place-order';
+  static const String orders = '/orders';
   static const String search = '/search';
   static const String newArrivals = '/new-arrivals';
   static const String dealOfDay = '/deal-of-day';
@@ -83,6 +85,9 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const WishlistScreen());
       case placeOrder:
         return MaterialPageRoute(builder: (_) => const PlaceOrderScreen());
+      case orders:
+        return MaterialPageRoute(builder: (_) => const OrdersScreen());
+
       case search:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case newArrivals:
