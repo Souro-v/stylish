@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'core/providers/auth_provider.dart';
 import 'core/providers/cart_provider.dart';
 import 'core/providers/wishlist_provider.dart';
+import 'core/services/notification_service.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_provider.dart';
 import 'core/routes/app_routes.dart';
@@ -14,6 +15,9 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Initialize notifications
+  await NotificationService().initialize();
 
   runApp(
     MultiProvider(

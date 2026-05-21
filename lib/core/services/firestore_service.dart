@@ -9,6 +9,29 @@ class FirestoreService {
 
   // ==================== USER ====================
 
+  // Update order status
+  Future<void> updateOrderStatus(String orderId, String status) async {
+    if (_userId == null) return;
+    await _firestore
+        .collection('users')
+        .doc(_userId)
+        .collection('orders')
+        .doc(orderId)
+        .update({'status': status});
+  }
+
+// Get single order
+  Stream<Map<String, dynamic>?> getOrder(String orderId) {
+    if (_userId == null) return Stream.value(null);
+    return _firestore
+        .collection('users')
+        .doc(_userId)
+        .collection('orders')
+        .doc(orderId)
+        .snapshots()
+        .map((doc) => doc.data());
+  }
+
   // Save user profile
   Future<void> saveUserProfile(Map<String, dynamic> data) async {
     if (_userId == null) return;
@@ -21,8 +44,7 @@ class FirestoreService {
   // Get user profile
   Future<Map<String, dynamic>?> getUserProfile() async {
     if (_userId == null) return null;
-    final doc =
-    await _firestore.collection('users').doc(_userId).get();
+    final doc = await _firestore.collection('users').doc(_userId).get();
     return doc.data();
   }
 
@@ -47,8 +69,7 @@ class FirestoreService {
         .doc(_userId)
         .collection('cart')
         .snapshots()
-        .map((snapshot) =>
-        snapshot.docs.map((doc) => doc.data()).toList());
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
   // Remove from cart
@@ -133,8 +154,7 @@ class FirestoreService {
         .doc(_userId)
         .collection('wishlist')
         .snapshots()
-        .map((snapshot) =>
-        snapshot.docs.map((doc) => doc.data()).toList());
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
   // ==================== ORDERS ====================
@@ -142,11 +162,7 @@ class FirestoreService {
   // Save order
   Future<void> saveOrder(Map<String, dynamic> orderData) async {
     if (_userId == null) return;
-    await _firestore
-        .collection('users')
-        .doc(_userId)
-        .collection('orders')
-        .add({
+    await _firestore.collection('users').doc(_userId).collection('orders').add({
       ...orderData,
       'createdAt': FieldValue.serverTimestamp(),
       'status': 'Pending',
@@ -162,7 +178,6 @@ class FirestoreService {
         .collection('orders')
         .orderBy('createdAt', descending: true)
         .snapshots()
-        .map((snapshot) =>
-        snapshot.docs.map((doc) => doc.data()).toList());
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 }
