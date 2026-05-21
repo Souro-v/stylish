@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<AuthProvider>(context, listen: false).updateLastActive();
       Provider.of<CartProvider>(context, listen: false).loadCart();
+      Provider.of<WishlistProvider>(context, listen: false).loadWishlist();
     });
   }
 

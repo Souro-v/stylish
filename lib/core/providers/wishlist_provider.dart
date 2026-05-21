@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../services/firestore_service.dart';
 
 class WishlistProvider extends ChangeNotifier {
-  final List<Map<String, dynamic>> _wishlistItems = [];
+  final FirestoreService _firestoreService = FirestoreService();
+  List<Map<String, dynamic>> _wishlistItems = [];
 
   List<Map<String, dynamic>> get wishlistItems => _wishlistItems;
 
@@ -9,13 +11,20 @@ class WishlistProvider extends ChangeNotifier {
     return _wishlistItems.any((item) => item['name'] == productName);
   }
 
-  void toggleWishlist(Map<String, dynamic> product) {
+  // Load wishlist from Firestore
+  void loadWishlist() {
+    _firestoreService.getWishlistItems().listen((items) {
+      _wishlistItems = items;
+      notifyListeners();
+    });
+  }
+
+  // Toggle wishlist
+  Future<void> toggleWishlist(Map<String, dynamic> product) async {
     if (isWishlisted(product['name'])) {
-      _wishlistItems.removeWhere(
-              (item) => item['name'] == product['name']);
+      await _firestoreService.removeFromWishlist(product['name']);
     } else {
-      _wishlistItems.add(product);
+      await _firestoreService.addToWishlist(product);
     }
-    notifyListeners();
   }
 }

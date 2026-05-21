@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
+import '../../core/services/firestore_service.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/custom_button.dart';
 import 'package:provider/provider.dart';
@@ -217,69 +218,24 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     // Continue Button
                     CustomButton(
                       text: 'Continue',
-                      onPressed: () {
-                        // Cart clear
-                        Provider.of<CartProvider>(context, listen: false).clearCart();
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (_) => Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(24),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Container(
-                                    width: 80,
-                                    height: 80,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColors.primary.withValues(alpha: 0.1),
-                                    ),
-                                    child: const Icon(
-                                      Icons.check_circle,
-                                      color: AppColors.primary,
-                                      size: 50,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  const Text(
-                                    'Payment done successfully.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 24),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pushNamedAndRemoveUntil(
-                                        context,
-                                        AppRoutes.home,
-                                            (route) => false,
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.primary,
-                                      minimumSize: const Size(double.infinity, 48),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                    child: const Text(
-                                      'Continue Shopping',
-                                      style: TextStyle(color: AppColors.white),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
+                      onPressed: () async {
+                        final cartProvider =
+                            Provider.of<CartProvider>(context, listen: false);
+                        final navigator = Navigator.of(context);
+
+                        final firestoreService = FirestoreService();
+                        await firestoreService.saveOrder({
+                          'items': cartProvider.cartItems,
+                          'totalPrice': cartProvider.totalPrice,
+                          'paymentMethod': _paymentMethods[_selectedPayment]
+                              ['number'],
+                          'status': 'Pending',
+                        });
+
+                        await cartProvider.clearCart();
+
+                        if (!mounted) return;
+                        _showSuccessDialog(navigator);
                       },
                     ),
                     const SizedBox(height: 24),
@@ -293,6 +249,68 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentNavIndex,
         onTap: (index) => setState(() => _currentNavIndex = index),
+      ),
+    );
+  }
+
+  void _showSuccessDialog(NavigatorState navigator) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primary.withValues(alpha: 0.1),
+                ),
+                child: const Icon(
+                  Icons.check_circle,
+                  color: AppColors.primary,
+                  size: 50,
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Payment done successfully.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: () {
+                  navigator.pushNamedAndRemoveUntil(
+                    AppRoutes.home,
+                    (route) => false,
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  minimumSize: const Size(double.infinity, 48),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  'Continue Shopping',
+                  style: TextStyle(color: AppColors.white),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
