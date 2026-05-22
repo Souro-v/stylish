@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -220,6 +221,45 @@ class AuthProvider extends ChangeNotifier {
     } on FirebaseAuthException catch (e) {
       _isLoading = false;
       _errorMessage = _getErrorMessage(e.code);
+      notifyListeners();
+      return false;
+    }
+  }
+
+  // Google Sign In
+  Future<bool> signInWithGoogle() async {
+    try {
+      _isLoading = true;
+      _errorMessage = null;
+      notifyListeners();
+
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      if (googleUser == null) {
+        _isLoading = false;
+        notifyListeners();
+        return false;
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await _auth.signInWithCredential(credential);
+      _user = _auth.currentUser;
+      await updateLastActive();
+
+      _isLoading = false;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _isLoading = false;
+      _errorMessage = 'Google sign in failed';
       notifyListeners();
       return false;
     }

@@ -215,7 +215,31 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 // Social Login
                 SocialLoginRow(
-                  onGoogleTap: () {},
+                  onGoogleTap: () async {
+                    final authProvider =
+                        Provider.of<AuthProvider>(context, listen: false);
+                    final navigator = Navigator.of(context);
+                    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+                    final success = await authProvider.signInWithGoogle();
+
+                    if (!mounted) return;
+
+                    if (success) {
+                      navigator.pushNamedAndRemoveUntil(
+                        AppRoutes.home,
+                        (route) => false,
+                      );
+                    } else {
+                      scaffoldMessenger.showSnackBar(
+                        SnackBar(
+                          content: Text(authProvider.errorMessage ??
+                              'Google sign in failed'),
+                          backgroundColor: AppColors.error,
+                        ),
+                      );
+                    }
+                  },
                   onAppleTap: () {},
                   onFacebookTap: () {},
                 ),

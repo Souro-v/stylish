@@ -28,6 +28,8 @@ dependencies:
 
   cloud_firestore: ^6.3.0
 
+  google_sign_in: ^6.2.1
+
   # UI
   smooth_page_indicator: ^1.1.0
   carousel_slider: ^5.0.0
