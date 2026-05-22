@@ -19,11 +19,80 @@ class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void _showPhoneDialog() {
+    final phoneController = TextEditingController();
+    final navigator = Navigator.of(context);
+
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: const Text('Enter Phone Number'),
+        content: TextField(
+          controller: phoneController,
+          keyboardType: TextInputType.phone,
+          decoration: InputDecoration(
+            hintText: '+880XXXXXXXXXX',
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: AppColors.primary),
+            ),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child:
+                const Text('Cancel', style: TextStyle(color: AppColors.grey)),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              final authProvider =
+                  Provider.of<AuthProvider>(context, listen: false);
+              authProvider.sendOTP(
+                phoneController.text.trim(),
+                (verificationId) {
+                  navigator.pushNamed(
+                    AppRoutes.otp,
+                    arguments: {
+                      'verificationId': verificationId,
+                      'phoneNumber': phoneController.text.trim(),
+                    },
+                  );
+                },
+                (error) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(error),
+                      backgroundColor: AppColors.error,
+                    ),
+                  );
+                },
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+            ),
+            child: const Text('Send OTP',
+                style: TextStyle(color: AppColors.white)),
+          ),
+        ],
+      ),
+    );
   }
 
   void _onLogin() async {
@@ -125,6 +194,23 @@ class _SignInScreenState extends State<SignInScreen> {
                     );
                   },
                 ),
+                const SizedBox(height: 12),
+                OutlinedButton.icon(
+                  onPressed: () => _showPhoneDialog(),
+                  icon: const Icon(Icons.phone, color: AppColors.primary),
+                  label: const Text(
+                    'Login with Phone',
+                    style: TextStyle(color: AppColors.primary),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 52),
+                    side: const BorderSide(color: AppColors.primary),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+
                 const SizedBox(height: 32),
 
                 // Social Login

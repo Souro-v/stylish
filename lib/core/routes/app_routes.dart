@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/screens/products/wishlist_screen.dart';
+import '../../screens/auth/otp_screen.dart';
 import '../../screens/categories/category_screen.dart';
 import '../../screens/checkout/place_order_screen.dart';
 import '../../screens/home/deal_of_day_screen.dart';
@@ -31,6 +32,7 @@ class AppRoutes {
   static const String signIn = '/sign-in';
   static const String signUp = '/sign-up';
   static const String forgotPassword = '/forgot-password';
+  static const String otp = '/otp';
   static const String home = '/home';
   static const String productDetail = '/product-detail';
   static const String cart = '/cart';
@@ -68,6 +70,14 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case forgotPassword:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
+      case otp:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => OtpScreen(
+            verificationId: args['verificationId'],
+            phoneNumber: args['phoneNumber'],
+          ),
+        );
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case productDetail:

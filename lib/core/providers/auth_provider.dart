@@ -12,8 +12,11 @@ class AuthProvider extends ChangeNotifier {
   static const int _sessionDuration = 5 * 60 * 1000; // 5 minutes in ms
 
   User? get user => _user;
+
   bool get isLoading => _isLoading;
+
   String? get errorMessage => _errorMessage;
+
   bool get isLoggedIn => _user != null;
 
   AuthProvider() {
@@ -152,6 +155,73 @@ class AuthProvider extends ChangeNotifier {
         return 'Too many attempts. Please try again later.';
       default:
         return 'Something went wrong. Please try again.';
+    }
+  }
+
+  // Send OTP
+  Future<void> sendOTP(
+    String phoneNumber,
+    Function(String verificationId) onCodeSent,
+    Function(String error) onError,
+  ) async {
+    try {
+      _isLoading = true;
+      _errorMessage = null;
+      notifyListeners();
+
+      await _auth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await _auth.signInWithCredential(credential);
+          _user = _auth.currentUser;
+          _isLoading = false;
+          notifyListeners();
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          _isLoading = false;
+          _errorMessage = e.message ?? 'Verification failed';
+          notifyListeners();
+          onError(_errorMessage!);
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          _isLoading = false;
+          notifyListeners();
+          onCodeSent(verificationId);
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    } catch (e) {
+      _isLoading = false;
+      _errorMessage = 'Something went wrong';
+      notifyListeners();
+      onError(_errorMessage!);
+    }
+  }
+
+// Verify OTP
+  Future<bool> verifyOTP(String verificationId, String otp) async {
+    try {
+      _isLoading = true;
+      _errorMessage = null;
+      notifyListeners();
+
+      final credential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: otp,
+      );
+
+      await _auth.signInWithCredential(credential);
+      _user = _auth.currentUser;
+      await updateLastActive();
+
+      _isLoading = false;
+      notifyListeners();
+      return true;
+    } on FirebaseAuthException catch (e) {
+      _isLoading = false;
+      _errorMessage = _getErrorMessage(e.code);
+      notifyListeners();
+      return false;
     }
   }
 }
