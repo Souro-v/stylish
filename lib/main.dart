@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'core/providers/auth_provider.dart';
 import 'core/providers/cart_provider.dart';
+import 'core/providers/language_provider.dart';
 import 'core/providers/wishlist_provider.dart';
 import 'core/services/notification_service.dart';
 import 'core/theme/app_theme.dart';
@@ -15,7 +16,6 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   // Initialize notifications
   await NotificationService().initialize();
 
@@ -26,11 +26,13 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => WishlistProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
       ],
       child: const MyApp(),
     ),
   );
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

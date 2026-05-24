@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/providers/auth_provider.dart';
+import '../../core/providers/language_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/theme/theme_provider.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
@@ -69,7 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (image != null) {
       // Save image to app directory
       final directory = await getApplicationDocumentsDirectory();
-      const String  fileName = 'profile_image.jpg';
+      const String fileName = 'profile_image.jpg';
       final String filePath = '${directory.path}/$fileName';
 
       // Copy image to app directory
@@ -435,6 +436,31 @@ class _SettingsSheet extends StatelessWidget {
                   value: themeProvider.isDarkMode,
                   activeThumbColor: AppColors.primary,
                   onChanged: (_) => themeProvider.toggleTheme(),
+                ),
+              );
+            },
+          ),
+          // Language Toggle
+          Consumer<LanguageProvider>(
+            builder: (context, langProvider, _) {
+              return ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(
+                  Iconsax.language_square,
+                  color: AppColors.primary,
+                ),
+                title: const Text('Language'),
+                subtitle: Text(
+                  langProvider.isBangla ? 'বাংলা' : 'English',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: AppColors.grey,
+                  ),
+                ),
+                trailing: Switch(
+                  value: langProvider.isBangla,
+                  activeThumbColor: AppColors.primary,
+                  onChanged: (_) => langProvider.toggleLanguage(),
                 ),
               );
             },
