@@ -4,6 +4,7 @@ import '../../screens/auth/otp_screen.dart';
 import '../../screens/categories/category_screen.dart';
 import '../../screens/checkout/place_order_screen.dart';
 import '../../screens/home/deal_of_day_screen.dart';
+import '../../screens/home/flash_sale_screen.dart';
 import '../../screens/home/flat_heels_screen.dart';
 import '../../screens/home/new_arrivals_screen.dart';
 import '../../screens/home/special_offers_screen.dart';
@@ -48,6 +49,7 @@ class AppRoutes {
   static const String dealOfDay = '/deal-of-day';
   static const String specialOffers = '/special-offers';
   static const String flatHeels = '/flat-heels';
+  static const String flashSale = '/flash-sale';
   static const String beauty = '/beauty';
   static const String fashion = '/fashion';
   static const String kids = '/kids';
@@ -108,6 +110,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case newArrivals:
         return MaterialPageRoute(builder: (_) => const NewArrivalsScreen());
+      case flashSale:
+        return MaterialPageRoute(builder: (_) => const FlashSaleScreen());
       case dealOfDay:
         return MaterialPageRoute(builder: (_) => const DealOfDayScreen());
       case specialOffers:

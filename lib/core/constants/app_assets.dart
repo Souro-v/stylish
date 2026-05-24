@@ -201,4 +201,20 @@ class AppAssets {
   static const String sponsored9 = 'assets/products/sponsored9.jpg';
   static const String sponsored10 = 'assets/products/sponsored10.jpg';
   static const String sponsored11 = 'assets/products/sponsored11.jpg';
+
+  // Flash Sale
+  static const String flashBanner = 'assets/images/flash_banner.jpg';
+  static const String fs1 = 'assets/products/f_s1.jpg';
+  static const String fs2 = 'assets/products/f_s2.jpg';
+  static const String fs3 = 'assets/products/f_s3.jpg';
+  static const String fs4 = 'assets/products/f_s4.jpg';
+  static const String fs5 = 'assets/products/f_s5.jpg';
+  static const String fs6 = 'assets/products/f_s6.jpg';
+  static const String fs7 = 'assets/products/f_s7.jpg';
+  static const String fs8 = 'assets/products/f_s8.jpg';
+  static const String fs9 = 'assets/products/f_s9.jpg';
+  static const String fs10 = 'assets/products/f_s10.jpg';
+  static const String fs11 = 'assets/products/f_s11.jpg';
+  static const String fs12 = 'assets/products/f_s12.jpg';
+  static const String fs13 = 'assets/products/f_s13.jpg';
 }

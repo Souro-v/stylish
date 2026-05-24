@@ -351,6 +351,59 @@ class _HomeScreenState extends State<HomeScreen> {
                     const BannerSlider(),
                     const SizedBox(height: 16),
 
+                    // Flash Sale Banner
+                    GestureDetector(
+                      onTap: () =>
+                          Navigator.pushNamed(context, AppRoutes.flashSale),
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 16),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 12),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Iconsax.flash,
+                                    color: AppColors.white, size: 24),
+                                SizedBox(width: 8),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Flash Sale! 🔥',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Up to 67% Off',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: AppColors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Icon(Icons.arrow_forward_ios,
+                                color: AppColors.white, size: 16),
+                          ],
+                        ),
+                      ),
+                    ),
+
                     // Deal of the Day
                     Container(
                       padding: const EdgeInsets.symmetric(
