@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/language_provider.dart';
 import '../../core/providers/wishlist_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
@@ -21,6 +22,7 @@ class _TrendingScreenState extends State<WishlistScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final lang = Provider.of<LanguageProvider>(context);
 
     return Scaffold(
       body: SafeArea(
@@ -91,13 +93,13 @@ class _TrendingScreenState extends State<WishlistScreen> {
             const SizedBox(height: 12),
 
             // Title
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'My Wishlist',
-                  style: TextStyle(
+                  lang.wishlist,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -157,8 +159,7 @@ class _TrendingScreenState extends State<WishlistScreen> {
                         return GestureDetector(
                           onTap: () => Navigator.pushNamed(
                               context, AppRoutes.productDetail,
-                            arguments: product
-                          ),
+                              arguments: product),
                           child: Container(
                             decoration: BoxDecoration(
                               color:

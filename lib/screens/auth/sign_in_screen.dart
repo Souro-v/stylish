@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/providers/auth_provider.dart';
+import '../../core/providers/language_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/custom_button.dart';
 import '../../widgets/common/custom_text_field.dart';
@@ -118,6 +119,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = Provider.of<LanguageProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -127,9 +129,9 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Welcome\nBack!',
-                  style: TextStyle(
+                Text(
+                  lang.welcome,
+                  style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                   ),
@@ -138,7 +140,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 // Username or Email
                 CustomTextField(
-                  hintText: 'Username or Email',
+                  hintText: lang.email,
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: const Icon(Iconsax.user, color: AppColors.grey),
@@ -153,7 +155,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 // Password
                 CustomTextField(
-                  hintText: 'Password',
+                  hintText: lang.password,
                   controller: _passwordController,
                   isPassword: true,
                   prefixIcon: const Icon(Iconsax.lock, color: AppColors.grey),
@@ -188,7 +190,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 Consumer<AuthProvider>(
                   builder: (context, auth, _) {
                     return CustomButton(
-                      text: 'Login',
+                      text: lang.login,
                       onPressed: _onLogin,
                       isLoading: auth.isLoading,
                     );

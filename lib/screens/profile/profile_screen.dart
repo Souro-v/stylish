@@ -127,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onTap: () => Navigator.pop(context),
                     child: const Icon(Icons.arrow_back_ios, size: 20),
                   ),
-                  const Text(
+                 const Text(
                     'Profile',
                     style: TextStyle(
                       fontSize: 18,
@@ -398,6 +398,7 @@ class _SettingsSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = Provider.of<LanguageProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -413,9 +414,9 @@ class _SettingsSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          const Text(
-            'Settings',
-            style: TextStyle(
+          Text(
+            lang.settings,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -431,7 +432,7 @@ class _SettingsSheet extends StatelessWidget {
                   themeProvider.isDarkMode ? Iconsax.moon : Iconsax.sun_1,
                   color: AppColors.primary,
                 ),
-                title: const Text('Dark Mode'),
+                title: Text(lang.darkMode),
                 trailing: Switch(
                   value: themeProvider.isDarkMode,
                   activeThumbColor: AppColors.primary,
@@ -449,7 +450,7 @@ class _SettingsSheet extends StatelessWidget {
                   Iconsax.language_square,
                   color: AppColors.primary,
                 ),
-                title: const Text('Language'),
+                title: Text(lang.language),
                 subtitle: Text(
                   langProvider.isBangla ? 'বাংলা' : 'English',
                   style: const TextStyle(
@@ -472,9 +473,9 @@ class _SettingsSheet extends StatelessWidget {
               Iconsax.logout,
               color: AppColors.error,
             ),
-            title: const Text(
-              'Sign Out',
-              style: TextStyle(
+            title: Text(
+              lang.logout,
+              style: const TextStyle(
                 color: AppColors.error,
                 fontWeight: FontWeight.w500,
               ),

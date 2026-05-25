@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/providers/cart_provider.dart';
+import '../../core/providers/language_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/custom_button.dart';
@@ -21,7 +22,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
+    final lang = Provider.of<LanguageProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -36,9 +37,9 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                     onTap: () => Navigator.pop(context),
                     child: const Icon(Icons.arrow_back_ios, size: 20),
                   ),
-                  const Text(
-                    'Shopping Bag',
-                    style: TextStyle(
+                  Text(
+                    lang.shoppingBag,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                     ),
@@ -396,9 +397,9 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
-                                    'Order Total',
-                                    style: TextStyle(
+                                  Text(
+                                    lang.orderTotal,
+                                    style: const TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -442,7 +443,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
 
                         // Proceed to Payment Button
                         CustomButton(
-                          text: 'Proceed to Payment',
+                          text: lang.proceedToPayment,
                           onPressed: () =>
                               Navigator.pushNamed(context, AppRoutes.checkout),
                         ),
