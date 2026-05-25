@@ -5,6 +5,7 @@ import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/providers/cart_provider.dart';
+import '../../core/providers/language_provider.dart';
 import '../../core/providers/wishlist_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
@@ -222,6 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final lang = Provider.of<LanguageProvider>(context);
 
     return Scaffold(
       drawer: _buildDrawer(context),
@@ -244,9 +246,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Image.asset(AppAssets.logo, width: 32, height: 32),
                       const SizedBox(width: 6),
-                      const Text(
-                        'Stylish',
-                        style: TextStyle(
+                      Text(
+                        lang.appName,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: AppColors.primary,
@@ -286,22 +288,24 @@ class _HomeScreenState extends State<HomeScreen> {
                               : AppColors.lightScaffoldBg,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Iconsax.search_normal, color: AppColors.grey),
-                            SizedBox(width: 8),
+                            const Icon(Iconsax.search_normal,
+                                color: AppColors.grey),
+                            const SizedBox(width: 8),
                             Expanded(
                               child: TextField(
                                 enabled: false,
                                 decoration: InputDecoration(
-                                  hintText: 'Search any Product...',
+                                  hintText: lang.searchProduct,
                                   border: InputBorder.none,
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
                                 ),
                               ),
                             ),
-                            Icon(Iconsax.microphone, color: AppColors.grey),
+                            const Icon(Iconsax.microphone,
+                                color: AppColors.grey),
                           ],
                         ),
                       ),
@@ -312,9 +316,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'All Featured',
-                          style: TextStyle(
+                        Text(
+                          lang.allFeatured,
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -367,26 +371,26 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               children: [
-                                Icon(Iconsax.flash,
+                                const Icon(Iconsax.flash,
                                     color: AppColors.white, size: 24),
-                                SizedBox(width: 8),
+                                const SizedBox(width: 8),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Flash Sale! 🔥',
-                                      style: TextStyle(
+                                      lang.flashSale,
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: AppColors.white,
                                       ),
                                     ),
-                                    Text(
+                                    const Text(
                                       'Up to 67% Off',
                                       style: TextStyle(
                                         fontSize: 12,
@@ -397,7 +401,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ],
                             ),
-                            Icon(Icons.arrow_forward_ios,
+                            const Icon(Icons.arrow_forward_ios,
                                 color: AppColors.white, size: 16),
                           ],
                         ),
@@ -415,19 +419,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Column(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Deal of the Day',
-                                style: TextStyle(
+                                lang.dealOfDay,
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.white,
                                 ),
                               ),
-                              SizedBox(height: 4),
-                              Row(
+                              const SizedBox(height: 4),
+                              const Row(
                                 children: [
                                   Icon(Iconsax.clock,
                                       size: 14, color: AppColors.white),
@@ -453,18 +457,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: AppColors.white,
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: const Row(
+                              child: Row(
                                 children: [
                                   Text(
-                                    'View all',
-                                    style: TextStyle(
+                                    lang.viewAll,
+                                    style: const TextStyle(
                                       fontSize: 12,
                                       color: AppColors.primary,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  SizedBox(width: 4),
-                                  Icon(Icons.arrow_forward,
+                                  const SizedBox(width: 4),
+                                  const Icon(Icons.arrow_forward,
                                       size: 12, color: AppColors.primary),
                                 ],
                               ),
@@ -556,19 +560,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Column(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Trending Products',
-                                style: TextStyle(
+                                lang.trendingProducts,
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.white,
                                 ),
                               ),
-                              SizedBox(height: 4),
-                              Row(
+                              const SizedBox(height: 4),
+                              const Row(
                                 children: [
                                   Icon(Iconsax.calendar,
                                       size: 14, color: AppColors.white),
@@ -594,18 +598,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: AppColors.white,
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: const Row(
+                              child: Row(
                                 children: [
                                   Text(
-                                    'View all',
-                                    style: TextStyle(
+                                    lang.viewAll,
+                                    style: const TextStyle(
                                       fontSize: 12,
                                       color: AppColors.primary,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  SizedBox(width: 4),
-                                  Icon(Icons.arrow_forward,
+                                  const SizedBox(width: 4),
+                                  const Icon(Icons.arrow_forward,
                                       size: 12, color: AppColors.primary),
                                 ],
                               ),
@@ -778,7 +782,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     // New Arrivals
                     SectionHeader(
-                      title: 'New Arrivals',
+                      title: lang.newArrivals,
                       subtitle: "Summer' 25 Collections",
                       onViewAll: () =>
                           Navigator.pushNamed(context, AppRoutes.newArrivals),

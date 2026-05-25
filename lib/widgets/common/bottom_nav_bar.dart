@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/language_provider.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -15,6 +17,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final lang = Provider.of<LanguageProvider>(context);
 
     return Container(
       decoration: BoxDecoration(
@@ -35,31 +38,31 @@ class BottomNavBar extends StatelessWidget {
         elevation: 0,
         selectedFontSize: 11,
         unselectedFontSize: 11,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Iconsax.home),
-            activeIcon: Icon(Iconsax.home_15),
-            label: 'Home',
+            icon: const Icon(Iconsax.home),
+            activeIcon: const Icon(Iconsax.home_15),
+            label: lang.home,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Iconsax.heart),
-            activeIcon: Icon(Iconsax.heart5),
-            label: 'Wishlist',
+            icon: const Icon(Iconsax.heart),
+            activeIcon: const Icon(Iconsax.heart5),
+            label: lang.wishlist,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Iconsax.shopping_cart),
-            activeIcon: Icon(Iconsax.shopping_cart1),
-            label: 'Cart',
+            icon: const Icon(Iconsax.shopping_cart),
+            activeIcon: const Icon(Iconsax.shopping_cart1),
+            label: lang.cart,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Iconsax.search_normal),
-            activeIcon: Icon(Iconsax.search_normal_1),
-            label: 'Search',
+            icon: const Icon(Iconsax.search_normal),
+            activeIcon: const Icon(Iconsax.search_normal_1),
+            label: lang.search,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Iconsax.user),
-            activeIcon: Icon(Iconsax.user),
-            label: 'Profile',
+            icon: const Icon(Iconsax.user),
+            activeIcon: const Icon(Iconsax.user),
+            label: lang.profile,
           ),
         ],
       ),
