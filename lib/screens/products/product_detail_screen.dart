@@ -5,6 +5,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/providers/cart_provider.dart';
+import '../../core/providers/language_provider.dart';
 import '../../core/providers/wishlist_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
@@ -82,6 +83,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final lang = Provider.of<LanguageProvider>(context);
 
     final String fullDesc = widget.product['desc'] ??
         'Perhaps the most iconic sneaker of all-time, this original "Chicago"? colorway is the cornerstone to any sneaker collection. Made famous in 1985 by Michael Jordan, the shoe has stood the test of time, becoming the most famous colorway of the Air Jordan 1. This 2015 release saw the shoe return in its full glory.';
@@ -358,8 +360,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 const SizedBox(width: 8),
                                 Text(
                                   isWishlisted
-                                      ? 'Wishlisted'
-                                      : 'Add to Wishlist',
+                                      ? lang.wishlist
+                                      : lang.addToWishlist,
                                   style: const TextStyle(
                                     color: AppColors.primary,
                                     fontWeight: FontWeight.w600,
@@ -398,7 +400,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 icon: const Icon(Iconsax.shopping_cart,
                                     color: AppColors.white, size: 18),
                                 label: Text(
-                                  isInCart ? 'Go to cart' : 'Add to cart',
+                                  isInCart ? lang.goToCart : lang.addToCart,
                                   style: const TextStyle(color: AppColors.white),
                                 ),
                                 style: ElevatedButton.styleFrom(
@@ -419,9 +421,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 context, AppRoutes.checkout),
                             icon: const Icon(Icons.bolt,
                                 color: AppColors.white, size: 18),
-                            label: const Text(
-                              'Buy Now',
-                              style: TextStyle(color: AppColors.white),
+                            label: Text(
+                              lang.buyNow,
+                              style: const TextStyle(color: AppColors.white),
                             ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,

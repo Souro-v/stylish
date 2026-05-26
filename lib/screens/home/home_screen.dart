@@ -36,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildDrawer(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Drawer(
       backgroundColor: isDark ? AppColors.darkBackground : AppColors.white,
       child: SafeArea(
@@ -64,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Welcome!',
+                        'Welcome',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,

@@ -113,6 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = Provider.of<LanguageProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -359,7 +360,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       // Save Button
                       CustomButton(
-                        text: 'Save',
+                        text: lang.save,
                         onPressed: _onSave,
                         isLoading: _isLoading,
                       ),

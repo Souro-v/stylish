@@ -38,4 +38,12 @@ class AppBn {
   static const String searchProduct = 'যেকোনো পণ্য খুঁজুন...';
   static const String recentSearches = 'সাম্প্রতিক খোঁজ';
   static const String popularSearches = 'জনপ্রিয় খোঁজ';
+  static const String emiavailable = 'EMI উপলব্ধ';
+  static const String coupon = 'কুপন প্রয়োগ করুন';
+  static const String Dfree = 'বিনামূল্যে বিতরণ';
+  static const String details = 'বিস্তারিত';
+  static const String knowmore = 'আরও জানুন';
+  static const String opdetails = 'অর্ডার পেমেন্টের বিবরণ';
+  static const String cartempty = 'আপনার কার্ট খালি!';
+  static const String aptocart = 'কার্টে পণ্য যোগ করুন';
 }

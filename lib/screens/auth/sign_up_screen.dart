@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/providers/auth_provider.dart';
+import '../../core/providers/language_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/custom_button.dart';
 import '../../widgets/common/custom_text_field.dart';
@@ -52,6 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = Provider.of<LanguageProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -72,7 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 // Username or Email
                 CustomTextField(
-                  hintText: 'Username or Email',
+                  hintText: lang.email,
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: const Icon(Iconsax.user, color: AppColors.grey),
@@ -87,7 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 // Password
                 CustomTextField(
-                  hintText: 'Password',
+                  hintText: lang.password,
                   controller: _passwordController,
                   isPassword: true,
                   prefixIcon: const Icon(Iconsax.lock, color: AppColors.grey),

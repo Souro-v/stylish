@@ -63,17 +63,17 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                             color: AppColors.grey.withValues(alpha: 0.4),
                           ),
                           const SizedBox(height: 16),
-                          const Text(
-                            'Your cart is empty!',
-                            style: TextStyle(
+                          Text(
+                            lang.cartempty,
+                            style: const TextStyle(
                               fontSize: 16,
                               color: AppColors.grey,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Add products to your cart',
-                            style: TextStyle(
+                          Text(
+                            lang.aptocart,
+                            style: const TextStyle(
                               fontSize: 13,
                               color: AppColors.grey,
                             ),
@@ -271,14 +271,14 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Row(
+                              Row(
                                 children: [
-                                  Icon(Icons.discount_outlined,
+                                  const Icon(Icons.discount_outlined,
                                       size: 20, color: AppColors.grey),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Text(
-                                    'Apply Coupons',
-                                    style: TextStyle(
+                                    lang.coupon,
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -318,9 +318,9 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Order Payment Details',
-                                style: TextStyle(
+                              Text(
+                                lang.opdetails,
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -352,9 +352,9 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                               color: AppColors.grey)),
                                       GestureDetector(
                                         onTap: () {},
-                                        child: const Text(
-                                          'Know More',
-                                          style: TextStyle(
+                                        child: Text(
+                                          lang.knowmore,
+                                          style: const TextStyle(
                                             fontSize: 12,
                                             color: AppColors.primary,
                                           ),
@@ -364,9 +364,9 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                   ),
                                   GestureDetector(
                                     onTap: () {},
-                                    child: const Text(
-                                      'Apply Coupon',
-                                      style: TextStyle(
+                                    child: Text(
+                                      lang.coupon,
+                                      style: const TextStyle(
                                         fontSize: 12,
                                         color: AppColors.primary,
                                       ),
@@ -375,14 +375,14 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                                 ],
                               ),
                               const SizedBox(height: 8),
-                              const Row(
+                              Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Delivery Fee',
-                                      style: TextStyle(
+                                  Text(lang.Dfree,
+                                      style: const TextStyle(
                                           fontSize: 13, color: AppColors.grey)),
-                                  Text(
+                                  const Text(
                                     'Free',
                                     style: TextStyle(
                                       fontSize: 13,
@@ -416,18 +416,18 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                               const SizedBox(height: 6),
                               Row(
                                 children: [
-                                  const Text(
-                                    'EMI Available ',
-                                    style: TextStyle(
+                                  Text(
+                                    lang.emiavailable,
+                                    style: const TextStyle(
                                       fontSize: 12,
                                       color: AppColors.grey,
                                     ),
                                   ),
                                   GestureDetector(
                                     onTap: () {},
-                                    child: const Text(
-                                      'Details',
-                                      style: TextStyle(
+                                    child: Text(
+                                      lang.details,
+                                      style: const TextStyle(
                                         fontSize: 12,
                                         color: AppColors.primary,
                                         fontWeight: FontWeight.w500,

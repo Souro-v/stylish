@@ -13,66 +13,103 @@ class LanguageProvider extends ChangeNotifier {
   dynamic get strings => _isBangla ? AppBn() : AppEn();
 
   // Static getters for easy access
-  String get appName =>
-      _isBangla ? AppBn.appName : AppEn.appName;
+  String get appName => _isBangla ? AppBn.appName : AppEn.appName;
+
   String get home => _isBangla ? AppBn.home : AppEn.home;
-  String get wishlist =>
-      _isBangla ? AppBn.wishlist : AppEn.wishlist;
+
+  String get wishlist => _isBangla ? AppBn.wishlist : AppEn.wishlist;
+
   String get cart => _isBangla ? AppBn.cart : AppEn.cart;
+
   String get search => _isBangla ? AppBn.search : AppEn.search;
-  String get profile =>
-      _isBangla ? AppBn.profile : AppEn.profile;
+
+  String get profile => _isBangla ? AppBn.profile : AppEn.profile;
+
   String get signIn => _isBangla ? AppBn.signIn : AppEn.signIn;
+
   String get signUp => _isBangla ? AppBn.signUp : AppEn.signUp;
+
   String get email => _isBangla ? AppBn.email : AppEn.email;
-  String get password =>
-      _isBangla ? AppBn.password : AppEn.password;
+
+  String get password => _isBangla ? AppBn.password : AppEn.password;
+
   String get login => _isBangla ? AppBn.login : AppEn.login;
+
   String get logout => _isBangla ? AppBn.logout : AppEn.logout;
-  String get welcome =>
-      _isBangla ? AppBn.welcome : AppEn.welcome;
-  String get allFeatured =>
-      _isBangla ? AppBn.allFeatured : AppEn.allFeatured;
-  String get dealOfDay =>
-      _isBangla ? AppBn.dealOfDay : AppEn.dealOfDay;
+
+  String get welcome => _isBangla ? AppBn.welcome : AppEn.welcome;
+
+  String get allFeatured => _isBangla ? AppBn.allFeatured : AppEn.allFeatured;
+
+  String get dealOfDay => _isBangla ? AppBn.dealOfDay : AppEn.dealOfDay;
+
   String get trendingProducts =>
       _isBangla ? AppBn.trendingProducts : AppEn.trendingProducts;
-  String get newArrivals =>
-      _isBangla ? AppBn.newArrivals : AppEn.newArrivals;
+
+  String get newArrivals => _isBangla ? AppBn.newArrivals : AppEn.newArrivals;
+
   String get specialOffers =>
       _isBangla ? AppBn.specialOffers : AppEn.specialOffers;
-  String get viewAll =>
-      _isBangla ? AppBn.viewAll : AppEn.viewAll;
-  String get addToCart =>
-      _isBangla ? AppBn.addToCart : AppEn.addToCart;
-  String get goToCart =>
-      _isBangla ? AppBn.goToCart : AppEn.goToCart;
+
+  String get viewAll => _isBangla ? AppBn.viewAll : AppEn.viewAll;
+
+  String get addToCart => _isBangla ? AppBn.addToCart : AppEn.addToCart;
+
+  String get goToCart => _isBangla ? AppBn.goToCart : AppEn.goToCart;
+
   String get buyNow => _isBangla ? AppBn.buyNow : AppEn.buyNow;
+
   String get addToWishlist =>
       _isBangla ? AppBn.addToWishlist : AppEn.addToWishlist;
-  String get wishlisted =>
-      _isBangla ? AppBn.wishlisted : AppEn.wishlisted;
+
+  String get wishlisted => _isBangla ? AppBn.wishlisted : AppEn.wishlisted;
+
   String get proceedToPayment =>
       _isBangla ? AppBn.proceedToPayment : AppEn.proceedToPayment;
-  String get shoppingBag =>
-      _isBangla ? AppBn.shoppingBag : AppEn.shoppingBag;
-  String get orderTotal =>
-      _isBangla ? AppBn.orderTotal : AppEn.orderTotal;
-  String get myOrders =>
-      _isBangla ? AppBn.myOrders : AppEn.myOrders;
-  String get trackOrder =>
-      _isBangla ? AppBn.trackOrder : AppEn.trackOrder;
-  String get settings =>
-      _isBangla ? AppBn.settings : AppEn.settings;
-  String get darkMode =>
-      _isBangla ? AppBn.darkMode : AppEn.darkMode;
-  String get language =>
-      _isBangla ? AppBn.language : AppEn.language;
+
+  String get shoppingBag => _isBangla ? AppBn.shoppingBag : AppEn.shoppingBag;
+
+  String get orderTotal => _isBangla ? AppBn.orderTotal : AppEn.orderTotal;
+
+  String get myOrders => _isBangla ? AppBn.myOrders : AppEn.myOrders;
+
+  String get trackOrder => _isBangla ? AppBn.trackOrder : AppEn.trackOrder;
+
+  String get settings => _isBangla ? AppBn.settings : AppEn.settings;
+
+  String get darkMode => _isBangla ? AppBn.darkMode : AppEn.darkMode;
+
+  String get language => _isBangla ? AppBn.language : AppEn.language;
+
   String get save => _isBangla ? AppBn.save : AppEn.save;
-  String get flashSale =>
-      _isBangla ? AppBn.flashSale : AppEn.flashSale;
+
+  String get flashSale => _isBangla ? AppBn.flashSale : AppEn.flashSale;
+
   String get searchProduct =>
       _isBangla ? AppBn.searchProduct : AppEn.searchProduct;
+
+  String get recentSearches =>
+      _isBangla ? AppBn.recentSearches : AppEn.recentSearches;
+
+  String get popularSearches =>
+      _isBangla ? AppBn.popularSearches : AppEn.popularSearches;
+
+  String get emiavailable =>
+      _isBangla ? AppBn.emiavailable : AppEn.emiavailable;
+
+  String get coupon => _isBangla ? AppBn.coupon : AppEn.coupon;
+
+  String get Dfree => _isBangla ? AppBn.Dfree : AppEn.Dfree;
+
+  String get details => _isBangla ? AppBn.details : AppEn.details;
+
+  String get knowmore => _isBangla ? AppBn.knowmore : AppEn.knowmore;
+
+  String get opdetails => _isBangla ? AppBn.opdetails : AppEn.opdetails;
+
+  String get cartempty => _isBangla ? AppBn.cartempty : AppEn.cartempty;
+
+  String get aptocart => _isBangla ? AppBn.aptocart : AppEn.aptocart;
 
   LanguageProvider() {
     _loadLanguage();

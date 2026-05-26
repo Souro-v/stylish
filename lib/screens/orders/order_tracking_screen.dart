@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/language_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 
@@ -57,6 +59,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final lang = Provider.of<LanguageProvider>(context);
 
     return Scaffold(
       body: SafeArea(
@@ -73,9 +76,9 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                     onTap: () => Navigator.pop(context),
                     child: const Icon(Icons.arrow_back_ios, size: 20),
                   ),
-                  const Text(
-                    'Track Order',
-                    style: TextStyle(
+                  Text(
+                   lang.trackOrder,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                     ),

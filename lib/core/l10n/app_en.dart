@@ -38,4 +38,12 @@ class AppEn {
   static const String searchProduct = 'Search any Product...';
   static const String recentSearches = 'Recent Searches';
   static const String popularSearches = 'Popular Searches';
+  static const String emiavailable = 'EMI Available ';
+  static const String coupon = 'Apply coupon ';
+  static const String Dfree = 'Free delivery';
+  static const String details = 'Details ';
+  static const String knowmore = 'Know More';
+  static const String opdetails = 'Order Payment Details';
+  static const String cartempty = 'Your cart is empty!';
+  static const String aptocart = 'Add products to your cart';
 }

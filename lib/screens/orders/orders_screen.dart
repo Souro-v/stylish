@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/language_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/services/firestore_service.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
@@ -19,6 +21,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final lang = Provider.of<LanguageProvider>(context);
 
     return Scaffold(
       body: SafeArea(
@@ -34,9 +37,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     onTap: () => Navigator.pop(context),
                     child: const Icon(Icons.arrow_back_ios, size: 20),
                   ),
-                  const Text(
-                    'My Orders',
-                    style: TextStyle(
+                  Text(
+                    lang.myOrders,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                     ),

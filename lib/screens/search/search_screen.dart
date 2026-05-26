@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/providers/language_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/star_rating.dart';
@@ -125,6 +127,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final lang = Provider.of<LanguageProvider>(context);
 
     return Scaffold(
       body: SafeArea(
@@ -151,8 +154,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       child: TextField(
                         controller: _searchController,
                         autofocus: true,
-                        decoration: const InputDecoration(
-                          hintText: 'Search any Product...',
+                        decoration: InputDecoration(
+                          hintText: lang.searchProduct,
                           border: InputBorder.none,
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
@@ -214,6 +217,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   // Default Content (before search)
   Widget _buildDefaultContent(bool isDark) {
+    final lang = Provider.of<LanguageProvider>(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,9 +226,9 @@ class _SearchScreenState extends State<SearchScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Recent Searches',
-                style: TextStyle(
+              Text(
+               lang.recentSearches,
+                style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
@@ -269,9 +273,9 @@ class _SearchScreenState extends State<SearchScreen> {
           const SizedBox(height: 20),
 
           // Popular Searches
-          const Text(
-            'Popular Searches',
-            style: TextStyle(
+           Text(
+            lang.popularSearches,
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
