@@ -9,6 +9,7 @@ import '../../core/providers/language_provider.dart';
 import '../../core/providers/wishlist_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
+import '../vendor/vendor_service.dart';
 import 'widgets/banner_slider.dart';
 import 'widgets/category_row.dart';
 import 'widgets/deal_of_day_card.dart';
@@ -155,6 +156,20 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, AppRoutes.orders);
+              },
+            ),
+            _DrawerItem(
+              icon: Iconsax.shop,
+              title: 'Vendor Dashboard',
+              onTap: () async {
+                Navigator.pop(context);
+                final isVendor = await VendorService().isVendor();
+                if (!context.mounted) return;
+                if (isVendor) {
+                  Navigator.pushNamed(context, AppRoutes.vendorDashboard);
+                } else {
+                  Navigator.pushNamed(context, AppRoutes.vendorRegister);
+                }
               },
             ),
 
