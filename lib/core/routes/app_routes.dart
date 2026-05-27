@@ -22,6 +22,9 @@ import '../../screens/home/home_screen.dart';
 import '../../screens/cart/cart_screen.dart';
 import '../../screens/profile/profile_screen.dart';
 import '../../screens/checkout/checkout_screen.dart';
+import '../../screens/vendor/vendor_add_product_screen.dart';
+import '../../screens/vendor/vendor_dashboard_screen.dart';
+import '../../screens/vendor/vendor_register_screen.dart';
 import '../constants/app_assets.dart';
 
 class AppRoutes {
@@ -58,6 +61,10 @@ class AppRoutes {
   static const String gifts = '/gifts';
   static const String summerSale = '/summer-sale';
   static const String sponsoredScreen = '/sponsored';
+  static const String vendorRegister = '/vendor-register';
+  static const String vendorDashboard = '/vendor-dashboard';
+  static const String vendorAddProduct = '/vendor-add-product';
+  static const String vendorProducts = '/vendor-products';
 
   // Route Generator
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -80,6 +87,13 @@ class AppRoutes {
             phoneNumber: args['phoneNumber'],
           ),
         );
+      case vendorRegister:
+        return MaterialPageRoute(builder: (_) => const VendorRegisterScreen());
+      case vendorDashboard:
+        return MaterialPageRoute(builder: (_) => const VendorDashboardScreen());
+      case vendorAddProduct:
+        return MaterialPageRoute(
+            builder: (_) => const VendorAddProductScreen());
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case productDetail:
