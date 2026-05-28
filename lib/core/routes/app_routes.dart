@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/screens/products/wishlist_screen.dart';
+import '../../screens/analytics/analytics_screen.dart';
 import '../../screens/auth/otp_screen.dart';
 import '../../screens/categories/category_screen.dart';
 import '../../screens/checkout/place_order_screen.dart';
@@ -48,6 +49,7 @@ class AppRoutes {
   static const String orders = '/orders';
   static const String orderTracking = '/order-tracking';
   static const String search = '/search';
+  static const String analytics = '/analytics';
   static const String newArrivals = '/new-arrivals';
   static const String dealOfDay = '/deal-of-day';
   static const String specialOffers = '/special-offers';
@@ -115,6 +117,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const PlaceOrderScreen());
       case orders:
         return MaterialPageRoute(builder: (_) => const OrdersScreen());
+      case analytics:
+        return MaterialPageRoute(builder: (_) => const AnalyticsScreen());
       case orderTracking:
         final data = settings.arguments as Map<String, dynamic>? ?? {};
         return MaterialPageRoute(

@@ -8,6 +8,7 @@ import '../../core/providers/cart_provider.dart';
 import '../../core/providers/language_provider.dart';
 import '../../core/providers/wishlist_provider.dart';
 import '../../core/routes/app_routes.dart';
+import '../../core/services/analytics_service.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/star_rating.dart';
 import 'widgets/size_selector.dart';
@@ -28,12 +29,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   bool _isExpanded = false;
 
   List<String> get _images => [
-    widget.product['image'] ?? AppAssets.detail1,
-    AppAssets.detail2,
-    AppAssets.detail3,
-    AppAssets.detail4,
-    AppAssets.detail5,
-  ];
+        widget.product['image'] ?? AppAssets.detail1,
+        AppAssets.detail2,
+        AppAssets.detail3,
+        AppAssets.detail4,
+        AppAssets.detail5,
+      ];
 
   static const List<Map<String, dynamic>> _similarProducts = [
     {
@@ -75,6 +76,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    AnalyticsService().trackProductView(widget.product['name'] ?? '');
+  }
+
+  @override
   void dispose() {
     _imageController.dispose();
     super.dispose();
@@ -103,8 +110,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     child: const Icon(Icons.arrow_back_ios, size: 20),
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.pushNamed(
-                        context, AppRoutes.placeOrder),
+                    onTap: () =>
+                        Navigator.pushNamed(context, AppRoutes.placeOrder),
                     child: const Icon(Iconsax.shopping_cart, size: 24),
                   ),
                 ],
@@ -151,8 +158,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
-                                  color:
-                                  AppColors.black.withValues(alpha: 0.1),
+                                  color: AppColors.black.withValues(alpha: 0.1),
                                   blurRadius: 4,
                                 ),
                               ],
@@ -296,8 +302,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () =>
-                          setState(() => _isExpanded = !_isExpanded),
+                      onTap: () => setState(() => _isExpanded = !_isExpanded),
                       child: Text(
                         _isExpanded ? 'Less' : '...More',
                         style: const TextStyle(
@@ -334,17 +339,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     Consumer<WishlistProvider>(
                       builder: (context, wishlist, _) {
                         final isWishlisted =
-                        wishlist.isWishlisted(widget.product['name']);
+                            wishlist.isWishlisted(widget.product['name']);
                         return GestureDetector(
-                          onTap: () =>
-                              wishlist.toggleWishlist(widget.product),
+                          onTap: () => wishlist.toggleWishlist(widget.product),
                           child: Container(
                             width: double.infinity,
-                            padding:
-                            const EdgeInsets.symmetric(vertical: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
                             decoration: BoxDecoration(
-                              border:
-                              Border.all(color: AppColors.primary),
+                              border: Border.all(color: AppColors.primary),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Row(
@@ -381,11 +383,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         Expanded(
                           child: Consumer<CartProvider>(
                             builder: (context, cart, _) {
-                              final isInCart = cart.isInCart(widget.product['name'] ?? '');
+                              final isInCart =
+                                  cart.isInCart(widget.product['name'] ?? '');
                               return ElevatedButton.icon(
                                 onPressed: () {
                                   if (isInCart) {
-                                    Navigator.pushNamed(context, AppRoutes.placeOrder);
+                                    Navigator.pushNamed(
+                                        context, AppRoutes.placeOrder);
                                   } else {
                                     cart.addToCart(widget.product);
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -401,11 +405,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     color: AppColors.white, size: 18),
                                 label: Text(
                                   isInCart ? lang.goToCart : lang.addToCart,
-                                  style: const TextStyle(color: AppColors.white),
+                                  style:
+                                      const TextStyle(color: AppColors.white),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.primary,
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -427,8 +433,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12),
+                              padding: const EdgeInsets.symmetric(vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -447,8 +452,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         color: AppColors.primary.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color:
-                          AppColors.primary.withValues(alpha: 0.2),
+                          color: AppColors.primary.withValues(alpha: 0.2),
                         ),
                       ),
                       child: const Column(
@@ -489,8 +493,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             style: OutlinedButton.styleFrom(
                               side: const BorderSide(
                                   color: AppColors.lightBorder),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12),
+                              padding: const EdgeInsets.symmetric(vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -510,8 +513,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             style: OutlinedButton.styleFrom(
                               side: const BorderSide(
                                   color: AppColors.lightBorder),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12),
+                              padding: const EdgeInsets.symmetric(vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -575,8 +577,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemCount: _similarProducts.length,
-                        separatorBuilder: (_, __) =>
-                        const SizedBox(width: 12),
+                        separatorBuilder: (_, __) => const SizedBox(width: 12),
                         itemBuilder: (context, index) {
                           final product = _similarProducts[index];
                           return GestureDetector(
@@ -594,20 +595,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 borderRadius: BorderRadius.circular(12),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppColors.black
-                                        .withValues(alpha: 0.06),
+                                    color:
+                                        AppColors.black.withValues(alpha: 0.06),
                                     blurRadius: 8,
                                     offset: const Offset(0, 2),
                                   ),
                                 ],
                               ),
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ClipRRect(
-                                    borderRadius:
-                                    const BorderRadius.vertical(
+                                    borderRadius: const BorderRadius.vertical(
                                       top: Radius.circular(12),
                                     ),
                                     child: Image.asset(
@@ -621,7 +620,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     padding: const EdgeInsets.all(8),
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           product['name'],
@@ -652,7 +651,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                           ),
                                         ),
                                         StarRating(
-                                          rating: (product['rating'] as num).toDouble(),
+                                          rating: (product['rating'] as num)
+                                              .toDouble(),
                                           size: 12,
                                         ),
                                       ],

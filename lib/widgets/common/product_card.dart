@@ -102,7 +102,6 @@ class ProductCard extends StatelessWidget {
                 ),
               ],
             ),
-
             // Details
             Padding(
               padding: const EdgeInsets.all(8),

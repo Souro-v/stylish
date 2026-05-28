@@ -184,6 +184,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pushNamed(context, AppRoutes.profile);
               },
             ),
+            _DrawerItem(
+              icon: Iconsax.chart,
+              title: 'Analytics',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.analytics);
+              },
+            ),
             const SizedBox(height: 8),
           ],
         ),
