@@ -128,7 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onTap: () => Navigator.pop(context),
                     child: const Icon(Icons.arrow_back_ios, size: 20),
                   ),
-                 const Text(
+                  const Text(
                     'Profile',
                     style: TextStyle(
                       fontSize: 18,

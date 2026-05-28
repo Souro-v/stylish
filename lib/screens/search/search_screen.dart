@@ -227,7 +227,7 @@ class _SearchScreenState extends State<SearchScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-               lang.recentSearches,
+                lang.recentSearches,
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -273,7 +273,7 @@ class _SearchScreenState extends State<SearchScreen> {
           const SizedBox(height: 20),
 
           // Popular Searches
-           Text(
+          Text(
             lang.popularSearches,
             style: const TextStyle(
               fontSize: 15,

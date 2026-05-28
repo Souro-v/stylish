@@ -18,11 +18,11 @@ class SocialLoginRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
+        const Row(
           children: [
-            const Expanded(child: Divider()),
+            Expanded(child: Divider()),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: Text(
                 'OR Continue with',
                 style: TextStyle(
@@ -31,7 +31,7 @@ class SocialLoginRow extends StatelessWidget {
                 ),
               ),
             ),
-            const Expanded(child: Divider()),
+            Expanded(child: Divider()),
           ],
         ),
         const SizedBox(height: 16),

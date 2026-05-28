@@ -91,7 +91,6 @@ class _TrendingScreenState extends State<WishlistScreen> {
               ),
             ),
             const SizedBox(height: 12),
-
             // Title
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),

@@ -28,45 +28,45 @@ class CustomButton extends StatelessWidget {
       height: height,
       child: isOutlined
           ? OutlinedButton(
-        onPressed: isLoading ? null : onPressed,
-        style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: AppColors.primary),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        child: _buildChild(),
-      )
+              onPressed: isLoading ? null : onPressed,
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: AppColors.primary),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: _buildChild(),
+            )
           : ElevatedButton(
-        onPressed: isLoading ? null : onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        child: _buildChild(),
-      ),
+              onPressed: isLoading ? null : onPressed,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: _buildChild(),
+            ),
     );
   }
 
   Widget _buildChild() {
     return isLoading
         ? const SizedBox(
-      width: 24,
-      height: 24,
-      child: CircularProgressIndicator(
-        color: AppColors.white,
-        strokeWidth: 2.5,
-      ),
-    )
+            width: 24,
+            height: 24,
+            child: CircularProgressIndicator(
+              color: AppColors.white,
+              strokeWidth: 2.5,
+            ),
+          )
         : Text(
-      text,
-      style: TextStyle(
-        fontSize: fontSize,
-        fontWeight: FontWeight.w600,
-        color: isOutlined ? AppColors.primary : AppColors.white,
-      ),
-    );
+            text,
+            style: TextStyle(
+              fontSize: fontSize,
+              fontWeight: FontWeight.w600,
+              color: isOutlined ? AppColors.primary : AppColors.white,
+            ),
+          );
   }
 }

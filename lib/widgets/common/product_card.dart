@@ -40,7 +40,7 @@ class ProductCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: AppColors.black.withOpacity(0.06),
+              color: AppColors.black.withValues(alpha: 0.06),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -60,17 +60,17 @@ class ProductCard extends StatelessWidget {
                     aspectRatio: 1,
                     child: isNetwork
                         ? Image.network(
-                      image,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Container(
-                        color: AppColors.lightTextGrey,
-                        child: const Icon(Icons.image_not_supported),
-                      ),
-                    )
+                            image,
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) => Container(
+                              color: AppColors.lightTextGrey,
+                              child: const Icon(Icons.image_not_supported),
+                            ),
+                          )
                         : Image.asset(
-                      image,
-                      fit: BoxFit.cover,
-                    ),
+                            image,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
                 // Wishlist Button
@@ -82,25 +82,20 @@ class ProductCard extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? AppColors.darkCard
-                            : AppColors.white,
+                        color: isDark ? AppColors.darkCard : AppColors.white,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.black.withOpacity(0.08),
+                            color: AppColors.black.withValues(alpha: 0.08),
                             blurRadius: 4,
                           ),
                         ],
                       ),
                       child: Icon(
-                        isWishlisted
-                            ? Icons.favorite
-                            : Icons.favorite_border,
+                        isWishlisted ? Icons.favorite : Icons.favorite_border,
                         size: 16,
-                        color: isWishlisted
-                            ? AppColors.primary
-                            : AppColors.grey,
+                        color:
+                            isWishlisted ? AppColors.primary : AppColors.grey,
                       ),
                     ),
                   ),
