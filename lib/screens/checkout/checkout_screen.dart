@@ -3,6 +3,7 @@ import '../../core/constants/app_assets.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/services/firestore_service.dart';
+import '../../core/services/loyalty_service.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/custom_button.dart';
 import 'package:provider/provider.dart';
@@ -231,8 +232,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ['number'],
                           'status': 'Pending',
                         });
-
                         await cartProvider.clearCart();
+                        await LoyaltyService()
+                            .addPoints(cartProvider.totalPrice);
 
                         if (!mounted) return;
                         _showSuccessDialog(navigator);
