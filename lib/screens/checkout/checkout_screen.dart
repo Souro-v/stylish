@@ -8,10 +8,8 @@ import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/custom_button.dart';
 import 'package:provider/provider.dart';
 import '../../core/providers/cart_provider.dart';
-
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
-
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
@@ -19,7 +17,6 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   int _selectedPayment = 0;
   int _currentNavIndex = 2;
-
   final List<Map<String, dynamic>> _paymentMethods = [
     {
       'icon': AppAssets.visaIcon,

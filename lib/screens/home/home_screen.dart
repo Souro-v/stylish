@@ -192,6 +192,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pushNamed(context, AppRoutes.analytics);
               },
             ),
+            _DrawerItem(
+              icon: Iconsax.medal,
+              title: 'Loyalty Points',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.loyalty);
+              },
+            ),
             const SizedBox(height: 8),
           ],
         ),
