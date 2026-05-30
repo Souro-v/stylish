@@ -14,6 +14,7 @@ import '../../screens/orders/order_tracking_screen.dart';
 import '../../screens/orders/orders_screen.dart';
 import '../../screens/products/product_detail_screen.dart';
 import '../../screens/products/trending_screen.dart';
+import '../../screens/referral/referral_screen.dart';
 import '../../screens/search/search_screen.dart';
 import '../../screens/splash/splash_screen.dart';
 import '../../screens/onboarding/onboarding_screen.dart';
@@ -52,6 +53,7 @@ class AppRoutes {
   static const String search = '/search';
   static const String loyalty = '/loyalty';
   static const String analytics = '/analytics';
+  static const String referral = '/referral';
   static const String newArrivals = '/new-arrivals';
   static const String dealOfDay = '/deal-of-day';
   static const String specialOffers = '/special-offers';
@@ -123,6 +125,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const AnalyticsScreen());
       case loyalty:
         return MaterialPageRoute(builder: (_) => const LoyaltyScreen());
+      case referral:
+        return MaterialPageRoute(builder: (_) => const ReferralScreen());
       case orderTracking:
         final data = settings.arguments as Map<String, dynamic>? ?? {};
         return MaterialPageRoute(

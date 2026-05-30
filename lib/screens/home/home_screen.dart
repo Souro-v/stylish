@@ -200,6 +200,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pushNamed(context, AppRoutes.loyalty);
               },
             ),
+            _DrawerItem(
+              icon: Iconsax.gift,
+              title: 'Refer & Earn',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.referral);
+              },
+            ),
             const SizedBox(height: 8),
           ],
         ),
