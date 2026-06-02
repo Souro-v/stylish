@@ -185,6 +185,14 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             _DrawerItem(
+              icon: Iconsax.magic_star,
+              title: 'For You',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.recommendation);
+              },
+            ),
+            _DrawerItem(
               icon: Iconsax.chart,
               title: 'Analytics',
               onTap: () {
@@ -817,6 +825,54 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 16),
+
+                    // Recommendation Banner
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamed(
+                          context, AppRoutes.recommendation),
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 16),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFF6C63FF), Color(0xFF3F3D56)],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Row(
+                          children: [
+                            Icon(Iconsax.magic_star,
+                                color: AppColors.white, size: 28),
+                            SizedBox(width: 12),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Recommended For You ✨',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'Based on your activity',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Spacer(),
+                            Icon(Icons.arrow_forward_ios,
+                                color: AppColors.white, size: 16),
+                          ],
+                        ),
+                      ),
+                    ),
 
                     // New Arrivals
                     SectionHeader(

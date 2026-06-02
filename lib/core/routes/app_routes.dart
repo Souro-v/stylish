@@ -14,6 +14,7 @@ import '../../screens/orders/order_tracking_screen.dart';
 import '../../screens/orders/orders_screen.dart';
 import '../../screens/products/product_detail_screen.dart';
 import '../../screens/products/trending_screen.dart';
+import '../../screens/recommendation/recommendation_screen.dart';
 import '../../screens/referral/referral_screen.dart';
 import '../../screens/search/search_screen.dart';
 import '../../screens/splash/splash_screen.dart';
@@ -54,6 +55,7 @@ class AppRoutes {
   static const String loyalty = '/loyalty';
   static const String analytics = '/analytics';
   static const String referral = '/referral';
+  static const String recommendation = '/recommendation';
   static const String newArrivals = '/new-arrivals';
   static const String dealOfDay = '/deal-of-day';
   static const String specialOffers = '/special-offers';
@@ -132,6 +134,8 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => OrderTrackingScreen(orderData: data),
         );
+      case recommendation:
+        return MaterialPageRoute(builder: (_) => const RecommendationScreen());
       case search:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case newArrivals:
