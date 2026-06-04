@@ -34,7 +34,6 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   carousel_slider: ^5.0.0
   image_picker: ^1.0.7
-  google_maps_flutter: ^2.5.0
   firebase_core: ^4.7.0
   firebase_auth: ^6.4.0
   path_provider: ^2.1.2
@@ -43,6 +42,7 @@ dependencies:
     sdk: flutter
   intl: ^0.20.0
   fl_chart: ^0.69.0
+  mobile_scanner: ^5.0.0
 
 dev_dependencies:
   flutter_test:

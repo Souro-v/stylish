@@ -16,6 +16,7 @@ import '../../screens/products/product_detail_screen.dart';
 import '../../screens/products/trending_screen.dart';
 import '../../screens/recommendation/recommendation_screen.dart';
 import '../../screens/referral/referral_screen.dart';
+import '../../screens/scanner/scanner_screen.dart';
 import '../../screens/search/search_screen.dart';
 import '../../screens/splash/splash_screen.dart';
 import '../../screens/onboarding/onboarding_screen.dart';
@@ -47,6 +48,7 @@ class AppRoutes {
   static const String trending = '/trending';
   static const String profile = '/profile';
   static const String checkout = '/checkout';
+  static const String scanner = '/scanner';
   static const String wishlist = '/wishlist';
   static const String placeOrder = '/place-order';
   static const String orders = '/orders';
@@ -115,7 +117,9 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const CartScreen());
       case profile:
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
-      case checkout:
+      case scanner:
+        return MaterialPageRoute(builder: (_) => const ScannerScreen());
+        case checkout:
         return MaterialPageRoute(builder: (_) => const CheckoutScreen());
       case wishlist:
         return MaterialPageRoute(builder: (_) => const WishlistScreen());

@@ -168,6 +168,11 @@ class _SearchScreenState extends State<SearchScreen> {
                         },
                       ),
                     ),
+                    GestureDetector(
+                      onTap: () =>
+                          Navigator.pushNamed(context, AppRoutes.scanner),
+                      child: const Icon(Iconsax.scan, color: AppColors.grey),
+                    ),
                     if (_isSearching)
                       GestureDetector(
                         onTap: () {

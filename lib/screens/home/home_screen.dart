@@ -193,6 +193,14 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             _DrawerItem(
+              icon: Iconsax.scan,
+              title: 'Scan Product',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.scanner);
+              },
+            ),
+            _DrawerItem(
               icon: Iconsax.chart,
               title: 'Analytics',
               onTap: () {
