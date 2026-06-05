@@ -467,6 +467,19 @@ class _SettingsSheet extends StatelessWidget {
               );
             },
           ),
+          //live chat
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(
+              Iconsax.message,
+              color: AppColors.primary,
+            ),
+            title: const Text('Live Chat'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, AppRoutes.chat);
+            },
+          ),
           // Sign Out
           ListTile(
             contentPadding: EdgeInsets.zero,
