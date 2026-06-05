@@ -3,6 +3,7 @@ import 'package:stylish/screens/products/wishlist_screen.dart';
 import '../../screens/analytics/analytics_screen.dart';
 import '../../screens/auth/otp_screen.dart';
 import '../../screens/categories/category_screen.dart';
+import '../../screens/chats/chat_screen.dart';
 import '../../screens/checkout/place_order_screen.dart';
 import '../../screens/home/deal_of_day_screen.dart';
 import '../../screens/home/flash_sale_screen.dart';
@@ -75,6 +76,7 @@ class AppRoutes {
   static const String vendorDashboard = '/vendor-dashboard';
   static const String vendorAddProduct = '/vendor-add-product';
   static const String vendorProducts = '/vendor-products';
+  static const String chat = '/chat';
 
   // Route Generator
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -119,7 +121,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
       case scanner:
         return MaterialPageRoute(builder: (_) => const ScannerScreen());
-        case checkout:
+      case checkout:
         return MaterialPageRoute(builder: (_) => const CheckoutScreen());
       case wishlist:
         return MaterialPageRoute(builder: (_) => const WishlistScreen());
@@ -138,6 +140,8 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => OrderTrackingScreen(orderData: data),
         );
+      case chat:
+        return MaterialPageRoute(builder: (_) => const ChatScreen());
       case recommendation:
         return MaterialPageRoute(builder: (_) => const RecommendationScreen());
       case search:

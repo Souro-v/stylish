@@ -217,6 +217,14 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             _DrawerItem(
+              icon: Iconsax.message,
+              title: 'Live Chat',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.chat);
+              },
+            ),
+            _DrawerItem(
               icon: Iconsax.gift,
               title: 'Refer & Earn',
               onTap: () {
