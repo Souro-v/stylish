@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/screens/products/wishlist_screen.dart';
 import '../../screens/analytics/analytics_screen.dart';
+import '../../screens/ar/ar_screen.dart';
 import '../../screens/auth/otp_screen.dart';
 import '../../screens/categories/category_screen.dart';
 import '../../screens/chats/chat_screen.dart';
@@ -57,6 +58,7 @@ class AppRoutes {
   static const String search = '/search';
   static const String loyalty = '/loyalty';
   static const String analytics = '/analytics';
+  static const String ar = '/ar';
   static const String referral = '/referral';
   static const String recommendation = '/recommendation';
   static const String newArrivals = '/new-arrivals';
@@ -140,6 +142,8 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => OrderTrackingScreen(orderData: data),
         );
+      case ar:
+        return MaterialPageRoute(builder: (_) => const ArScreen());
       case chat:
         return MaterialPageRoute(builder: (_) => const ChatScreen());
       case recommendation:

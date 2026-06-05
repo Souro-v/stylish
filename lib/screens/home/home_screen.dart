@@ -225,6 +225,14 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             _DrawerItem(
+              icon: Iconsax.magic_star,
+              title: 'Virtual Try-On',
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AppRoutes.ar);
+              },
+            ),
+            _DrawerItem(
               icon: Iconsax.gift,
               title: 'Refer & Earn',
               onTap: () {
