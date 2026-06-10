@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/screens/products/wishlist_screen.dart';
+import '../../screens/about/about_screen.dart';
 import '../../screens/analytics/analytics_screen.dart';
 import '../../screens/ar/ar_screen.dart';
 import '../../screens/auth/otp_screen.dart';
@@ -16,6 +17,7 @@ import '../../screens/orders/order_tracking_screen.dart';
 import '../../screens/orders/orders_screen.dart';
 import '../../screens/products/product_detail_screen.dart';
 import '../../screens/products/trending_screen.dart';
+import '../../screens/recently_viewed/recently_viewed_screen.dart';
 import '../../screens/recommendation/recommendation_screen.dart';
 import '../../screens/referral/referral_screen.dart';
 import '../../screens/scanner/scanner_screen.dart';
@@ -73,6 +75,8 @@ class AppRoutes {
   static const String mens = '/mens';
   static const String womens = '/womens';
   static const String gifts = '/gifts';
+  static const String about = '/about';
+  static const String recentlyViewed = '/recently-viewed';
   static const String summerSale = '/summer-sale';
   static const String sponsoredScreen = '/sponsored';
   static const String vendorRegister = '/vendor-register';
@@ -134,7 +138,12 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const OrdersScreen());
       case analytics:
         return MaterialPageRoute(builder: (_) => const AnalyticsScreen());
-      case loyalty:
+      case about:
+        return MaterialPageRoute(builder: (_) => const AboutScreen());
+      case recentlyViewed:
+        return MaterialPageRoute(
+            builder: (_) => const RecentlyViewedScreen());
+        case loyalty:
         return MaterialPageRoute(builder: (_) => const LoyaltyScreen());
       case referral:
         return MaterialPageRoute(builder: (_) => const ReferralScreen());

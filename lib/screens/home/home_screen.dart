@@ -225,6 +225,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                     _DrawerItem(
+                      icon: Iconsax.eye,
+                      title: 'Recently Viewed',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.recentlyViewed);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.info_circle,
+                      title: 'About Us',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.about);
+                      },
+                    ),
+                    _DrawerItem(
                       icon: Iconsax.shop,
                       title: 'Vendor Dashboard',
                       onTap: () async {
