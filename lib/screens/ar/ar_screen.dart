@@ -39,7 +39,7 @@ class _ArScreenState extends State<ArScreen> {
     // Accessories
     [
       {'name': 'Red Bangles', 'image': AppAssets.fs6, 'color': Colors.red},
-      {'name': 'Wedding Bangles', 'image': AppAssets.fs7, 'color': Colors.amber},
+      {'name': 'Wedding Bangles', 'image': AppAssets.fs7, 'color': const Color(0xFFFFD700)},
       {'name': 'Women Purse', 'image': AppAssets.fs9, 'color': Colors.brown},
     ],
   ];
