@@ -9,6 +9,7 @@ import '../../core/providers/language_provider.dart';
 import '../../core/providers/wishlist_provider.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/services/analytics_service.dart';
+import '../../core/services/recently_viewed_service.dart';
 import '../../core/services/review_service.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/star_rating.dart';
@@ -83,6 +84,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   void initState() {
     super.initState();
     AnalyticsService().trackProductView(widget.product['name'] ?? '');
+    RecentlyViewedService().addProduct(widget.product);
   }
 
   @override
