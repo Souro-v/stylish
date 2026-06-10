@@ -31,6 +31,7 @@ import '../../screens/profile/profile_screen.dart';
 import '../../screens/checkout/checkout_screen.dart';
 import '../../screens/vendor/vendor_add_product_screen.dart';
 import '../../screens/vendor/vendor_dashboard_screen.dart';
+import '../../screens/vendor/vendor_products_screen.dart';
 import '../../screens/vendor/vendor_register_screen.dart';
 import '../constants/app_assets.dart';
 
@@ -144,7 +145,10 @@ class AppRoutes {
         );
       case ar:
         return MaterialPageRoute(builder: (_) => const ArScreen());
-      case chat:
+      case vendorProducts:
+        return MaterialPageRoute(
+            builder: (_) => const VendorProductsScreen());
+        case chat:
         return MaterialPageRoute(builder: (_) => const ChatScreen());
       case recommendation:
         return MaterialPageRoute(builder: (_) => const RecommendationScreen());

@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildDrawer(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Drawer(
       backgroundColor: isDark ? AppColors.darkBackground : AppColors.white,
       child: SafeArea(
@@ -44,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Header
             Container(
+              width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
                 color: AppColors.primary,
@@ -64,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Welcome',
+                        'Welcome!',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -84,163 +86,174 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            const SizedBox(height: 8),
-
-            // Menu Items
-            _DrawerItem(
-              icon: Iconsax.home,
-              title: 'Home',
-              onTap: () {
-                Navigator.pop(context);
-              },
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 8),
+                    _DrawerItem(
+                      icon: Iconsax.home,
+                      title: 'Home',
+                      onTap: () => Navigator.pop(context),
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.magic_star,
+                      title: 'For You',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.recommendation);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.flash,
+                      title: 'Flash Sale 🔥',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.flashSale);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.category,
+                      title: 'Beauty',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.beauty);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.category,
+                      title: 'Fashion',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.fashion);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.category,
+                      title: 'Kids',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.kids);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.category,
+                      title: 'Mens',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.mens);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.category,
+                      title: 'Womens',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.womens);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.category,
+                      title: 'Gifts',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.gifts);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.heart,
+                      title: 'Wishlist',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.wishlist);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.shopping_bag,
+                      title: 'My Orders',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.orders);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.medal,
+                      title: 'Loyalty Points',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.loyalty);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.gift,
+                      title: 'Refer & Earn',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.referral);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.chart,
+                      title: 'Analytics',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.analytics);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.magic_star,
+                      title: 'Virtual Try-On',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.ar);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.scan,
+                      title: 'Scan Product',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.scanner);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.message,
+                      title: 'Live Chat',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.chat);
+                      },
+                    ),
+                    _DrawerItem(
+                      icon: Iconsax.shop,
+                      title: 'Vendor Dashboard',
+                      onTap: () async {
+                        Navigator.pop(context);
+                        final isVendor = await VendorService().isVendor();
+                        if (!context.mounted) return;
+                        if (isVendor) {
+                          Navigator.pushNamed(
+                              context, AppRoutes.vendorDashboard);
+                        } else {
+                          Navigator.pushNamed(
+                              context, AppRoutes.vendorRegister);
+                        }
+                      },
+                    ),
+                    const Divider(),
+                    _DrawerItem(
+                      icon: Iconsax.setting_2,
+                      title: 'Settings',
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AppRoutes.profile);
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                ),
+              ),
             ),
-            _DrawerItem(
-              icon: Iconsax.category,
-              title: 'Beauty',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.beauty);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.category,
-              title: 'Fashion',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.fashion);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.category,
-              title: 'Kids',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.kids);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.category,
-              title: 'Mens',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.mens);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.category,
-              title: 'Womens',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.womens);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.category,
-              title: 'Gifts',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.gifts);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.heart,
-              title: 'Wishlist',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.wishlist);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.shopping_bag,
-              title: 'My Orders',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.orders);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.shop,
-              title: 'Vendor Dashboard',
-              onTap: () async {
-                Navigator.pop(context);
-                final isVendor = await VendorService().isVendor();
-                if (!context.mounted) return;
-                if (isVendor) {
-                  Navigator.pushNamed(context, AppRoutes.vendorDashboard);
-                } else {
-                  Navigator.pushNamed(context, AppRoutes.vendorRegister);
-                }
-              },
-            ),
-
-            const Spacer(),
-
-            // Settings + Logout
-            _DrawerItem(
-              icon: Iconsax.setting_2,
-              title: 'Settings',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.profile);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.magic_star,
-              title: 'For You',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.recommendation);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.scan,
-              title: 'Scan Product',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.scanner);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.chart,
-              title: 'Analytics',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.analytics);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.medal,
-              title: 'Loyalty Points',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.loyalty);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.message,
-              title: 'Live Chat',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.chat);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.magic_star,
-              title: 'Virtual Try-On',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.ar);
-              },
-            ),
-            _DrawerItem(
-              icon: Iconsax.gift,
-              title: 'Refer & Earn',
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AppRoutes.referral);
-              },
-            ),
-            const SizedBox(height: 8),
           ],
         ),
       ),
