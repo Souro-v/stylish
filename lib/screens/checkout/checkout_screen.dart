@@ -8,8 +8,10 @@ import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/custom_button.dart';
 import 'package:provider/provider.dart';
 import '../../core/providers/cart_provider.dart';
+
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
+
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
@@ -228,6 +230,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           'paymentMethod': _paymentMethods[_selectedPayment]
                               ['number'],
                           'status': 'Pending',
+                          'orderId':
+                              DateTime.now().millisecondsSinceEpoch.toString(),
                         });
                         await cartProvider.clearCart();
                         await LoyaltyService()

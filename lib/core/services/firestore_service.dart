@@ -9,15 +9,23 @@ class FirestoreService {
 
   // ==================== USER ====================
 
+
   // Update order status
   Future<void> updateOrderStatus(String orderId, String status) async {
     if (_userId == null) return;
-    await _firestore
+    final snapshot = await _firestore
         .collection('users')
         .doc(_userId)
         .collection('orders')
-        .doc(orderId)
-        .update({'status': status});
+        .get();
+
+    // orderId match update
+    for (final doc in snapshot.docs) {
+      if (doc.id == orderId || doc.data()['orderId'] == orderId) {
+        await doc.reference.update({'status': status});
+        break;
+      }
+    }
   }
 
 // Get single order
