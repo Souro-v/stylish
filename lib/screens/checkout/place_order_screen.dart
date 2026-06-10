@@ -4,6 +4,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/providers/cart_provider.dart';
 import '../../core/providers/language_provider.dart';
 import '../../core/routes/app_routes.dart';
+import '../../core/services/coupon_service.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/custom_button.dart';
 
@@ -18,6 +19,41 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
   int _currentNavIndex = 2;
 
   final List<String> _sizes = ['38', '40', '42', '44', '46'];
+  final CouponService _couponService = CouponService();
+  final _couponController = TextEditingController();
+  double _discount = 0;
+  String _appliedCoupon = '';
+
+  // Apply coupon method
+  void _applyCoupon() {
+    final cart = Provider.of<CartProvider>(context, listen: false);
+    final coupon = _couponService.validateCoupon(
+      _couponController.text.trim(),
+      cart.totalPrice,
+    );
+    if (coupon == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Invalid coupon or minimum order not met'),
+          backgroundColor: AppColors.error,
+        ),
+      );
+      return;
+    }
+    final discount =
+    _couponService.calculateDiscount(coupon, cart.totalPrice);
+    setState(() {
+      _discount = discount;
+      _appliedCoupon = _couponController.text.trim().toUpperCase();
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+            'Coupon applied! You save ₹${discount.toStringAsFixed(0)}'),
+        backgroundColor: AppColors.success,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -250,16 +286,12 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                             ),
                           );
                         }),
-
                         const SizedBox(height: 16),
-
                         // Apply Coupons
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 14),
+                          padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color:
-                                isDark ? AppColors.darkCard : AppColors.white,
+                            color: isDark ? AppColors.darkCard : AppColors.white,
                             borderRadius: BorderRadius.circular(12),
                             boxShadow: [
                               BoxShadow(
@@ -268,33 +300,75 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                               ),
                             ],
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              const Text(
+                                'Apply Coupon',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
                               Row(
                                 children: [
-                                  const Icon(Icons.discount_outlined,
-                                      size: 20, color: AppColors.grey),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    lang.coupon,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
+                                  Expanded(
+                                    child: TextField(
+                                      controller: _couponController,
+                                      decoration: InputDecoration(
+                                        hintText: 'Enter coupon code',
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide:
+                                          const BorderSide(color: AppColors.primary),
+                                        ),
+                                        contentPadding: const EdgeInsets.symmetric(
+                                            horizontal: 12, vertical: 8),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  ElevatedButton(
+                                    onPressed: _applyCoupon,
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.primary,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      'Apply',
+                                      style: TextStyle(color: AppColors.white),
                                     ),
                                   ),
                                 ],
                               ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: const Text(
-                                  'Select',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                              if (_appliedCoupon.isNotEmpty) ...[
+                                const SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.check_circle,
+                                        color: AppColors.success, size: 16),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      '$_appliedCoupon applied! -₹${_discount.toStringAsFixed(0)}',
+                                      style: const TextStyle(
+                                        color: AppColors.success,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
                                 ),
+                              ],
+                              const SizedBox(height: 8),
+                              const Text(
+                                'Available: STYLISH10 | FLAT50 | WELCOME20 | SAVE100',
+                                style: TextStyle(fontSize: 11, color: AppColors.grey),
                               ),
                             ],
                           ),
