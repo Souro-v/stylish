@@ -44,48 +44,63 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             // Header
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                color: AppColors.primary,
-              ),
-              child: const Row(
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: AppColors.white,
-                    child: Icon(
-                      Iconsax.user,
-                      size: 30,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                  SizedBox(width: 12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            Consumer<AuthProvider>(
+              builder: (context, auth, _) {
+                final user = auth.user;
+                return Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(color: AppColors.primary),
+                  child: Row(
                     children: [
-                      Text(
-                        'Welcome!',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.white,
-                        ),
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: AppColors.white,
+                        backgroundImage: user?.photoURL != null
+                            ? NetworkImage(user!.photoURL!)
+                            : null,
+                        child: user?.photoURL == null
+                            ? Text(
+                                user?.email?.substring(0, 1).toUpperCase() ??
+                                    'U',
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.primary,
+                                ),
+                              )
+                            : null,
                       ),
-                      Text(
-                        'Stylish User',
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: AppColors.white,
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              user?.displayName ?? 'Stylish User',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.white,
+                              ),
+                            ),
+                            Text(
+                              user?.email ?? '',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: AppColors.white,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                ],
-              ),
+                );
+              },
             ),
-
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -355,14 +370,32 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  GestureDetector(
-                    onTap: () =>
-                        Navigator.pushNamed(context, AppRoutes.profile),
-                    child: const CircleAvatar(
-                      radius: 18,
-                      backgroundColor: AppColors.lightBorder,
-                      child: Icon(Iconsax.user, size: 20),
-                    ),
+                  Consumer<AuthProvider>(
+                    builder: (context, auth, _) {
+                      final user = auth.user;
+                      return GestureDetector(
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.profile),
+                        child: CircleAvatar(
+                          radius: 18,
+                          backgroundColor: AppColors.lightBorder,
+                          backgroundImage: user?.photoURL != null
+                              ? NetworkImage(user!.photoURL!)
+                              : null,
+                          child: user?.photoURL == null
+                              ? Text(
+                                  user?.email?.substring(0, 1).toUpperCase() ??
+                                      'U',
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primary,
+                                  ),
+                                )
+                              : null,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -403,14 +436,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            const Icon(Iconsax.microphone,
-                                color: AppColors.grey),
+                            const Icon(Iconsax.scanner, color: AppColors.grey),
                           ],
                         ),
                       ),
                     ),
                     const SizedBox(height: 16),
-
                     // All Featured Header
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -141,9 +141,8 @@ class AppRoutes {
       case about:
         return MaterialPageRoute(builder: (_) => const AboutScreen());
       case recentlyViewed:
-        return MaterialPageRoute(
-            builder: (_) => const RecentlyViewedScreen());
-        case loyalty:
+        return MaterialPageRoute(builder: (_) => const RecentlyViewedScreen());
+      case loyalty:
         return MaterialPageRoute(builder: (_) => const LoyaltyScreen());
       case referral:
         return MaterialPageRoute(builder: (_) => const ReferralScreen());
@@ -155,9 +154,8 @@ class AppRoutes {
       case ar:
         return MaterialPageRoute(builder: (_) => const ArScreen());
       case vendorProducts:
-        return MaterialPageRoute(
-            builder: (_) => const VendorProductsScreen());
-        case chat:
+        return MaterialPageRoute(builder: (_) => const VendorProductsScreen());
+      case chat:
         return MaterialPageRoute(builder: (_) => const ChatScreen());
       case recommendation:
         return MaterialPageRoute(builder: (_) => const RecommendationScreen());

@@ -6,6 +6,7 @@ class ChatService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   String? get _userId => _auth.currentUser?.uid;
+
   String? get _userEmail => _auth.currentUser?.email;
 
   // Send message
@@ -54,8 +55,7 @@ class ChatService {
         .collection('messages')
         .orderBy('createdAt', descending: false)
         .snapshots()
-        .map((snapshot) =>
-        snapshot.docs.map((doc) => doc.data()).toList());
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
   // Auto reply logic

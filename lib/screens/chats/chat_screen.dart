@@ -62,8 +62,7 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             // AppBar
             Container(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: const BoxDecoration(
                 color: AppColors.primary,
               ),
@@ -79,7 +78,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: AppColors.white.withValues(alpha:0.2),
+                      color: AppColors.white.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(Iconsax.message,
@@ -115,8 +114,7 @@ class _ChatScreenState extends State<ChatScreen> {
               child: StreamBuilder<List<Map<String, dynamic>>>(
                 stream: _chatService.getMessages(),
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
                       child: CircularProgressIndicator(
                         color: AppColors.primary,
@@ -132,7 +130,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           Icon(
                             Iconsax.message,
                             size: 60,
-                            color: AppColors.grey.withValues(alpha:0.4),
+                            color: AppColors.grey.withValues(alpha: 0.4),
                           ),
                           const SizedBox(height: 12),
                           const Text(
@@ -195,22 +193,20 @@ class _ChatScreenState extends State<ChatScreen> {
                                   color: isUser
                                       ? AppColors.primary
                                       : isDark
-                                      ? AppColors.darkCard
-                                      : AppColors.white,
+                                          ? AppColors.darkCard
+                                          : AppColors.white,
                                   borderRadius: BorderRadius.only(
-                                    topLeft:
-                                    const Radius.circular(16),
-                                    topRight:
-                                    const Radius.circular(16),
-                                    bottomLeft: Radius.circular(
-                                        isUser ? 16 : 0),
-                                    bottomRight: Radius.circular(
-                                        isUser ? 0 : 16),
+                                    topLeft: const Radius.circular(16),
+                                    topRight: const Radius.circular(16),
+                                    bottomLeft:
+                                        Radius.circular(isUser ? 16 : 0),
+                                    bottomRight:
+                                        Radius.circular(isUser ? 0 : 16),
                                   ),
                                   boxShadow: [
                                     BoxShadow(
                                       color: AppColors.black
-                                          .withValues(alpha:0.05),
+                                          .withValues(alpha: 0.05),
                                       blurRadius: 4,
                                     ),
                                   ],
@@ -222,8 +218,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                     color: isUser
                                         ? AppColors.white
                                         : isDark
-                                        ? AppColors.darkTextDark
-                                        : AppColors.lightTextDark,
+                                            ? AppColors.darkTextDark
+                                            : AppColors.lightTextDark,
                                   ),
                                 ),
                               ),
@@ -248,14 +244,12 @@ class _ChatScreenState extends State<ChatScreen> {
 
             // Input
             Container(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color:
-                isDark ? AppColors.darkBackground : AppColors.white,
+                color: isDark ? AppColors.darkBackground : AppColors.white,
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.black.withValues(alpha:0.05),
+                    color: AppColors.black.withValues(alpha: 0.05),
                     blurRadius: 8,
                     offset: const Offset(0, -2),
                   ),
@@ -294,24 +288,22 @@ class _ChatScreenState extends State<ChatScreen> {
                       width: 44,
                       height: 44,
                       decoration: BoxDecoration(
-                        color: _isSending
-                            ? AppColors.grey
-                            : AppColors.primary,
+                        color: _isSending ? AppColors.grey : AppColors.primary,
                         shape: BoxShape.circle,
                       ),
                       child: _isSending
                           ? const Padding(
-                        padding: EdgeInsets.all(10),
-                        child: CircularProgressIndicator(
-                          color: AppColors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
+                              padding: EdgeInsets.all(10),
+                              child: CircularProgressIndicator(
+                                color: AppColors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
                           : const Icon(
-                        Icons.send,
-                        color: AppColors.white,
-                        size: 20,
-                      ),
+                              Icons.send,
+                              color: AppColors.white,
+                              size: 20,
+                            ),
                     ),
                   ),
                 ],
