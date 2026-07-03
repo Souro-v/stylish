@@ -10,6 +10,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/providers/auth_provider.dart';
 import '../../core/providers/language_provider.dart';
 import '../../core/routes/app_routes.dart';
+import '../../core/services/firestore_service.dart';
 import '../../core/theme/theme_provider.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
 import '../../widgets/common/custom_button.dart';
@@ -45,6 +46,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _ifscController = TextEditingController(text: 'SBIN00428');
 
   bool _isLoading = false;
+
+  ImageProvider? _getProfileImage() {
+    if (_profileImage != null) {
+      return FileImage(_profileImage!);
+    }
+    final photoURL = FirebaseAuth.instance.currentUser?.photoURL;
+    if (photoURL != null) {
+      return NetworkImage(photoURL);
+    }
+    return null;
+  }
 
   @override
   void dispose() {
@@ -89,6 +101,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _loadProfileImage();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      setState(() {
+        _emailController.text = user.email ?? '';
+        if (user.photoURL != null) {
+          // Firebase photo
+        }
+      });
+
+      // Load from Firestore
+      final firestoreService = FirestoreService();
+      final data = await firestoreService.getUserProfile();
+      if (data != null && mounted) {
+        setState(() {
+          _addressController.text = data['address'] ?? _addressController.text;
+          _cityController.text = data['city'] ?? _cityController.text;
+          _stateController.text = data['state'] ?? _stateController.text;
+          _countryController.text = data['country'] ?? _countryController.text;
+          _pincodeController.text = data['pincode'] ?? _pincodeController.text;
+          _bankAccountController.text =
+              data['bankAccount'] ?? _bankAccountController.text;
+          _accountHolderController.text =
+              data['accountHolder'] ?? _accountHolderController.text;
+          _ifscController.text = data['ifsc'] ?? _ifscController.text;
+        });
+      }
+    }
   }
 
   Future<void> _loadProfileImage() async {
@@ -139,7 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Settings Icon
                   GestureDetector(
                     onTap: () {
-                      // Settings options - পরে add করব
+                      // Settings options
                       showModalBottomSheet(
                         context: context,
                         shape: const RoundedRectangleBorder(
@@ -165,7 +208,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 16),
-
                       // Profile Avatar
                       Center(
                         child: Stack(
@@ -173,15 +215,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             CircleAvatar(
                               radius: 50,
                               backgroundColor: AppColors.lightBorder,
-                              backgroundImage: _profileImage != null
-                                  ? FileImage(_profileImage!)
-                                  : null,
-                              child: _profileImage == null
-                                  ? const Icon(
-                                      Iconsax.user,
-                                      size: 50,
-                                      color: AppColors.grey,
-                                    )
+                              backgroundImage: _getProfileImage(),
+                              child: _profileImage == null &&
+                                      FirebaseAuth
+                                              .instance.currentUser?.photoURL ==
+                                          null
+                                  ? const Icon(Iconsax.user,
+                                      size: 50, color: AppColors.grey)
                                   : null,
                             ),
                             Positioned(
@@ -195,11 +235,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     color: Colors.blue,
                                     shape: BoxShape.circle,
                                   ),
-                                  child: const Icon(
-                                    Icons.edit,
-                                    size: 14,
-                                    color: AppColors.white,
-                                  ),
+                                  child: const Icon(Icons.edit,
+                                      size: 14, color: AppColors.white),
                                 ),
                               ),
                             ),

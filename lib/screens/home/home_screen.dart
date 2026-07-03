@@ -29,12 +29,22 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<AuthProvider>(context, listen: false).updateLastActive();
-      Provider.of<CartProvider>(context, listen: false).loadCart();
-      Provider.of<WishlistProvider>(context, listen: false).loadWishlist();
+      final auth = Provider.of<AuthProvider>(context, listen: false);
+      if (auth.user != null) {
+        Provider.of<CartProvider>(context, listen: false).loadCart();
+        Provider.of<WishlistProvider>(context, listen: false).loadWishlist();
+      }
+      auth.updateLastActive();
+
+      // Listen for auth changes
+      auth.addListener(() {
+        if (auth.user != null) {
+          Provider.of<CartProvider>(context, listen: false).loadCart();
+          Provider.of<WishlistProvider>(context, listen: false).loadWishlist();
+        }
+      });
     });
   }
-
   Widget _buildDrawer(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
