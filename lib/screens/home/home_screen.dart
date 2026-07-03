@@ -25,6 +25,140 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentNavIndex = 0;
 
+  void _showSortBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) => Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: AppColors.lightBorder,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Sort By',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            _SortOption(
+                title: 'Popularity', onTap: () => Navigator.pop(context)),
+            _SortOption(
+                title: 'Price: Low to High',
+                onTap: () => Navigator.pop(context)),
+            _SortOption(
+                title: 'Price: High to Low',
+                onTap: () => Navigator.pop(context)),
+            _SortOption(
+                title: 'Newest First', onTap: () => Navigator.pop(context)),
+            _SortOption(title: 'Discount', onTap: () => Navigator.pop(context)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showFilterBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) => Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: AppColors.lightBorder,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Filter By',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            const Text('Category',
+                style: TextStyle(fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              children: ['Beauty', 'Fashion', 'Kids', 'Mens', 'Womens', 'Gifts']
+                  .map((cat) => GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Chip(
+                          label: Text(cat),
+                          backgroundColor:
+                              AppColors.primary.withValues(alpha: 0.1),
+                          labelStyle: const TextStyle(color: AppColors.primary),
+                        ),
+                      ))
+                  .toList(),
+            ),
+            const SizedBox(height: 12),
+            const Text('Price Range',
+                style: TextStyle(fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              children: [
+                'Under ₹500',
+                '₹500-₹1000',
+                '₹1000-₹2000',
+                'Above ₹2000'
+              ]
+                  .map((price) => GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Chip(
+                          label: Text(price),
+                          backgroundColor:
+                              AppColors.primary.withValues(alpha: 0.1),
+                          labelStyle: const TextStyle(color: AppColors.primary),
+                        ),
+                      ))
+                  .toList(),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text('Apply Filter',
+                    style: TextStyle(color: AppColors.white)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -45,6 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
   }
+
   Widget _buildDrawer(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -466,15 +601,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           children: [
                             TextButton.icon(
-                              onPressed: () {},
+                              onPressed: () => _showSortBottomSheet(),
                               icon: const Icon(Iconsax.sort, size: 16),
                               label: const Text('Sort'),
                               style: TextButton.styleFrom(
-                                foregroundColor: AppColors.grey,
-                              ),
+                                  foregroundColor: AppColors.grey),
                             ),
                             TextButton.icon(
-                              onPressed: () {},
+                              onPressed: () => _showFilterBottomSheet(),
                               icon: const Icon(Iconsax.filter, size: 16),
                               label: const Text('Filter'),
                               style: TextButton.styleFrom(
@@ -1093,6 +1227,24 @@ class _DrawerItem extends StatelessWidget {
       ),
       onTap: onTap,
       horizontalTitleGap: 8,
+    );
+  }
+}
+
+class _SortOption extends StatelessWidget {
+  final String title;
+  final VoidCallback onTap;
+
+  const _SortOption({required this.title, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(title, style: const TextStyle(fontSize: 14)),
+      trailing:
+          const Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.grey),
+      onTap: onTap,
     );
   }
 }
