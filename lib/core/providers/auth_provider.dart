@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -85,20 +86,34 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // Sign Up
-  Future<bool> signUp(String email, String password) async {
+  Future<bool> signUp(String email, String password, String name) async {
     try {
       _isLoading = true;
       _errorMessage = null;
       notifyListeners();
 
-      await _auth.createUserWithEmailAndPassword(
+      final credential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
+      // Save display name
+      await credential.user?.updateDisplayName(name);
+      await credential.user?.reload();
       _user = _auth.currentUser;
-      await updateLastActive();
 
+      // Save to Firestore
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(credential.user?.uid)
+          .set({
+        'name': name,
+        'email': email,
+        'createdAt': FieldValue.serverTimestamp(),
+        'loyaltyPoints': 0,
+      });
+
+      await updateLastActive();
       _isLoading = false;
       notifyListeners();
       return true;

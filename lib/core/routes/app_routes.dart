@@ -16,6 +16,7 @@ import '../../screens/loyalty/loyalty_screen.dart';
 import '../../screens/orders/order_tracking_screen.dart';
 import '../../screens/orders/orders_screen.dart';
 import '../../screens/products/product_detail_screen.dart';
+import '../../screens/products/similar_products_screen.dart';
 import '../../screens/products/trending_screen.dart';
 import '../../screens/recently_viewed/recently_viewed_screen.dart';
 import '../../screens/recommendation/recommendation_screen.dart';
@@ -75,6 +76,7 @@ class AppRoutes {
   static const String mens = '/mens';
   static const String womens = '/womens';
   static const String gifts = '/gifts';
+  static const String similarProducts = '/similar-products';
   static const String about = '/about';
   static const String recentlyViewed = '/recently-viewed';
   static const String summerSale = '/summer-sale';
@@ -872,6 +874,10 @@ class AppRoutes {
             ],
           ),
         );
+      case similarProducts:
+        final product = settings.arguments as Map<String, dynamic>? ?? {};
+        return MaterialPageRoute(
+            builder: (_) => SimilarProductsScreen(product: product));
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(
