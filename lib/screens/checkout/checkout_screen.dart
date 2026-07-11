@@ -21,19 +21,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   int _currentNavIndex = 2;
   final List<Map<String, dynamic>> _paymentMethods = [
     {
-      'icon': AppAssets.visaIcon,
+      'icon': AppAssets.visa,
       'number': '********2109',
     },
     {
-      'icon': AppAssets.bkashIcon,
+      'icon': AppAssets.bkash,
       'number': '********2109',
     },
     {
-      'icon': AppAssets.nagadIcon,
+      'icon': AppAssets.nagad,
       'number': '********2109',
     },
     {
-      'icon': AppAssets.rocketIcon,
+      'icon': AppAssets.rocket,
       'number': '********2109',
     },
   ];

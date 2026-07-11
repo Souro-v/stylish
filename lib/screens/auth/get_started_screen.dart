@@ -15,7 +15,7 @@ class GetStartedScreen extends StatelessWidget {
           // Background Image
           SizedBox.expand(
             child: Image.asset(
-              AppAssets.getStartedBg,
+              AppAssets.getStarted,
               fit: BoxFit.cover,
             ),
           ),

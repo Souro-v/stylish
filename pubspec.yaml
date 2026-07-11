@@ -59,13 +59,13 @@ flutter_native_splash:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/beauty/
-    - assets/fashion/
-    - assets/gift/
-    - assets/icons/
-    - assets/images/
-    - assets/kid/
-    - assets/men/
-    - assets/products/
-    - assets/women/
+#  assets:
+#    - assets/beauty/
+#    - assets/fashion/
+#    - assets/gift/
+#    - assets/icons/
+#    - assets/images/
+#    - assets/kid/
+#    - assets/men/
+#    - assets/products/
+#    - assets/women/

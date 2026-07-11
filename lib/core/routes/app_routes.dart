@@ -592,7 +592,7 @@ class AppRoutes {
             title: 'Gifts',
             products: [
               {
-                'image': AppAssets.gift1,
+                'image': AppAssets.gifts1,
                 'name': 'Gift Product 1',
                 'price': 999,
                 'oldPrice': 1799,
@@ -600,7 +600,7 @@ class AppRoutes {
                 'rating': 4.5
               },
               {
-                'image': AppAssets.gift2,
+                'image': AppAssets.gifts2,
                 'name': 'Gift Product 2',
                 'price': 1299,
                 'oldPrice': 2499,
@@ -608,7 +608,7 @@ class AppRoutes {
                 'rating': 4.0
               },
               {
-                'image': AppAssets.gift3,
+                'image': AppAssets.gifts3,
                 'name': 'Gift Product 3',
                 'price': 799,
                 'oldPrice': 1499,
@@ -616,7 +616,7 @@ class AppRoutes {
                 'rating': 4.5
               },
               {
-                'image': AppAssets.gift4,
+                'image': AppAssets.gifts4,
                 'name': 'Gift Product 4',
                 'price': 1499,
                 'oldPrice': 2799,
@@ -624,7 +624,7 @@ class AppRoutes {
                 'rating': 4.0
               },
               {
-                'image': AppAssets.gift5,
+                'image': AppAssets.gifts5,
                 'name': 'Gift Product 5',
                 'price': 699,
                 'oldPrice': 1299,
@@ -632,7 +632,7 @@ class AppRoutes {
                 'rating': 4.5
               },
               {
-                'image': AppAssets.gift6,
+                'image': AppAssets.gifts6,
                 'name': 'Gift Product 6',
                 'price': 1799,
                 'oldPrice': 3299,
@@ -640,7 +640,7 @@ class AppRoutes {
                 'rating': 4.0
               },
               {
-                'image': AppAssets.gift7,
+                'image': AppAssets.gifts7,
                 'name': 'Gift Product 7',
                 'price': 899,
                 'oldPrice': 1599,
@@ -648,7 +648,7 @@ class AppRoutes {
                 'rating': 4.5
               },
               {
-                'image': AppAssets.gift8,
+                'image': AppAssets.gifts8,
                 'name': 'Gift Product 8',
                 'price': 1199,
                 'oldPrice': 2199,
@@ -656,7 +656,7 @@ class AppRoutes {
                 'rating': 4.0
               },
               {
-                'image': AppAssets.gift9,
+                'image': AppAssets.gifts9,
                 'name': 'Gift Product 9',
                 'price': 999,
                 'oldPrice': 1799,
@@ -664,7 +664,7 @@ class AppRoutes {
                 'rating': 4.5
               },
               {
-                'image': AppAssets.gift10,
+                'image': AppAssets.gifts10,
                 'name': 'Gift Product 10',
                 'price': 1599,
                 'oldPrice': 2999,
@@ -672,7 +672,7 @@ class AppRoutes {
                 'rating': 4.0
               },
               {
-                'image': AppAssets.gift11,
+                'image': AppAssets.gifts11,
                 'name': 'Gift Product 11',
                 'price': 799,
                 'oldPrice': 1499,
@@ -680,7 +680,7 @@ class AppRoutes {
                 'rating': 4.5
               },
               {
-                'image': AppAssets.gift12,
+                'image': AppAssets.gifts12,
                 'name': 'Gift Product 12',
                 'price': 1099,
                 'oldPrice': 1999,
@@ -688,7 +688,7 @@ class AppRoutes {
                 'rating': 4.0
               },
               {
-                'image': AppAssets.gift13,
+                'image': AppAssets.gifts13,
                 'name': 'Gift Product 13',
                 'price': 899,
                 'oldPrice': 1699,
