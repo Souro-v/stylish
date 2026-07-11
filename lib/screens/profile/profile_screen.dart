@@ -31,6 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // Personal Details
   final _emailController = TextEditingController(text: 'aashifa@gmail.com');
   final _passwordController = TextEditingController(text: '***********');
+  final _nameController = TextEditingController();
 
   // Business Address
   final _pincodeController = TextEditingController(text: '450116');
@@ -70,6 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _bankAccountController.dispose();
     _accountHolderController.dispose();
     _ifscController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
@@ -106,9 +108,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _loadUserData() async {
     final user = FirebaseAuth.instance.currentUser;
+
     if (user != null) {
       setState(() {
         _emailController.text = user.email ?? '';
+        _nameController.text = user.displayName ?? '';
         if (user.photoURL != null) {
           // Firebase photo
         }
@@ -142,16 +146,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  void _onSave() {
+  void _onSave() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
-      Future.delayed(const Duration(seconds: 2), () {
-        if (!mounted) return;
-        setState(() => _isLoading = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile saved!')),
-        );
+      final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+      // Update display name
+      await FirebaseAuth.instance.currentUser
+          ?.updateDisplayName(_nameController.text.trim());
+
+      // Save to Firestore
+      final firestoreService = FirestoreService();
+      await firestoreService.saveUserProfile({
+        'name': _nameController.text.trim(),
+        'email': _emailController.text.trim(),
+        'address': _addressController.text.trim(),
+        'city': _cityController.text.trim(),
+        'state': _stateController.text.trim(),
+        'country': _countryController.text.trim(),
+        'pincode': _pincodeController.text.trim(),
+        'bankAccount': _bankAccountController.text.trim(),
+        'accountHolder': _accountHolderController.text.trim(),
+        'ifsc': _ifscController.text.trim(),
       });
+
+      if (!mounted) return;
+      setState(() => _isLoading = false);
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text('Profile saved successfully!'),
+          backgroundColor: AppColors.success,
+        ),
+      );
     }
   }
 
@@ -252,6 +278,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
+                      ),
+                      const SizedBox(height: 16),
+
+                      const Text('Full Name',
+                          style:
+                              TextStyle(fontSize: 13, color: AppColors.grey)),
+                      const SizedBox(height: 6),
+                      CustomTextField(
+                        hintText: 'Full Name',
+                        controller: _nameController,
+                        prefixIcon:
+                            const Icon(Iconsax.user, color: AppColors.grey),
                       ),
                       const SizedBox(height: 16),
 

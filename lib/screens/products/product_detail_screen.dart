@@ -93,6 +93,148 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     _reviewController.dispose();
     super.dispose();
   }
+  void _showCompareDialog() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) => Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: AppColors.lightBorder,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Compare Products',
+              style: TextStyle(
+                  fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                // Current Product
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.primary),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          widget.product['image'] ?? '',
+                          height: 80,
+                          fit: BoxFit.cover,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          widget.product['name'] ?? '',
+                          maxLines: 2,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          '₹${widget.product['price']}',
+                          style: const TextStyle(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                const Icon(Icons.compare_arrows,
+                    color: AppColors.primary, size: 32),
+                const SizedBox(width: 16),
+                // Compare product
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.trending,
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: AppColors.lightBorder),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Column(
+                        children: [
+                          Icon(Iconsax.add_circle,
+                              size: 40, color: AppColors.grey),
+                          SizedBox(height: 8),
+                          Text(
+                            'Select Product',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.grey),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            // Compare Table
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppColors.lightBorder.withValues(alpha: 0.3),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                children: [
+                  _CompareRow(
+                      label: 'Price',
+                      value: '₹${widget.product['price']}'),
+                  _CompareRow(
+                      label: 'Rating',
+                      value:
+                      '${widget.product['rating'] ?? 'N/A'} ⭐'),
+                  _CompareRow(
+                      label: 'Discount',
+                      value:
+                      '${widget.product['discount'] ?? 'N/A'}'),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                minimumSize: const Size(double.infinity, 48),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              child: const Text('Close',
+                  style: TextStyle(color: AppColors.white)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -490,40 +632,35 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       children: [
                         Expanded(
                           child: OutlinedButton.icon(
-                            onPressed: () {},
-                            icon: const Icon(Iconsax.eye,
-                                size: 16, color: AppColors.grey),
-                            label: const Text(
-                              'View Similar',
-                              style: TextStyle(color: AppColors.grey),
+                            onPressed: () => Navigator.pushNamed(
+                              context,
+                              AppRoutes.similarProducts,
+                              arguments: widget.product,
                             ),
+                            icon: const Icon(Iconsax.eye, size: 16, color: AppColors.grey),
+                            label: const Text('View Similar',
+                                style: TextStyle(color: AppColors.grey)),
                             style: OutlinedButton.styleFrom(
-                              side: const BorderSide(
-                                  color: AppColors.lightBorder),
+                              side: const BorderSide(color: AppColors.lightBorder),
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
                           ),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: OutlinedButton.icon(
-                            onPressed: () {},
+                            onPressed: () => _showCompareDialog(),
                             icon: const Icon(Iconsax.document_copy,
                                 size: 16, color: AppColors.grey),
-                            label: const Text(
-                              'Add to Compare',
-                              style: TextStyle(color: AppColors.grey),
-                            ),
+                            label: const Text('Add to Compare',
+                                style: TextStyle(color: AppColors.grey)),
                             style: OutlinedButton.styleFrom(
-                              side: const BorderSide(
-                                  color: AppColors.lightBorder),
+                              side: const BorderSide(color: AppColors.lightBorder),
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
                           ),
                         ),
@@ -995,6 +1132,30 @@ class _ReviewSectionState extends State<_ReviewSection> {
             ),
           ),
       ],
+    );
+  }
+}
+class _CompareRow extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _CompareRow({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label,
+              style: const TextStyle(
+                  fontSize: 13, color: AppColors.grey)),
+          Text(value,
+              style: const TextStyle(
+                  fontSize: 13, fontWeight: FontWeight.w500)),
+        ],
+      ),
     );
   }
 }
